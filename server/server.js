@@ -7,6 +7,7 @@ import config from "./config";
 
 //import routes
 import signUp from "./routes/singUp";
+import loginIn from "./routes/loginIn";
 
 //create app
 const app = express();
@@ -32,3 +33,4 @@ app.use(express.json());
 
 //create endpoint
 app.use("/register", signUp);
+app.use("/login", loginIn);
