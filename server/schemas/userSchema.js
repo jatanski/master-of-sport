@@ -29,7 +29,7 @@ userSchema.methods.genToken = function() {
     {
       _id: this._id
     },
-    config.get("jwtPrivateKey")
+    config.jwtKey
   );
 };
 

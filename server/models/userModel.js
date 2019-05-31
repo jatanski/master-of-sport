@@ -18,7 +18,7 @@ const validateUserSignUp = user => {
       .max(30)
       .required()
   });
-  return Joi.valide(user, schema);
+  return Joi.validate(user, schema);
 };
 
 const validateUserLoginIn = user => {
@@ -31,7 +31,7 @@ const validateUserLoginIn = user => {
       .max(30)
       .required()
   });
-  return Joi.valide(user, schema);
+  return Joi.validate(user, schema);
 };
 
 export { User, validateUserLoginIn, validateUserSignUp };
