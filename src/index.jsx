@@ -5,11 +5,11 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import "./styles/global.scss";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  // <Provider>
+  <App />,
   document.getElementById("root")
 );
 
