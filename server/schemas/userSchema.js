@@ -1,7 +1,9 @@
+//import library from node_modules
 import mongoose from "mongoose";
 import config from "../config";
 import jwt from "jsonwebtoken";
 
+//create user schema
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -24,6 +26,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
+//generate token
 userSchema.methods.genToken = function() {
   return jwt.sign(
     {

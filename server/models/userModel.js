@@ -1,9 +1,11 @@
+//import library from node_modules
 import mongoose from "mongoose";
 import Joi from "@hapi/joi";
 import userSchema from "../schemas/userSchema";
 
 const User = mongoose.model("User", userSchema);
 
+//create validate model
 const validateUserSignUp = user => {
   const schema = Joi.object().keys({
     name: Joi.string()
