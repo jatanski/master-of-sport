@@ -1,0 +1,20 @@
+@import "../../styles/mixins";
+
+.firstView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  & .button {
+    margin: 10px;
+  }
+
+  &__registerButton a {
+    @include resetButton;
+  }
+
+  &__loginButton a {
+    @include resetButton;
+  }
+}
