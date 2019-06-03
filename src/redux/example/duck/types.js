@@ -1,0 +1,7 @@
+const ADD_EXAMPLE = "ADD_EXAMPLE";
+const RESET_EXAMPLE = "RESET_EXAMPLE";
+
+export default {
+  ADD_EXAMPLE,
+  RESET_EXAMPLE
+};
