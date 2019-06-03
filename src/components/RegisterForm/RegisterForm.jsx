@@ -57,7 +57,6 @@ export default class RegisterForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Form>

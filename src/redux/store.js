@@ -3,6 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers";
 import { exampleActions } from "./example/index";
 import thunk from "redux-thunk";
+import { loginActions } from "./general";
 
 const store = createStore(
   rootReducer,
@@ -12,10 +13,17 @@ const store = createStore(
 store.dispatch(exampleActions.add("Example 4"));
 
 const allActions = bindActionCreators(
-  { add: exampleActions.add, reset: exampleActions.reset },
+  {
+    add: exampleActions.add,
+    reset: exampleActions.reset,
+    login: loginActions.login,
+    logout: loginActions.logout
+  },
   store.dispatch
 );
 
+window.store = store;
+
 allActions.add("Example 5");
 
-export default store;
+export { store, allActions };
