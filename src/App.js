@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import FirstView from "./views/FirstView/FirstView";
+import RegisterView from "./views/RegisterView/RegisterView";
+import LoginView from "./views/LoginView/LoginView";
+import MainView from "./views/MainView/MainView";
+import DesktopMenu from "./views/MenuDesktop/MenuDesktop";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from "react-redux";
+
+class App extends Component {
+  render() {
+    console.log(window.store);
+    console.log(window.store.getState());
+    console.log(window.store.getState().login.loginStatus);
+    console.log(this.props);
+    return (
+      <div>
+        <Router>
+          {this.props.loginStatus ? <DesktopMenu /> : null}
+          <Route exact path="/" component={FirstView} />
+          <Route path="/register" component={RegisterView} />
+          <Route path="/login" component={LoginView} />
+          <Route path="/me" component={MainView} />
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  loginStatus: state.loginStatus
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(App);
