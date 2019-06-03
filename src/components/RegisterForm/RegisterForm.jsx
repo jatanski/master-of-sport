@@ -38,7 +38,7 @@ export default class RegisterForm extends Component {
       //   this.props.loginStatus(true);
       response = await response.json();
       console.log(response);
-      //   this.props.history.push(`/me`);
+      this.props.changeView();
     } catch (err) {
       console.log(err);
       //   if ([404, 400].includes(err.status)) {
@@ -57,7 +57,7 @@ export default class RegisterForm extends Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     return (
       <div>
         <Form>
