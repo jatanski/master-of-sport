@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import "./menuDesktop.scss";
 import { Navbar, Nav, Button, Form, FormControl } from "react-bootstrap";
+import { allActions } from "../../redux/store";
 import { Link } from "react-router-dom";
 
 export default class MenuDesktop extends Component {
   logout() {
     localStorage.removeItem("x-auth-token");
+    allActions.logout();
   }
   render() {
     return (

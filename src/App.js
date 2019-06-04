@@ -29,7 +29,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  loginStatus: state.loginStatus
+  loginStatus: state.login.loginStatus
 });
 
 export default connect(
