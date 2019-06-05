@@ -11,10 +11,6 @@ import { connect } from "react-redux";
 
 class App extends Component {
   render() {
-    console.log(window.store);
-    console.log(window.store.getState());
-    console.log(window.store.getState().login.loginStatus);
-    console.log(this.props);
     return (
       <div>
         <Router>
