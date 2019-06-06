@@ -18,6 +18,9 @@ export default class MenuDesktop extends Component {
             <Nav.Link to="/calculator">
               <Link to="/calculator">Kalkulator kalorii</Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link to="/bmi">Kalkulator BMI</Link>
+            </Nav.Link>
             <Nav.Link href="#features">Settings</Nav.Link>
             <Nav.Link href="#pricing">Profil</Nav.Link>
             <Button variant="outline-light" onClick={this.logout}>

@@ -5,13 +5,38 @@ import { allActions } from "../../redux/store";
 
 export default class NewProduct extends Component {
   state = {
+    multipier: 0,
     newProductName: "",
     numberOfProteins: 0,
     numberOfCarbohydrates: 0,
     numberOfFats: 0,
     numberOfCalories: 0,
-    weight: 0
+    weight: 0,
+    numberProduct: 0
   };
+
+  countElements = () => {
+    const multipier = this.state.weight / 100;
+    const elementsAfterCount = {
+      newProductName: this.state.newProductName,
+      numberOfProteins: this.state.numberOfProteins * multipier,
+      numberOfCarbohydrates: this.state.numberOfCarbohydrates * multipier,
+      numberOfFats: this.state.numberOfFats * multipier,
+      numberOfCalories: this.state.numberOfCalories * multipier,
+      weight: this.state.weight,
+      numberProduct: this.state.numberProduct + 1
+    };
+    this.setState({
+      multipier: multipier,
+      numberProduct: elementsAfterCount.numberProduct,
+      numberOfProteins: elementsAfterCount.numberOfProteins,
+      numberOfCarbohydrates: elementsAfterCount.numberOfCarbohydrates,
+      numberOfFats: elementsAfterCount.numberOfFats,
+      numberOfCalories: elementsAfterCount.numberOfCalories
+    });
+    allActions.sendInfo(elementsAfterCount);
+  };
+
   handleNumberInputChange = e => {
     const state = {};
     state[`${e.target.id}`] = Number(e.target.value);
@@ -25,13 +50,15 @@ export default class NewProduct extends Component {
   };
 
   createNewProduct = () => {
-    allActions.sendInfo(this.state);
+    this.countElements();
     allActions.addProduct(window.store.getState().newProduct.info);
 
     const allProducts = window.store.getState().allProducts.products;
     allActions.sumProducts(allProducts[allProducts.length - 1]);
+    allActions.addNewProduct(window.store.getState().newProduct.info);
     this.props.addNewProduct();
   };
+
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.close}>

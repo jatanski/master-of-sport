@@ -1,18 +1,21 @@
 import { combineReducers } from "redux";
-import exampleReducers from "./example";
 import loginReducer from "./general";
 import {
   newProductReducer,
   allProductsReducer,
-  sumProductsReducer
+  sumProductsReducer,
+  sumMealsReducer
 } from "./calculatorCalories";
+import { mealReducer, productReducer } from "./meals";
 
 const rootReducer = combineReducers({
-  example: exampleReducers,
   login: loginReducer,
   newProduct: newProductReducer,
   allProducts: allProductsReducer,
-  sumProducts: sumProductsReducer
+  sumProducts: sumProductsReducer,
+  sumMeals: sumMealsReducer,
+  meal: mealReducer,
+  product: productReducer
 });
 
 export default rootReducer;

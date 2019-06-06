@@ -5,13 +5,7 @@ import { connect } from "react-redux";
 
 class SummaryTable extends Component {
   state = {
-    meals: [],
-    elementsFromAllMeals: {
-      calories: 0,
-      proteins: 0,
-      carbohydrates: 0,
-      fats: 0
-    }
+    meals: []
   };
 
   sumAllMeals = () => {
@@ -46,10 +40,10 @@ class SummaryTable extends Component {
           </tr>
           <tr>
             <td>Suma dobowa</td>
-            <td>{this.state.elementsFromAllMeals.calories} kcal</td>
-            <td>{this.state.elementsFromAllMeals.proteins} g</td>
-            <td>{this.state.elementsFromAllMeals.carbohydrates} g</td>
-            <td>{this.state.elementsFromAllMeals.fats} g</td>
+            <td>{this.props.elementsFromAllMeals.calories} kcal</td>
+            <td>{this.props.elementsFromAllMeals.proteins} g</td>
+            <td>{this.props.elementsFromAllMeals.carbohydrates} g</td>
+            <td>{this.props.elementsFromAllMeals.fats} g</td>
           </tr>
         </tbody>
       </Table>
@@ -58,7 +52,7 @@ class SummaryTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  elementsFromAllMeals: ""
+  elementsFromAllMeals: state.sumMeals
 });
 
 export default connect(

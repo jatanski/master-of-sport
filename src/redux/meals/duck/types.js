@@ -1,0 +1,9 @@
+const ADD_MEAL = "ADD_MEAL";
+const ADD_NEW_PRODUCT = "ADD_NEW_PRODUCT";
+const RESET_PRODUCT = "RESET_PRODUCT";
+
+export default {
+  ADD_MEAL,
+  ADD_NEW_PRODUCT,
+  RESET_PRODUCT
+};

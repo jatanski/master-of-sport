@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import "./meal.scss";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import { connect } from "react-redux";
+import { allActions } from "../../redux/store";
 
 class Meal extends Component {
   state = {
     numberOfProducts: 1,
     products: [],
     showNewProduct: false,
-    newProductInfo: {
-      newProductName: "",
-      numberOfProteins: 0,
-      numberOfCarbohydrates: 0,
-      numberOfFats: 0,
-      numberOfCalories: 0
-    }
+    saveButton: {
+      text: "Zapisz posiłek",
+      variant: "success"
+    },
+    activeNewProduct: true
   };
+
   addNewProduct = () => {
     this.closeNewProduct();
     this.setState({
@@ -31,8 +31,9 @@ class Meal extends Component {
   };
 
   createNewProduct = el => {
+    console.log(el);
     return (
-      <tr key={Math.random()}>
+      <tr key={el.numberProduct}>
         <td> {el.newProductName}</td>
         <td>{el.weight} g</td>
         <td>{el.numberOfCalories} kcal</td>
@@ -44,11 +45,32 @@ class Meal extends Component {
   };
 
   showNewProduct = () => {
-    this.setState({ showNewProduct: true });
+    console.log(this.state);
+    if (this.state.activeNewProduct) {
+      this.setState({ showNewProduct: true });
+    }
   };
 
   closeNewProduct = () => {
     this.setState({ showNewProduct: false });
+  };
+
+  changeAddNewProduct = () => {
+    this.setState({ activeNewProduct: false });
+  };
+
+  changeSaveButton = () => {
+    this.setState({
+      saveButton: {
+        text: "Edytuj posiłek",
+        variant: "info"
+      }
+    });
+    this.changeAddNewProduct();
+    this.props.disabledOff();
+    allActions.sumMeals(window.store.getState().sumProducts.sumOfElements);
+    allActions.addMeal(window.store.getState().product.products);
+    allActions.resetProduct();
   };
 
   renderNewProduct() {
@@ -62,7 +84,7 @@ class Meal extends Component {
   }
 
   render() {
-    // console.log(this);
+    console.log(this.props);
     return (
       <div>
         <Table striped bordered hover variant="dark">
@@ -90,10 +112,13 @@ class Meal extends Component {
               : null}
             <tr>
               <td>
-                {" "}
-                <span className="addNewProduct" onClick={this.showNewProduct}>
-                  Dodaj nowy produkt
-                </span>{" "}
+                {this.state.activeNewProduct ? (
+                  <span className="addNewProduct" onClick={this.showNewProduct}>
+                    Dodaj nowy produkt
+                  </span>
+                ) : (
+                  <span>Dodaj nowy produkt</span>
+                )}
               </td>
               <td />
               <td>{this.props.sumOfElements.calories} kcal</td>
@@ -103,6 +128,12 @@ class Meal extends Component {
             </tr>
           </tbody>
         </Table>
+        <Button
+          onClick={this.changeSaveButton}
+          variant={this.state.saveButton.variant}
+        >
+          {this.state.saveButton.text}
+        </Button>
         {this.renderNewProduct()}
       </div>
     );
@@ -111,7 +142,9 @@ class Meal extends Component {
 
 const mapStateToProps = state => ({
   products: state.allProducts.products,
-  sumOfElements: state.sumProducts.sumOfElements
+  sumOfElements: state.sumProducts.sumOfElements,
+  meal: state.meal,
+  product: state.product.products
 });
 
 export default connect(

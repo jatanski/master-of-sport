@@ -24,21 +24,40 @@ const SUM_PRODUCTS_STATE = {
   }
 };
 
-const sumProductsReducer = (state = SUM_PRODUCTS_STATE, action) => {
-  console.log(state);
+const SUM_MEALS_STATE = {
+  calories: 0,
+  proteins: 0,
+  carbohydrates: 0,
+  fats: 0
+};
+
+const sumMealsReducer = (state = SUM_MEALS_STATE, action) => {
   switch (action.type) {
     case types.SUM_PRODUCTS:
-      console.log(action.item);
-      console.log(state);
-      console.log(state.sumOfElements.calories + action.item.numberOfCalories);
+      return {
+        ...state,
+        calories: state.calories + action.item.numberOfCalories,
+        proteins: state.proteins + action.item.numberOfProteins,
+        carbohydrates: state.carbohydrates + action.item.numberOfCarbohydrates,
+        fats: state.fats + action.item.numberOfFats
+      };
+    default:
+      return state;
+  }
+};
+
+const sumProductsReducer = (state = SUM_PRODUCTS_STATE, action) => {
+  switch (action.type) {
+    case types.SUM_PRODUCTS:
       return {
         ...state,
         sumOfElements: {
-          calories: state.calories + action.item.numberOfCalories,
-          proteins: state.proteins + action.item.numberOfProteins,
+          calories: state.sumOfElements.calories + action.item.numberOfCalories,
+          proteins: state.sumOfElements.proteins + action.item.numberOfProteins,
           carbohydrates:
-            state.carbohydrates + action.item.numberOfCarbohydrates,
-          fats: state.fats + action.item.numberOfFats
+            state.sumOfElements.carbohydrates +
+            action.item.numberOfCarbohydrates,
+          fats: state.sumOfElements.fats + action.item.numberOfFats
         }
       };
     default:
@@ -81,4 +100,9 @@ const newProductReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export { newProductReducer, allProductsReducer, sumProductsReducer };
+export {
+  newProductReducer,
+  allProductsReducer,
+  sumProductsReducer,
+  sumMealsReducer
+};

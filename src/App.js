@@ -5,6 +5,7 @@ import LoginView from "./views/LoginView/LoginView";
 import MainView from "./views/MainView/MainView";
 import DesktopMenu from "./views/MenuDesktop/MenuDesktop";
 import CalculatorCalories from "./views/CalculatorCalories/CalculatorCalories";
+import calculatorBMI from "./views/CalculatorBMI/CalculatorBMI";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/login" component={LoginView} />
           <Route path="/me" component={MainView} />
           <Route path="/calculator" component={CalculatorCalories} />
+          <Route path="/bmi" component={calculatorBMI} />
         </Router>
       </div>
     );

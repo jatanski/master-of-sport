@@ -3,23 +3,31 @@ import "./calculatorCalories.scss";
 import { Button } from "react-bootstrap";
 import SummaryTable from "../../components/SumarryTable/SummaryTable";
 import Meal from "../../components/Meal/Meal";
+import { allActions } from "../../redux/store";
 
 export default class CalculatorCalories extends Component {
   state = {
+    disabledButtonNewMeal: false,
     numberOfMeals: 0,
     meals: []
   };
   addNewMeal = () => {
     this.setState({
+      disabledButtonNewMeal: true,
       numberOfMeals: this.state.numberOfMeals + 1,
       meals: [...this.state.meals, { number: this.state.numberOfMeals }]
     });
   };
 
+  disabledOff = () => {
+    this.setState({ disabledButtonNewMeal: false });
+  };
+
   createNewMeal = el => {
+    allActions.addMeal();
     return (
       <li className="mealList-el" key={el.number}>
-        <Meal number={el.number + 1} />
+        <Meal disabledOff={this.disabledOff} number={el.number + 1} />
       </li>
     );
   };
@@ -32,7 +40,11 @@ export default class CalculatorCalories extends Component {
         <SummaryTable />
         <br />
         <br />
-        <Button onClick={this.addNewMeal} variant="primary">
+        <Button
+          onClick={this.addNewMeal}
+          variant="primary"
+          disabled={this.state.disabledButtonNewMeal}
+        >
           {" "}
           Dodaj posiłek
         </Button>
