@@ -17,7 +17,9 @@ const allActions = bindActionCreators(
     reset: exampleActions.reset,
     login: loginActions.login,
     logout: loginActions.logout,
-    sendInfo: newProductActions.sendInfo
+    sendInfo: newProductActions.sendInfo,
+    addProduct: newProductActions.addProduct,
+    sumProducts: newProductActions.sumProducts
   },
   store.dispatch
 );

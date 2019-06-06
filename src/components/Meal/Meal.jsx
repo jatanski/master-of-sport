@@ -4,10 +4,6 @@ import { Table } from "react-bootstrap";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => ({
-  newProductInfo: state.newProduct.info
-});
-
 class Meal extends Component {
   state = {
     numberOfProducts: 1,
@@ -19,29 +15,16 @@ class Meal extends Component {
       numberOfCarbohydrates: 0,
       numberOfFats: 0,
       numberOfCalories: 0
-    },
-    sumOfElements: {
-      calories: 0,
-      proteins: 0,
-      carbohydrates: 0,
-      fats: 0
     }
   };
   addNewProduct = () => {
     this.closeNewProduct();
-    console.log(this.props);
     this.setState({
       numberOfProducts: this.state.numberOfProducts + 1,
       products: [
         ...this.state.products,
         {
-          number: this.state.numberOfProducts,
-          name: this.props.newProductInfo.newProductName,
-          calories: this.props.newProductInfo.numberOfCalories,
-          proteins: this.props.newProductInfo.numberOfProteins,
-          carbohydrates: this.props.newProductInfo.numberOfCarbohydrates,
-          fats: this.props.newProductInfo.numberOfFats,
-          weight: this.props.newProductInfo.weight
+          number: this.state.numberOfProducts
         }
       ]
     });
@@ -49,7 +32,7 @@ class Meal extends Component {
 
   createNewProduct = el => {
     return (
-      <tr key={el.number}>
+      <tr key={Math.random()}>
         <td> {el.newProductName}</td>
         <td>{el.weight} g</td>
         <td>{el.numberOfCalories} kcal</td>
@@ -65,7 +48,6 @@ class Meal extends Component {
   };
 
   closeNewProduct = () => {
-    console.log(this.props);
     this.setState({ showNewProduct: false });
   };
 
@@ -79,22 +61,8 @@ class Meal extends Component {
     );
   }
 
-  sumOfElements = () => {
-    const elements = {};
-
-    this.state.products.forEach(el => {
-      elements.calories += el.numberOfCalories;
-      elements.proteins += el.numberOfProteins;
-      elements.carbohydrates += el.numberOfCarbohydrates;
-      elements.fats += el.numberOfFats;
-    });
-
-    this.setState({ sumOfElements: elements });
-  };
-
   render() {
-    console.log(this.state);
-    console.log(this.props);
+    // console.log(this);
     return (
       <div>
         <Table striped bordered hover variant="dark">
@@ -117,8 +85,8 @@ class Meal extends Component {
               <td>Węglowodany</td>
               <td>Tłuszcze</td>
             </tr>
-            {this.state.products
-              ? this.state.products.map(this.createNewProduct)
+            {this.props.products
+              ? this.props.products.map(this.createNewProduct)
               : null}
             <tr>
               <td>
@@ -128,10 +96,10 @@ class Meal extends Component {
                 </span>{" "}
               </td>
               <td />
-              <td>{this.state.sumOfElements.calories} kcal</td>
-              <td>{this.state.sumOfElements.proteins} g</td>
-              <td>{this.state.sumOfElements.carbohydrates} g</td>
-              <td>{this.state.sumOfElements.fats} g</td>
+              <td>{this.props.sumOfElements.calories} kcal</td>
+              <td>{this.props.sumOfElements.proteins} g</td>
+              <td>{this.props.sumOfElements.carbohydrates} g</td>
+              <td>{this.props.sumOfElements.fats} g</td>
             </tr>
           </tbody>
         </Table>
@@ -140,6 +108,11 @@ class Meal extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  products: state.allProducts.products,
+  sumOfElements: state.sumProducts.sumOfElements
+});
 
 export default connect(
   mapStateToProps,

@@ -26,6 +26,10 @@ export default class NewProduct extends Component {
 
   createNewProduct = () => {
     allActions.sendInfo(this.state);
+    allActions.addProduct(window.store.getState().newProduct.info);
+
+    const allProducts = window.store.getState().allProducts.products;
+    allActions.sumProducts(allProducts[allProducts.length - 1]);
     this.props.addNewProduct();
   };
   render() {
