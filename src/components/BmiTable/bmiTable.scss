@@ -1,0 +1,31 @@
+.redRow {
+  font-weight: 500;
+  color: red;
+  :hover {
+    color: red;
+  }
+}
+
+.orangeRow {
+  font-weight: 500;
+  color: orange;
+  :hover {
+    color: orange;
+  }
+}
+
+.greenRow {
+  font-weight: 500;
+  color: green;
+  :hover {
+    color: green;
+  }
+}
+
+.active {
+  background-color: royalblue;
+}
+
+.calculatorBMI__table {
+  max-width: 1000px;
+}

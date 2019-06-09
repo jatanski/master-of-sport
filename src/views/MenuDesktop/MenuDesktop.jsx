@@ -13,13 +13,21 @@ export default class MenuDesktop extends Component {
     return (
       <div className="menuDesktop">
         <Navbar bg="primary" variant="dark">
-          <Navbar.Brand href="#home">Master of Calories</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <Link to="/me">Master of Calories</Link>
+          </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link to="/calculator">
               <Link to="/calculator">Kalkulator kalorii</Link>
             </Nav.Link>
             <Nav.Link>
               <Link to="/bmi">Kalkulator BMI</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to="/myplans">Moje plany</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to="/statistics">Statystyki</Link>
             </Nav.Link>
             <Nav.Link href="#features">Settings</Nav.Link>
             <Nav.Link href="#pricing">Profil</Nav.Link>
