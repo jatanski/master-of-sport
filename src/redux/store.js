@@ -1,21 +1,31 @@
 import { createStore, bindActionCreators, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers";
-import { exampleActions } from "./example/index";
 import thunk from "redux-thunk";
+import { loginActions } from "./general";
+import { newProductActions } from "./calculatorCalories";
+import { mealsActions } from "./meals";
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-store.dispatch(exampleActions.add("Example 4"));
-
 const allActions = bindActionCreators(
-  { add: exampleActions.add, reset: exampleActions.reset },
+  {
+    login: loginActions.login,
+    logout: loginActions.logout,
+    sendInfo: newProductActions.sendInfo,
+    addProduct: newProductActions.addProduct,
+    sumProducts: newProductActions.sumProducts,
+    sumMeals: newProductActions.sumMeals,
+    addMeal: mealsActions.addMeal,
+    addNewProduct: mealsActions.addNewProduct,
+    resetProduct: mealsActions.resetProduct
+  },
   store.dispatch
 );
 
-allActions.add("Example 5");
+window.store = store;
 
-export default store;
+export { store, allActions };

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./loginForm.scss";
 import { Form, Button } from "react-bootstrap";
+import { allActions } from "../../redux/store";
 
 export default class RegisterForm extends Component {
   state = {
@@ -29,10 +30,12 @@ export default class RegisterForm extends Component {
         body: JSON.stringify(requestBody)
       });
       if (response.status !== 200) throw response;
-      //   localStorage.setItem(
-      //     "x-auth-token",
-      //     response.headers.get("x-auth-token")
-      //   );
+      localStorage.setItem(
+        "x-auth-token",
+        response.headers.get("x-auth-token")
+      );
+      allActions.login();
+
       //   this.props.loginStatus(true);
       response = await response.json();
       console.log(response);
