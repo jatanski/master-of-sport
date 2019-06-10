@@ -1,4 +1,5 @@
 .calculatorBMI {
+  position: relative;
   margin: 3vh;
   &__header {
     padding-bottom: 50px;
@@ -16,5 +17,11 @@
       padding-right: 20px;
       font-size: 1.5em;
     }
+  }
+  &__popUp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

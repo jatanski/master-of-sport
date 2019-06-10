@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./calculatorBMI.scss";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import BmiTable from "../../components/BmiTable/BmiTable";
+import { Link } from "react-router-dom";
 
 export default class CalculatorBMI extends Component {
   state = {
@@ -9,7 +10,9 @@ export default class CalculatorBMI extends Component {
     height: 0,
     resultDisplay: "block",
     bmi: 0,
-    id: ""
+    id: "",
+    showPopUp: false,
+    showFalsePopUp: false
   };
 
   resultStyle = {
@@ -45,7 +48,38 @@ export default class CalculatorBMI extends Component {
     this.setState({ id: id });
   };
 
-  saveBMI = () => {};
+  saveBMI = async () => {
+    const token = localStorage.getItem("x-auth-token");
+    const now = `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}`;
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-auth-token": token
+    };
+    const requestBody = {
+      value: this.state.bmi,
+      date: now
+    };
+
+    try {
+      let response = await fetch("/bmi", {
+        method: "post",
+        headers: requestHeaders,
+        body: JSON.stringify(requestBody)
+      });
+      if (response.status === 400) {
+        this.setState({ showFalsePopUp: true });
+      }
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      this.setState({ showPopUp: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  closePopUp = () => this.setState({ showPopUp: false });
+
+  closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
 
   renderResult = () => {
     return (
@@ -100,10 +134,55 @@ export default class CalculatorBMI extends Component {
         <br />
         <BmiTable id={this.state.id} />
         <br />
-        <Button onClick={this.saveBMI} variant="success">
-          Zapisz wynik
-        </Button>
+        {this.state.bmi !== 0 ? (
+          <Button onClick={this.saveBMI} variant="success">
+            Zapisz wynik
+          </Button>
+        ) : null}
         {this.renderDescription()}
+        {this.state.showPopUp ? (
+          <Alert
+            className="calculatorBMI__popUp"
+            show={this.state.showPopUp}
+            variant="success"
+          >
+            <Alert.Heading>Twoje BMI zostało zapisane.</Alert.Heading>
+            <hr />
+            <p>
+              Możesz teraz przejrzeć swoje statystyki. Albo zrobić coś innego.
+              Wybór należy do Ciebie.
+            </p>
+            <div className="d-flex justify-content-start">
+              <Link to="/statistics">
+                <Button variant="outline-secondary">
+                  Przejdź do statystyk
+                </Button>
+              </Link>
+            </div>
+            <div className="d-flex justify-content-end">
+              <Button onClick={this.closePopUp} variant="outline-success">
+                Zamknij
+              </Button>
+            </div>
+          </Alert>
+        ) : null}
+
+        <Alert
+          className="calculatorBMI__popUp"
+          show={this.state.showFalsePopUp}
+          variant="danger"
+        >
+          <Alert.Heading>Dodałeś już dzisiaj swoje BMI.</Alert.Heading>
+          <br />
+          <p>Spróbuj ponownie jutro.</p>
+          <hr />
+
+          <div className="d-flex justify-content-end">
+            <Button onClick={this.closeFalsePopUp} variant="outline-danger">
+              Zamknij
+            </Button>
+          </div>
+        </Alert>
       </section>
     );
   }
