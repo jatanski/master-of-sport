@@ -8,6 +8,7 @@ import config from "./config";
 //import routes
 import signUp from "./routes/singUp";
 import loginIn from "./routes/loginIn";
+import bmi from "./routes/bmi";
 
 //create app
 const app = express();
@@ -34,3 +35,4 @@ app.use(express.json());
 //create endpoint
 app.use("/register", signUp);
 app.use("/login", loginIn);
+app.use("/bmi", bmi);

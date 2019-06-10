@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
     maxlength: 255
+  },
+  statistics: {
+    bmi: {
+      type: Array,
+      dafault: {}
+    }
   }
 });
 
