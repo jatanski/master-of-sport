@@ -9,11 +9,21 @@ router.post("/", auth, async (req, res) => {
   let user;
   user = await User.findById(req.user);
 
+  const { value, date } = await req.body;
+
+  // check if date already exist
+  // eslint-disable-next-line array-callback-return
+  const dateExist = user.statistics.bmi.filter(el => {
+    if (el.date === date) return el;
+  });
+  if (dateExist[0])
+    return res.status(400).send("Bmi with this date arleady exicts.");
+
   //create new bmi object
   console.log(user);
-  let bmi = await new Bmi({
-    value: req.body.value,
-    date: req.body.date
+  let bmi = new Bmi({
+    value: value,
+    date: date
   });
 
   user.statistics.bmi.push(bmi);
