@@ -9,6 +9,7 @@ import calculatorBMI from "./views/CalculatorBMI/CalculatorBMI";
 import MyPlans from "./views/MyPlans/MyPlans";
 import Statistics from "./views/Statistics/Statistics";
 import Circuits from "./views/Circuits/Cirtuits";
+import TrainingDiary from "./views/TrainingDiary/TrainingDiary";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path="/myplans" component={MyPlans} />
           <Route path="/statistics" component={Statistics} />
           <Route path="/circuits" component={Circuits} />
+          <Route path="/diary" component={TrainingDiary} />
         </Router>
       </div>
     );
