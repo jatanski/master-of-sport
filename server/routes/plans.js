@@ -11,6 +11,8 @@ router.post("/", auth, async (req, res) => {
 
   const { name, exercises } = await req.body;
 
+  console.log(req.body);
+
   // check if date already exist
   // eslint-disable-next-line array-callback-return
   const dateExist = user.statistics.plans.filter(el => {
