@@ -49,15 +49,27 @@ export default class CalculatorBMI extends Component {
   };
 
   saveBMI = async () => {
+    let category = "";
+    if (this.state.id === "1") category = "Wygłodzenie";
+    else if (this.state.id === "2") category = "Wychudzenie";
+    else if (this.state.id === "3") category = "Niedowaga";
+    else if (this.state.id === "4") category = "Wartość prawidłowa";
+    else if (this.state.id === "5") category = "Nadwaga";
+    else if (this.state.id === "6") category = "I stopień otyłości";
+    else if (this.state.id === "7") category = "II stopień otyłości";
+    else if (this.state.id === "8") category = "III stopień otyłości";
+
     const token = localStorage.getItem("x-auth-token");
-    const now = `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}`;
+    const now = `${new Date().getDate()}.${new Date().getMonth() +
+      1}.${new Date().getFullYear()}`;
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
       "x-auth-token": token
     };
     const requestBody = {
       value: this.state.bmi,
-      date: now
+      date: now,
+      category: category
     };
 
     try {
@@ -90,6 +102,7 @@ export default class CalculatorBMI extends Component {
   renderDescription = () => {
     if (this.state.id >= 1 && this.state.id <= 3) {
       return <p>Twoja waga jest za niska! Musisz przytyć.</p>;
+      // eslint-disable-next-line eqeqeq
     } else if (this.state.id == 4) {
       return <p>Twoja waga jest prawidłowa. Gratuluję!</p>;
     } else if (this.state.id >= 5) {

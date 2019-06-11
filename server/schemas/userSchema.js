@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     bmi: {
       type: Array,
       dafault: {}
+    },
+    circuits: {
+      type: Array,
+      dafault: {}
     }
   }
 });

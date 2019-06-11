@@ -9,6 +9,7 @@ import config from "./config";
 import signUp from "./routes/singUp";
 import loginIn from "./routes/loginIn";
 import bmi from "./routes/bmi";
+import circuits from "./routes/circuits";
 
 //create app
 const app = express();
@@ -36,3 +37,4 @@ app.use(express.json());
 app.use("/register", signUp);
 app.use("/login", loginIn);
 app.use("/bmi", bmi);
+app.use("/circuits", circuits);

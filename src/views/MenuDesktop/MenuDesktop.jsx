@@ -29,6 +29,9 @@ export default class MenuDesktop extends Component {
             <Nav.Link>
               <Link to="/statistics">Statystyki</Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link to="circuits">Obwody</Link>
+            </Nav.Link>
             <Nav.Link href="#features">Settings</Nav.Link>
             <Nav.Link href="#pricing">Profil</Nav.Link>
             <Button variant="outline-light" onClick={this.logout}>

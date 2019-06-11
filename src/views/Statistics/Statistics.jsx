@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./statistics.scss";
 import { Button } from "react-bootstrap";
 import BmiStatistics from "../../components/BmiStatistics/BmiStatistics";
+import CircuitsStatistics from "../../components/CircuitsStatistics/CircuitsStatistics";
 
 export default class Statistics extends Component {
   state = {
@@ -9,9 +10,14 @@ export default class Statistics extends Component {
     showCircuits: false
   };
   showBmiTable = () => {
-    this.setState({ showBmi: true });
+    this.setState({ showBmi: true, showCircuits: false });
   };
-  showCircuitsTable = () => {};
+  showCircuitsTable = () => {
+    this.setState({
+      showBmi: false,
+      showCircuits: true
+    });
+  };
 
   render() {
     return (
@@ -23,6 +29,7 @@ export default class Statistics extends Component {
           Obwody i waga
         </Button>
         {this.state.showBmi ? <BmiStatistics /> : null}
+        {this.state.showCircuits ? <CircuitsStatistics /> : null}
       </section>
     );
   }
