@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     circuits: {
       type: Array,
       dafault: {}
+    },
+    plans: {
+      type: Array,
+      dafault: []
     }
   }
 });
