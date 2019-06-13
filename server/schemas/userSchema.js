@@ -36,11 +36,11 @@ const userSchema = new mongoose.Schema({
     plans: {
       type: Array,
       default: []
-    },
-    workouts: {
-      type: Array,
-      default: []
     }
+  },
+  workouts: {
+    type: Array,
+    default: []
   }
 });
 

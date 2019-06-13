@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 const workoutSchema = mongoose.Schema({
-  date: Date,
-  exercises: Object
+  date: String,
+  exercises: Object,
+  type: String
 });
 
 export default workoutSchema;
