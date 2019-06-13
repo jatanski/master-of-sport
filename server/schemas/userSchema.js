@@ -27,15 +27,19 @@ const userSchema = new mongoose.Schema({
   statistics: {
     bmi: {
       type: Array,
-      dafault: {}
+      default: []
     },
     circuits: {
       type: Array,
-      dafault: {}
+      default: []
     },
     plans: {
       type: Array,
-      dafault: []
+      default: []
+    },
+    workouts: {
+      type: Array,
+      default: []
     }
   }
 });

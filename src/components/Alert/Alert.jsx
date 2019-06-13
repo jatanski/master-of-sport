@@ -15,6 +15,12 @@ export default class CustomAlert extends Component {
       : (this.variant = { general: "danger", button: "outline-danger" });
   }
 
+  onClick = () => {
+    this.props.close();
+    if (this.props.showOff) this.props.showOff();
+    if (this.props.disabledOff) this.props.disabledOff();
+  };
+
   render() {
     return (
       <Alert
@@ -34,7 +40,7 @@ export default class CustomAlert extends Component {
           </div>
         ) : null}
         <div className="d-flex justify-content-end">
-          <Button onClick={this.props.close} variant={this.variant.button}>
+          <Button onClick={this.onClick} variant={this.variant.button}>
             Zamknij
           </Button>
         </div>
