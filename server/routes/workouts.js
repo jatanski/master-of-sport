@@ -37,13 +37,7 @@ router.get("/", auth, async (req, res) => {
   let user;
   user = await User.findById(req.user);
 
-  const { kindOfWorkout } = await req.body;
-
-  const workouts = user.workouts.filter(el => {
-    if (el.type === kindOfWorkout) return el;
-  });
-
-  res.status(200).send(workouts);
+  res.status(200).send(user.workouts);
 });
 
 export default router;
