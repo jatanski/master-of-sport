@@ -63,8 +63,8 @@ export default class NewPlanForm extends Component {
 
   savePlan = async () => {
     const exercisesToSend = [];
-    // eslint-disable-next-line array-callback-return
     console.log(this.exercises);
+    // eslint-disable-next-line array-callback-return
     this.exercises.map((el, i) => {
       exercisesToSend.push({});
       exercisesToSend[i].name = el[0];

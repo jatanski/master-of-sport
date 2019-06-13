@@ -1,6 +1,7 @@
 import express from "express";
 import { User } from "../models/userModel";
 import TrainingPlan from "../models/trainingPlanModel";
+import AllWorkoutsOneKind from "../models/allWorkoutsModel";
 import auth from "../middleware/auth";
 
 const router = express.Router();
@@ -26,8 +27,9 @@ router.post("/", auth, async (req, res) => {
     name: name,
     exercises: exercises
   });
-
+  console.log(user.statistics);
   user.statistics.plans.push(plan);
+  user.statistics.workouts.push(new AllWorkoutsOneKind({ name: plan.name }));
   await user.save();
 
   res.status(200).send(user.statistics.plans);
