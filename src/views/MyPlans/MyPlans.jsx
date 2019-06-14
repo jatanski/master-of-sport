@@ -6,11 +6,13 @@ import WorkoutsStatistics from "../../components/WorkoutsStatistics/WorkoutsStat
 export default class myPlans extends Component {
   state = {
     plans: [],
-    workouts: []
+    workouts: {},
+    workoutsArray: []
   };
 
   async componentDidMount() {
     let workouts = {};
+    let workoutsArray = [];
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -24,15 +26,18 @@ export default class myPlans extends Component {
       });
       if (response.status !== 200) throw response;
       response = await response.json();
-      response.forEach(el => {
+      console.log(response);
+      response.plans.forEach(el => {
         el.id = `#${el._id}`;
         el.showInput = false;
       });
-      this.setState({ plans: response });
-      response.forEach(el => {
-        workouts[`${el.name}`] = [];
+      this.setState({ plans: response.plans });
+      response.workouts.forEach(el => {
+        workouts[`${el}`] = [];
+        workoutsArray.push(el);
       });
-      this.setState({ workouts: workouts });
+      this.setState({ workouts: workouts, workoutsArray: workoutsArray });
+
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -45,6 +50,7 @@ export default class myPlans extends Component {
         <EditPlan plans={this.state.plans} />
         <WorkoutsStatistics
           workouts={this.state.workouts}
+          workoutsArray={this.state.workoutsArray}
           plans={this.state.plans}
         />
       </div>

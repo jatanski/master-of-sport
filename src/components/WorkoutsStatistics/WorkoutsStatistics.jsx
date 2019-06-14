@@ -142,16 +142,16 @@ export default class WorkoutsStatistics extends Component {
 
   renderPlan = el => {
     return (
-      <Tab key={el.name} eventKey={el.name} title={el.name}>
-        {this.state.workouts[el.name]
-          ? this.state.workouts[el.name].map(this.showExercises)
+      <Tab key={el} eventKey={el} title={el}>
+        {this.state.workouts[el]
+          ? this.state.workouts[el].map(this.showExercises)
           : null}
       </Tab>
     );
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     console.log(this.props);
     return (
       <div>
@@ -159,7 +159,9 @@ export default class WorkoutsStatistics extends Component {
           <Tab eventKey="home" title="Wybierz">
             <p>Wybierz plan, aby zobaczyć statystyki</p>
           </Tab>
-          {this.props.plans ? this.props.plans.map(this.renderPlan) : null}
+          {this.props.workoutsArray
+            ? this.props.workoutsArray.map(this.renderPlan)
+            : null}
         </Tabs>
       </div>
     );

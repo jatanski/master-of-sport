@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema({
   workouts: {
     type: Array,
     default: []
+  },
+  nameOfWorkputs: {
+    type: Array,
+    default: []
   }
 });
 

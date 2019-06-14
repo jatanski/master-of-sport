@@ -28,6 +28,12 @@ router.post("/", auth, async (req, res) => {
 
   user.workouts.push(workout);
 
+  const workoutNameExist = user.nameOfWorkputs.some(el => {
+    return el === kindOfWorkout;
+  });
+
+  if (!workoutNameExist) user.nameOfWorkputs.push(kindOfWorkout);
+
   await user.save();
 
   res.status(200).send(user.workouts);

@@ -50,7 +50,7 @@ export default class NewTraining extends Component {
       });
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ trainings: response });
+      this.setState({ trainings: response.plans });
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -64,6 +64,7 @@ export default class NewTraining extends Component {
   sendToDataBase = async () => {
     const now = `${new Date().getDate()}.${new Date().getMonth() +
       1}.${new Date().getFullYear()}`;
+    // const now = "11.05.2019";
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",

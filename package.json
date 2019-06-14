@@ -40,6 +40,7 @@
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
     "jsonwebtoken": "^8.5.1",
+    "material-icons": "^0.3.1",
     "mini-css-extract-plugin": "0.5.0",
     "mongodb": "^3.2.6",
     "mongoose": "^5.5.11",
@@ -148,5 +149,8 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0"
+  }
 }
