@@ -36,11 +36,19 @@ const userSchema = new mongoose.Schema({
     plans: {
       type: Array,
       default: []
-    },
-    workouts: {
-      type: Array,
-      default: []
     }
+  },
+  workouts: {
+    type: Array,
+    default: []
+  },
+  nameOfWorkputs: {
+    type: Array,
+    default: []
+  },
+  nutritionalPlans: {
+    type: Array,
+    default: []
   }
 });
 

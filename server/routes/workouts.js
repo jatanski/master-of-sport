@@ -11,46 +11,39 @@ router.post("/", auth, async (req, res) => {
 
   const { exercises, date, kindOfWorkout } = await req.body;
 
-  const dateExist = user.statistics.bmi.filter(el => {
-    if (el.date === date) return el;
+  const dateExist = user.workouts.filter(el => {
+    if (el.date === date && el.type === kindOfWorkout) return el;
   });
   if (dateExist[0])
-    return res.status(400).send("Workout with this date arleady exicts.");
+    return res
+      .status(400)
+      .send("Workout with this type and date arleady exicts.");
 
   //create new Workout object
   let workout = new Workout({
     date: date,
-    exercises: exercises
-  });
-  //   console.log(workout);
-  //   console.log(user.statistics.workouts[kindOfWorkout]);
-
-  //   const workoutType = user.statistics.workouts.filter(el => {
-  //     return el.name === kindOfWorkout;
-  //   });
-
-  user.statistics.workouts.forEach(el => {
-    if (el.name === kindOfWorkout) el.workouts.push(workout);
+    exercises: exercises,
+    type: kindOfWorkout
   });
 
-  //   console.log(workoutType);
-  console.log(user.statistics.workouts);
+  user.workouts.push(workout);
 
-  //   user.statistics.workouts[kindOfWorkout].workouts.push(workout);
-  //   console.log(user.statistics.workouts[kindOfWorkout]);
+  const workoutNameExist = user.nameOfWorkputs.some(el => {
+    return el === kindOfWorkout;
+  });
+
+  if (!workoutNameExist) user.nameOfWorkputs.push(kindOfWorkout);
 
   await user.save();
 
-  res.status(200).send(user);
+  res.status(200).send(user.workouts);
 });
 
 router.get("/", auth, async (req, res) => {
   let user;
   user = await User.findById(req.user);
 
-  const { kindOfWorkout } = await req.body;
-
-  res.status(200).send(user.statistics.workouts[kindOfWorkout].workouts);
+  res.status(200).send(user.workouts);
 });
 
 export default router;

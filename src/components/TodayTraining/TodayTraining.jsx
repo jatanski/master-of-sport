@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from "react";
 import {
   Button,
@@ -7,7 +8,6 @@ import {
   FormControl
 } from "react-bootstrap";
 import CustomAlert from "../../components/Alert/Alert";
-import { async } from "q";
 
 export default class NewTraining extends Component {
   state = {
@@ -16,11 +16,25 @@ export default class NewTraining extends Component {
     showTable: false,
     showSave: false,
     dateToSend: {},
-    choosenPlan: ""
+    choosenPlan: "",
+    showSuccessPopUp: false,
+    showFalsePopUp: false
   };
 
   dates = {};
   exercisesAfterFill = {};
+
+  alertText = {
+    success: {
+      header: "Trening został zapisany.",
+      desc:
+        "Możesz teraz przejrzeć swoje treningi w statystykach. Albo zrobić coś innego. Wybór należy do Ciebie."
+    },
+    fail: {
+      header: "Dodałeś już trening.",
+      desc: "Spróbuj ponownie jutro."
+    }
+  };
 
   async componentDidMount() {
     const token = localStorage.getItem("x-auth-token");
@@ -36,16 +50,21 @@ export default class NewTraining extends Component {
       });
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ trainings: response });
+      this.setState({ trainings: response.plans });
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   }
 
+  closeSuccessPopUp = () => this.setState({ showSuccessPopUp: false });
+
+  closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
+
   sendToDataBase = async () => {
     const now = `${new Date().getDate()}.${new Date().getMonth() +
       1}.${new Date().getFullYear()}`;
+    // const now = "11.05.2019";
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -196,11 +215,25 @@ export default class NewTraining extends Component {
             <tbody>{this.state.exercises.map(this.renderExercises)}</tbody>
           </Table>
         ) : null}
-
         {this.state.showSave ? (
           <Button onClick={this.sendToDataBase} variant="primary">
             Zapisz trening
           </Button>
+        ) : null}
+        {this.state.showSuccessPopUp ? (
+          <CustomAlert
+            header={this.alertText.success.header}
+            desc={this.alertText.success.desc}
+            close={this.closeSuccessPopUp}
+            goToStatistics="true"
+          />
+        ) : null}
+        {this.state.showFalsePopUp ? (
+          <CustomAlert
+            header={this.alertText.fail.header}
+            desc={this.alertText.fail.desc}
+            close={this.closeFalsePopUp}
+          />
         ) : null}
       </div>
     );

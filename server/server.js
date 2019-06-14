@@ -12,6 +12,7 @@ import bmi from "./routes/bmi";
 import circuits from "./routes/circuits";
 import plans from "./routes/plans";
 import workouts from "./routes/workouts";
+import nutritionalPlans from "./routes/nutritionalPlans";
 
 //create app
 const app = express();
@@ -42,3 +43,4 @@ app.use("/bmi", bmi);
 app.use("/circuits", circuits);
 app.use("/plans", plans);
 app.use("/workouts", workouts);
+app.use("nutritionalPlans", nutritionalPlans);

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const allWorkoutsOneKindSchema = mongoose.Schema({
   name: String,
-  workouts: {
+  trainings: {
     type: Array,
     default: []
   }
