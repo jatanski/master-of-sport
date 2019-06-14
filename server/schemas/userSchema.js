@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
   nameOfWorkputs: {
     type: Array,
     default: []
+  },
+  nutritionalPlans: {
+    type: Array,
+    default: []
   }
 });
 
