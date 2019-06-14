@@ -13,6 +13,7 @@ import circuits from "./routes/circuits";
 import plans from "./routes/plans";
 import workouts from "./routes/workouts";
 import nutritionalPlans from "./routes/nutritionalPlans";
+import menus from "./routes/menus";
 
 //create app
 const app = express();
@@ -44,3 +45,4 @@ app.use("/circuits", circuits);
 app.use("/plans", plans);
 app.use("/workouts", workouts);
 app.use("nutritionalPlans", nutritionalPlans);
+app.use("menus", menus);

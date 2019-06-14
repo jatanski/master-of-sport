@@ -1,6 +1,6 @@
 import express from "express";
 import { User } from "../models/userModel";
-import NutritionalPlan from "../models/nutritionalPlanModel";
+import Menu from "../models/menuModel";
 import auth from "../middleware/auth";
 
 const router = express.Router();
@@ -8,31 +8,32 @@ const router = express.Router();
 router.post("/", auth, async (req, res) => {
   let user = await User.findById(req.user);
 
-  const { name, meals, summary } = await req.body;
+  const { name, meals, summary, date } = await req.body;
   // check if date already exist
   // eslint-disable-next-line array-callback-return
-  const nameExist = user.nutritionalPlan.filter(el => {
-    if (el.name === name) return el;
+  const dateExist = user.statistics.plans.filter(el => {
+    if (el.date === date) return el;
   });
-  if (nameExist[0])
-    return res.status(400).send("Plan with this name arleady exicts.");
+  if (dateExist[0])
+    return res.status(400).send("Plan with this date arleady exicts.");
 
   //create new plan object
-  let plan = new NutritionalPlan({
+  let menu = new Menu({
     name: name,
     meals: meals,
-    summary: summary
+    summary: summary,
+    date: date
   });
-  user.nutritionalPlan.push(plan);
+  user.statistics.menus.push(menu);
   await user.save();
 
-  res.status(200).send(user.nutritionalPlan);
+  res.status(200).send(user.statistics.menus);
 });
 
 router.get("/", auth, async (req, res) => {
   let user = await User.findById(req.user);
 
-  res.status(200).send(user.nutritionalPlan);
+  res.status(200).send(user.statistics.menus);
 });
 
 export default router;

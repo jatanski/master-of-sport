@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import nutrionalPlanSchema from "../schemas/nutrionalPlanSchema";
+import nutritionalPlanSchema from "../schemas/nutritionalPlanSchema";
 
-const NutrionalPlan = mongoose.model("NutrionalPlan", nutrionalPlanSchema);
+const NutrionalPlan = mongoose.model("NutrionalPlan", nutritionalPlanSchema);
 
 export default NutrionalPlan;
