@@ -1,6 +1,11 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import CustomAlert from "../../components/Alert/Alert";
+import Input from "../../components/Input/Input";
+import "./newPlanForm.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default class NewPlanForm extends Component {
   state = {
@@ -18,31 +23,15 @@ export default class NewPlanForm extends Component {
     success: {
       header: "Plan został zapisany pomyślnie.",
       desc:
-        "Możesz teraz wsprowadzić swój pierwszy trening. Albo zrobić coś innego. Wybór należy do Ciebie."
+        "Możesz teraz przejść do sekcji MOJE TRENINGI i wsprowadzić swój pierwszy trening. Albo zrobić coś innego. Wybór należy do Ciebie."
     },
     fail: {
       header: "Coś poszło nie tak ;/",
       desc: "Plan o tej nazwie już istnieje. Spróbuj wpisać inną nazwę."
-    }
-  };
-
-  closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
-  closeSuccessPopUp = () => this.setState({ showSuccessPopUp: false });
-
-  collectPlanName = e => {
-    if (e.target.value) this.setState({ disabledSave: false });
-    else this.setState({ disabledSave: true });
-    const state = {};
-    state[`${e.target.id}`] = e.target.value;
-    this.setState(state);
-    console.log(this.state);
-  };
-
-  collectExercises = e => {
-    if (e.target.id % 2 === 0 || e.target.id % 2 === 1) {
-      this.exercises[e.target.id - 1][0] = e.target.value;
-    } else {
-      this.exercises[e.target.id - 1.5][1] = e.target.value;
+    },
+    goTo1: {
+      text: "Moje treningi",
+      link: "/myplans"
     }
   };
 
@@ -58,20 +47,34 @@ export default class NewPlanForm extends Component {
       ]
     });
     this.exercises.push({});
-    console.log(this.exercises);
+  };
+
+  closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
+  closeSuccessPopUp = () => this.setState({ showSuccessPopUp: false });
+
+  collectExercises = e => {
+    if (e.target.id % 2 === 0 || e.target.id % 2 === 1) {
+      this.exercises[e.target.id - 1][0] = e.target.value;
+    } else {
+      this.exercises[e.target.id - 1.5][1] = e.target.value;
+    }
+  };
+
+  collectPlanName = e => {
+    if (e.target.value) this.setState({ disabledSave: false });
+    else this.setState({ disabledSave: true });
+    const state = {};
+    state[`${e.target.id}`] = e.target.value;
+    this.setState(state);
   };
 
   savePlan = async () => {
     const exercisesToSend = [];
-    console.log(this.exercises);
-    // eslint-disable-next-line array-callback-return
     this.exercises.map((el, i) => {
       exercisesToSend.push({});
       exercisesToSend[i].name = el[0];
       exercisesToSend[i].series = el[1];
     });
-
-    console.log(exercisesToSend);
 
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
@@ -129,15 +132,16 @@ export default class NewPlanForm extends Component {
     return (
       <Form>
         <Form.Group onChange={this.collectPlanName} controlId="name">
-          <Form.Label>Wpisz nazwę treningu</Form.Label>
+          <Form.Label className="circuits__form__dimensions">
+            Wpisz nazwę treningu
+          </Form.Label>
           <Form.Control />
         </Form.Group>
-        <Form.Label>Wpisz nazwy ćwiczeń: </Form.Label>
         {this.state.exercises
           ? this.state.exercises.map(this.showExercises)
           : null}
         <Button variant="primary" onClick={this.addNewExercises}>
-          +
+          <FontAwesomeIcon icon={faPlus} />
         </Button>
         <br />
         <br />
@@ -153,7 +157,8 @@ export default class NewPlanForm extends Component {
             header={this.alertText.success.header}
             desc={this.alertText.success.desc}
             close={this.closeSuccessPopUp}
-            goToStatistics="true"
+            goTo1Text={this.alertText.goTo1.text}
+            goTo1Link={this.alertText.goTo1.link}
             showOff={this.props.showOff}
             disabledOff={this.props.disabledOff}
           />

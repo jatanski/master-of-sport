@@ -10,7 +10,7 @@ import MyPlans from "./views/MyPlans/MyPlans";
 import Statistics from "./views/Statistics/Statistics";
 import Circuits from "./views/Circuits/Cirtuits";
 import TrainingDiary from "./views/TrainingDiary/TrainingDiary";
-
+import WorkoutPlans from "./views/WorkoutPlans/WorkoutPlans";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -30,6 +30,7 @@ class App extends Component {
           <Route path="/statistics" component={Statistics} />
           <Route path="/circuits" component={Circuits} />
           <Route path="/diary" component={TrainingDiary} />
+          <Route path="/workoutplans" component={WorkoutPlans} />
         </Router>
       </div>
     );

@@ -23,7 +23,7 @@ export default class MenuDesktop extends Component {
             <Nav className="mr-auto">
               <NavDropdown title="Dodaj plan">
                 <NavDropdown.Item>
-                  <Link to="/myplans">Treningowy</Link>
+                  <Link to="/workoutplans">Treningowy</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link to="/calculator">Dietetyczny</Link>
