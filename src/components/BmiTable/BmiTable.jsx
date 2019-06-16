@@ -37,7 +37,7 @@ export default class BmiTable extends Component {
         <thead>
           <tr style={{ fontWeight: 500 }}>
             <td>Wartość</td>
-            <td>Co oznacza?</td>
+            <td>Kategoria</td>
           </tr>
         </thead>
         <tbody>

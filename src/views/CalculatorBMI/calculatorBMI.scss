@@ -7,6 +7,9 @@
   }
   &__form {
     width: 30%;
+    &__inputGroup {
+      margin-bottom: 1vh;
+    }
     &__label {
       padding-bottom: 10px;
       font-size: 1.4em;
@@ -24,4 +27,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+}
+
+.bmiResult {
+  font-size: 1.4em;
+  font-weight: 600;
 }

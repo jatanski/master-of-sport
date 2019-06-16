@@ -17,7 +17,7 @@ export default class CustomAlert extends Component {
 
   onClick = () => {
     this.props.close();
-    this.props.extraFunc();
+    if (this.props.extraFunc) this.props.extraFunc();
     if (this.props.showOff) this.props.showOff();
     if (this.props.disabledOff) this.props.disabledOff();
   };

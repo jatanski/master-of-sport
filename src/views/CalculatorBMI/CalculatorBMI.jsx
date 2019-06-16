@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import "./calculatorBMI.scss";
-import { Form, Button, Alert } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Jumbotron,
+  InputGroup,
+  FormControl
+} from "react-bootstrap";
 import BmiTable from "../../components/BmiTable/BmiTable";
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+import CustomAlert from "../../components/Alert/Alert";
 
 export default class CalculatorBMI extends Component {
   state = {
@@ -11,7 +19,7 @@ export default class CalculatorBMI extends Component {
     resultDisplay: "block",
     bmi: 0,
     id: "",
-    showPopUp: false,
+    showSuccessPopUp: false,
     showFalsePopUp: false
   };
 
@@ -19,9 +27,24 @@ export default class CalculatorBMI extends Component {
     display: this.state.resultDisplay
   };
 
-  showResult = () => {
-    this.setState({ resultDisplay: "block" });
+  alertText = {
+    success: {
+      header: "Wynik został zapisany.",
+      desc:
+        "Jeżeli chesz przejrzeć wszystkie swoje wyniki, znajdziesz je w STATYSTYKACH."
+    },
+    fail: {
+      header: "BMI zostało już dzisiaj dodane.",
+      desc: "Spróbuj ponownie jutro."
+    },
+    goTo1: {
+      text: "Statystyki",
+      link: "/statistics"
+    }
   };
+
+  closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
+  closeSuccessPopUp = () => this.setState({ showSuccessPopUp: false });
 
   collectData = e => {
     const state = {};
@@ -44,7 +67,6 @@ export default class CalculatorBMI extends Component {
     else if (bmi >= 30 && bmi < 35) id = "6";
     else if (bmi >= 35 && bmi < 40) id = "7";
     else if (bmi > 40) id = "8";
-    console.log(id);
     this.setState({ id: id });
   };
 
@@ -71,7 +93,6 @@ export default class CalculatorBMI extends Component {
       date: now,
       category: category
     };
-
     try {
       let response = await fetch("/bmi", {
         method: "post",
@@ -83,19 +104,21 @@ export default class CalculatorBMI extends Component {
       }
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ showPopUp: true });
+      this.setState({ showSuccessPopUp: true });
     } catch (error) {
       console.log(error);
     }
   };
 
-  closePopUp = () => this.setState({ showPopUp: false });
-
-  closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
+  showResult = () => {
+    this.setState({ resultDisplay: "block" });
+  };
 
   renderResult = () => {
     return (
-      <div style={this.resultStyle}>Twoje BMI wynosi: {this.state.bmi}.</div>
+      <div className="bmiResult" style={this.resultStyle}>
+        Twoje BMI wynosi: {this.state.bmi}.
+      </div>
     );
   };
 
@@ -113,89 +136,83 @@ export default class CalculatorBMI extends Component {
   render() {
     return (
       <section className="calculatorBMI">
-        <h1 className="calculatorBMI__header">Oblicz swoje BMI</h1>
-        <Form className="calculatorBMI__form">
-          <Form.Group controlId="weight">
-            <Form.Label className="calculatorBMI__form__label">
-              Waga w kg:
-            </Form.Label>
-            <Form.Control
-              className="calculatorBMI__form__input"
-              type="number"
-              onChange={this.collectData}
-            />
-          </Form.Group>
-          <Form.Group controlId="height">
-            <Form.Label className="calculatorBMI__form__label">
-              Wzrost w cm:
-            </Form.Label>
-            <Form.Control
-              className="calculatorBMI__form__input"
-              type="number"
-              onChange={this.collectData}
-            />
-          </Form.Group>
-          <Button
-            className="calculatorBMI__form__button"
-            variant="primary"
-            onClick={this.countBMI}
-          >
-            Oblicz
-          </Button>
-        </Form>
-        {this.renderResult()}
-        <br />
+        <Jumbotron>
+          <div className="calculatorCalories__instruction">
+            <h2 className="calculatorCalories__header-main">
+              Oblicz swoje BMI
+            </h2>
+            <p>
+              BMI to ważny wyznacznik tego, czy Twoje waga jest prawidłowa. Nie
+              lekceważ odchyleń od stanu prawidłowego, ponieważ mogą być one
+              groźne dla Twojego zdrowia.
+            </p>
+            <h3 className="calculatorCalories__header-secondary">Instrukcja</h3>
+            <p className="calculatorCalories__description">
+              1. Wpisz swoją wagę oraz wzrost w centumetrach, a następnie
+              kliknij oblicz. <br /> 2. Kalkulator obliczy swoje BMI oraz
+              sprawdzi w jakiej kategorii się znajdujesz. <br /> 3. Możesz
+              zapisać swoje BMI, aby móc monitorować swoje zmiany.
+            </p>
+          </div>
+          <Form className="calculatorBMI__form">
+            <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
+              <InputGroup.Prepend>
+                <InputGroup.Text>Waga w kg</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                className="calculatorBMI__form__input"
+                type="number"
+                onChange={this.collectData}
+                id="weight"
+              />
+            </InputGroup>
+            <InputGroup size="lg">
+              <InputGroup.Prepend>
+                <InputGroup.Text>Wzrost w cm</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                className="calculatorBMI__form__input"
+                type="number"
+                onChange={this.collectData}
+                id="height"
+              />
+            </InputGroup>
+            <Button
+              className="calculatorBMI__form__button"
+              variant="primary"
+              onClick={this.countBMI}
+            >
+              Oblicz
+            </Button>
+          </Form>
+          {this.renderResult()}
+        </Jumbotron>
         <BmiTable id={this.state.id} />
-        <br />
         {this.state.bmi !== 0 ? (
-          <Button onClick={this.saveBMI} variant="success">
-            Zapisz wynik
+          <Button size="lg" onClick={this.saveBMI} variant="success">
+            <span className="calculatorCalories__newMeal__text">
+              Zapisz wynik
+            </span>
+            <FontAwesomeIcon icon={faSave} />
           </Button>
         ) : null}
         {this.renderDescription()}
-        {this.state.showPopUp ? (
-          <Alert
-            className="calculatorBMI__popUp"
-            show={this.state.showPopUp}
-            variant="success"
-          >
-            <Alert.Heading>Twoje BMI zostało zapisane.</Alert.Heading>
-            <hr />
-            <p>
-              Możesz teraz przejrzeć swoje statystyki. Albo zrobić coś innego.
-              Wybór należy do Ciebie.
-            </p>
-            <div className="d-flex justify-content-start">
-              <Link to="/statistics">
-                <Button variant="outline-secondary">
-                  Przejdź do statystyk
-                </Button>
-              </Link>
-            </div>
-            <div className="d-flex justify-content-end">
-              <Button onClick={this.closePopUp} variant="outline-success">
-                Zamknij
-              </Button>
-            </div>
-          </Alert>
+        {this.state.showSuccessPopUp ? (
+          <CustomAlert
+            header={this.alertText.success.header}
+            desc={this.alertText.success.desc}
+            close={this.closeSuccessPopUp}
+            goTo1Text={this.alertText.goTo1.text}
+            goTo1Link={this.alertText.goTo1.link}
+          />
         ) : null}
-
-        <Alert
-          className="calculatorBMI__popUp"
-          show={this.state.showFalsePopUp}
-          variant="danger"
-        >
-          <Alert.Heading>Dodałeś już dzisiaj swoje BMI.</Alert.Heading>
-          <br />
-          <p>Spróbuj ponownie jutro.</p>
-          <hr />
-
-          <div className="d-flex justify-content-end">
-            <Button onClick={this.closeFalsePopUp} variant="outline-danger">
-              Zamknij
-            </Button>
-          </div>
-        </Alert>
+        {this.state.showFalsePopUp ? (
+          <CustomAlert
+            header={this.alertText.fail.header}
+            desc={this.alertText.fail.desc}
+            close={this.closeFalsePopUp}
+          />
+        ) : null}
       </section>
     );
   }
