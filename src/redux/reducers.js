@@ -7,6 +7,7 @@ import {
   sumMealsReducer
 } from "./calculatorCalories";
 import { mealReducer, productReducer } from "./meals";
+import { mealNewReducer } from "./newMeals";
 
 const rootReducer = combineReducers({
   login: loginReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   sumProducts: sumProductsReducer,
   sumMeals: sumMealsReducer,
   meal: mealReducer,
-  product: productReducer
+  product: productReducer,
+  mealNew: mealNewReducer
 });
 
 export default rootReducer;

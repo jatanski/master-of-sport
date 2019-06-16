@@ -37,6 +37,16 @@ export default class NewProduct extends Component {
     allActions.sendInfo(elementsAfterCount);
   };
 
+  createNewProduct = () => {
+    this.countElements();
+    allActions.addProduct(window.store.getState().newProduct.info);
+
+    const allProducts = window.store.getState().allProducts.products;
+    allActions.sumProducts(allProducts[allProducts.length - 1]);
+    allActions.addNewProduct(window.store.getState().newProduct.info);
+    this.props.addNewProduct();
+  };
+
   handleNumberInputChange = e => {
     const state = {};
     state[`${e.target.id}`] = Number(e.target.value);
@@ -49,16 +59,6 @@ export default class NewProduct extends Component {
     this.setState(state);
   };
 
-  createNewProduct = () => {
-    this.countElements();
-    allActions.addProduct(window.store.getState().newProduct.info);
-
-    const allProducts = window.store.getState().allProducts.products;
-    allActions.sumProducts(allProducts[allProducts.length - 1]);
-    allActions.addNewProduct(window.store.getState().newProduct.info);
-    this.props.addNewProduct();
-  };
-
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.close}>
@@ -68,16 +68,16 @@ export default class NewProduct extends Component {
         <Modal.Body>
           <Form>
             <Form.Group controlId="newProductName">
-              <Form.Label>Nazwa produktu</Form.Label>
+              <Form.Label>Nazwa produktu:</Form.Label>
               <Form.Control
                 onChange={this.handleTextInputChange}
                 type="text"
                 placeholder="Wpisz nazwę"
               />
             </Form.Group>
-            <Form.Label>Zawartość makroskładników w 100G</Form.Label>
-            <br />
-            <br />
+            <Form.Label className="makroelementsIn100g">
+              Zawartość makroskładników w 100 g.
+            </Form.Label>
             <Form.Group controlId="numberOfProteins">
               <Form.Label>Białko:</Form.Label>
               <Form.Control
@@ -100,14 +100,14 @@ export default class NewProduct extends Component {
               />
             </Form.Group>
             <Form.Group controlId="numberOfCalories">
-              <Form.Label>Kaloryczność w 100G</Form.Label>
+              <Form.Label>Kaloryczność</Form.Label>
               <Form.Control
                 onChange={this.handleNumberInputChange}
                 type="number"
               />
             </Form.Group>
             <Form.Group controlId="weight">
-              <Form.Label>Waga:</Form.Label>
+              <Form.Label className="makroelementsIn100g">Waga:</Form.Label>
               <Form.Control
                 type="number"
                 onChange={this.handleNumberInputChange}

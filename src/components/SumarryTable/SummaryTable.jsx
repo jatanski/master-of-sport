@@ -30,7 +30,7 @@ class SummaryTable extends Component {
         hover
         variant="dark"
       >
-        <tbody>
+        <thead>
           <tr>
             <td />
             <td>Kalorie</td>
@@ -38,8 +38,10 @@ class SummaryTable extends Component {
             <td>Węglowodany</td>
             <td>Tłuszcze</td>
           </tr>
+        </thead>
+        <tbody>
           <tr>
-            <td>Suma dobowa</td>
+            <td className="summaryDay">Suma dobowa</td>
             <td>{this.props.elementsFromAllMeals.calories} kcal</td>
             <td>{this.props.elementsFromAllMeals.proteins} g</td>
             <td>{this.props.elementsFromAllMeals.carbohydrates} g</td>

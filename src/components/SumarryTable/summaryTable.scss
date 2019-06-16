@@ -1,3 +1,11 @@
 .caloriesSummaryTable {
   text-align: center;
+  width: 90vw;
+  margin: 10vh 1.5vw 5vh;
+  & thead {
+    font-weight: 600;
+  }
+  & .summaryDay {
+    font-weight: 600;
+  }
 }

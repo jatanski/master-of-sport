@@ -44,5 +44,5 @@ app.use("/bmi", bmi);
 app.use("/circuits", circuits);
 app.use("/plans", plans);
 app.use("/workouts", workouts);
-app.use("nutritionalPlans", nutritionalPlans);
-app.use("menus", menus);
+app.use("/nutritionalPlans", nutritionalPlans);
+app.use("/menus", menus);

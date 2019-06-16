@@ -10,13 +10,14 @@ export default class CustomAlert extends Component {
       button: ""
     };
 
-    this.props.goToStatistics
+    this.props.goTo1Text
       ? (this.variant = { general: "success", button: "outline-success" })
       : (this.variant = { general: "danger", button: "outline-danger" });
   }
 
   onClick = () => {
     this.props.close();
+    this.props.extraFunc();
     if (this.props.showOff) this.props.showOff();
     if (this.props.disabledOff) this.props.disabledOff();
   };
@@ -32,14 +33,21 @@ export default class CustomAlert extends Component {
         <br />
         <p>{this.props.desc}</p>
         <hr />
-        {this.props.goToStatistics ? (
-          <div className="d-flex justify-content-start">
-            <Link to="/statistics">
-              <Button variant="outline-secondary">Przejdź do statystyk</Button>
+        <div className="d-flex justify-content-between">
+          {this.props.goTo1Text ? (
+            <Link to={this.props.goTo1Link}>
+              <Button variant="outline-secondary">
+                {this.props.goTo1Text}
+              </Button>
             </Link>
-          </div>
-        ) : null}
-        <div className="d-flex justify-content-end">
+          ) : null}
+          {this.props.goTo2Text ? (
+            <Link to={this.props.goTo2Link}>
+              <Button variant="outline-secondary">
+                {this.props.goTo2Text}
+              </Button>
+            </Link>
+          ) : null}
           <Button onClick={this.onClick} variant={this.variant.button}>
             Zamknij
           </Button>

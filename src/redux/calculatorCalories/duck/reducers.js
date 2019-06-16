@@ -41,6 +41,13 @@ const sumMealsReducer = (state = SUM_MEALS_STATE, action) => {
         carbohydrates: state.carbohydrates + action.item.numberOfCarbohydrates,
         fats: state.fats + action.item.numberOfFats
       };
+    case types.RESET_SUM_MEALS:
+      return {
+        calories: 0,
+        proteins: 0,
+        carbohydrates: 0,
+        fats: 0
+      };
     default:
       return state;
   }

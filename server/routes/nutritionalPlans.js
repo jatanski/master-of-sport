@@ -11,7 +11,7 @@ router.post("/", auth, async (req, res) => {
   const { name, meals, summary } = await req.body;
   // check if date already exist
   // eslint-disable-next-line array-callback-return
-  const nameExist = user.nutritionalPlan.filter(el => {
+  const nameExist = user.nutritionalPlans.filter(el => {
     if (el.name === name) return el;
   });
   if (nameExist[0])
@@ -23,10 +23,10 @@ router.post("/", auth, async (req, res) => {
     meals: meals,
     summary: summary
   });
-  user.nutritionalPlan.push(plan);
+  user.nutritionalPlans.push(plan);
   await user.save();
 
-  res.status(200).send(user.nutritionalPlan);
+  res.status(200).send(user.nutritionalPlans);
 });
 
 router.get("/", auth, async (req, res) => {

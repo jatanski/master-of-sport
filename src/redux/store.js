@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { loginActions } from "./general";
 import { newProductActions } from "./calculatorCalories";
 import { mealsActions } from "./meals";
+import { mealNewActions } from "./newMeals";
 
 const store = createStore(
   rootReducer,
@@ -19,9 +20,12 @@ const allActions = bindActionCreators(
     addProduct: newProductActions.addProduct,
     sumProducts: newProductActions.sumProducts,
     sumMeals: newProductActions.sumMeals,
+    resetMeals: newProductActions.resetMeals,
     addMeal: mealsActions.addMeal,
     addNewProduct: mealsActions.addNewProduct,
-    resetProduct: mealsActions.resetProduct
+    resetProduct: mealsActions.resetProduct,
+    addNewMeal: mealNewActions.addNewMeal,
+    resetNewMeal: mealNewActions.resetNewMeal
   },
   store.dispatch
 );

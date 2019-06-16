@@ -1,3 +1,42 @@
 .calculatorCalories {
+  max-width: 1440px;
+  margin: 3vh 3vw;
   color: #000;
+  &__header-main {
+    text-align: center;
+    margin-bottom: 5vh;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  &__header-secondary {
+    text-align: left;
+    margin: 5vh 0 2vh;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  &__description {
+    line-height: 180%;
+    margin-bottom: 5vh;
+  }
+  &__formName {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    &__label {
+      font-weight: 600;
+      color: #111;
+    }
+  }
+  &__newMeal {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    &__text {
+      padding-right: 10px;
+    }
+  }
+  &__meals {
+    padding-top: 3vh;
+  }
 }

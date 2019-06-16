@@ -1,0 +1,11 @@
+.menuDesktop {
+  &__link {
+    position: relative;
+    top: 10%;
+    color: aliceblue;
+    transition: 0.2s;
+    &:hover {
+      color: #111;
+    }
+  }
+}

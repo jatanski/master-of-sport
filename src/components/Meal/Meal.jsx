@@ -11,13 +11,29 @@ class Meal extends Component {
     products: [],
     showNewProduct: false,
     saveButton: {
-      text: "Zapisz posiłek",
+      text: "Dodaj posiłek",
       variant: "success"
     },
     activeNewProduct: true
   };
 
+  products = [];
+  summary = {
+    calories: 0,
+    proteins: 0,
+    carbohydrates: 0,
+    fats: 0
+  };
+
   addNewProduct = () => {
+    const product = window.store.getState().newProduct.info;
+    this.products.push(product);
+    this.summary = {
+      calories: this.summary.calories + product.numberOfCalories,
+      proteins: this.summary.proteins + product.numberOfProteins,
+      carbohydrates: this.summary.carbohydrates + product.numberOfCarbohydrates,
+      fats: this.summary.fats + product.numberOfFats
+    };
     this.closeNewProduct();
     this.setState({
       numberOfProducts: this.state.numberOfProducts + 1,
@@ -31,7 +47,6 @@ class Meal extends Component {
   };
 
   createNewProduct = el => {
-    console.log(el);
     return (
       <tr key={el.numberProduct}>
         <td> {el.newProductName}</td>
@@ -45,7 +60,6 @@ class Meal extends Component {
   };
 
   showNewProduct = () => {
-    console.log(this.state);
     if (this.state.activeNewProduct) {
       this.setState({ showNewProduct: true });
     }
@@ -68,8 +82,10 @@ class Meal extends Component {
     });
     this.changeAddNewProduct();
     this.props.disabledOff();
+    this.props.disabledOffSavePlan();
     allActions.sumMeals(window.store.getState().sumProducts.sumOfElements);
-    allActions.addMeal(window.store.getState().product.products);
+    const toSave = { products: this.products, summary: this.summary };
+    allActions.addNewMeal(toSave);
     allActions.resetProduct();
   };
 
@@ -84,17 +100,15 @@ class Meal extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
-      <div>
+      <div className="meal">
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
               <th colSpan="6">
-                {" "}
                 <span className="numberOfMeal">
                   Posiłek {this.props.number}
-                </span>{" "}
+                </span>
               </th>
             </tr>
           </thead>
@@ -107,9 +121,7 @@ class Meal extends Component {
               <td>Węglowodany</td>
               <td>Tłuszcze</td>
             </tr>
-            {this.props.products
-              ? this.props.products.map(this.createNewProduct)
-              : null}
+            {this.products ? this.products.map(this.createNewProduct) : null}
             <tr>
               <td>
                 {this.state.activeNewProduct ? (
@@ -121,14 +133,15 @@ class Meal extends Component {
                 )}
               </td>
               <td />
-              <td>{this.props.sumOfElements.calories} kcal</td>
-              <td>{this.props.sumOfElements.proteins} g</td>
-              <td>{this.props.sumOfElements.carbohydrates} g</td>
-              <td>{this.props.sumOfElements.fats} g</td>
+              <td>{this.summary.calories} kcal</td>
+              <td>{this.summary.proteins} g</td>
+              <td>{this.summary.carbohydrates} g</td>
+              <td>{this.summary.fats} g</td>
             </tr>
           </tbody>
         </Table>
         <Button
+          size="lg"
           onClick={this.changeSaveButton}
           variant={this.state.saveButton.variant}
         >
