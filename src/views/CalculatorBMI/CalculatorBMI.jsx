@@ -14,13 +14,13 @@ import CustomAlert from "../../components/Alert/Alert";
 
 export default class CalculatorBMI extends Component {
   state = {
-    weight: 0,
-    height: 0,
-    resultDisplay: "block",
     bmi: 0,
+    height: 0,
     id: "",
+    resultDisplay: "block",
     showSuccessPopUp: false,
-    showFalsePopUp: false
+    showFalsePopUp: false,
+    weight: 0
   };
 
   resultStyle = {
@@ -166,7 +166,7 @@ export default class CalculatorBMI extends Component {
                 id="weight"
               />
             </InputGroup>
-            <InputGroup size="lg">
+            <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
               <InputGroup.Prepend>
                 <InputGroup.Text>Wzrost w cm</InputGroup.Text>
               </InputGroup.Prepend>
