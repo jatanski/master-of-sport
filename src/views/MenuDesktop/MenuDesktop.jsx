@@ -35,8 +35,13 @@ export default class MenuDesktop extends Component {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link className="menuDesktop__link" to="circuits">
+                <Link className="menuDesktop__link" to="/circuits">
                   Obwody
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link className="menuDesktop__link" to="/diary">
+                  Dodaj treninig
                 </Link>
               </Nav.Item>
               <Nav.Item>
@@ -45,7 +50,7 @@ export default class MenuDesktop extends Component {
                     Sprawdź swoje BMI
                   </Link>
                 </Nav.Item>
-                <Link className="menuDesktop__link" to="diary">
+                <Link className="menuDesktop__link" to="/diary">
                   Dziennik treningowy
                 </Link>
               </Nav.Item>

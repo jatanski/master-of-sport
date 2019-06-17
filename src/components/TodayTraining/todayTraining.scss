@@ -1,0 +1,12 @@
+.todayTraining {
+  position: relative;
+  &__chooseDropdown {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &__trainingTable {
+    margin-top: 3vh;
+    padding-top: 8vh;
+  }
+}

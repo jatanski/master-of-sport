@@ -8,22 +8,19 @@ import {
   FormControl
 } from "react-bootstrap";
 import CustomAlert from "../../components/Alert/Alert";
+import "./todayTraining.scss";
 
 export default class NewTraining extends Component {
   state = {
-    trainings: [],
+    choosenPlan: "",
+    dateToSend: {},
     exercises: [],
     showTable: false,
     showSave: false,
-    dateToSend: {},
-    choosenPlan: "",
     showSuccessPopUp: false,
-    showFalsePopUp: false
+    showFalsePopUp: false,
+    trainings: []
   };
-
-  dates = {};
-  exercisesAfterFill = {};
-
   alertText = {
     success: {
       header: "Trening został zapisany.",
@@ -33,8 +30,15 @@ export default class NewTraining extends Component {
     fail: {
       header: "Dodałeś już trening.",
       desc: "Spróbuj ponownie jutro."
+    },
+    goTo1: {
+      text: "Statystyki",
+      link: "/statistics"
     }
   };
+
+  exercisesAfterFill = {};
+  dates = {};
 
   async componentDidMount() {
     const token = localStorage.getItem("x-auth-token");
@@ -50,16 +54,27 @@ export default class NewTraining extends Component {
       });
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ trainings: response.plans });
-      console.log(response);
+      this.setState({
+        trainings: response.plans
+      });
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
   }
 
   closeSuccessPopUp = () => this.setState({ showSuccessPopUp: false });
-
   closeFalsePopUp = () => this.setState({ showFalsePopUp: false });
+
+  collectDate = e => {
+    this.exercisesAfterFill[`${e.target.className}`][
+      `${e.target.parentElement.id}`
+    ][`${e.target.id}`] = e.target.value;
+    console.log(this.exercisesAfterFill);
+    this.setState({
+      dateToSend: this.exercisesAfterFill
+    });
+  };
 
   sendToDataBase = async () => {
     const now = `${new Date().getDate()}.${new Date().getMonth() +
@@ -75,8 +90,6 @@ export default class NewTraining extends Component {
       date: now,
       exercises: this.state.dateToSend
     };
-
-    console.log(requestBody);
     try {
       let response = await fetch("/workouts", {
         method: "post",
@@ -89,15 +102,13 @@ export default class NewTraining extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ showSuccessPopUp: true });
-      console.log("poszło");
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   showPlanToChoose = el => {
-    // console.log(el);
     return (
       <Dropdown.Item
         key={el._id}
@@ -107,14 +118,6 @@ export default class NewTraining extends Component {
         {el.name}
       </Dropdown.Item>
     );
-  };
-
-  collectDate = e => {
-    this.exercisesAfterFill[`${e.target.className}`][
-      `${e.target.parentElement.id}`
-    ][`${e.target.id}`] = e.target.value;
-    console.log(this.exercisesAfterFill);
-    this.setState({ dateToSend: this.exercisesAfterFill });
   };
 
   renderTable = el => {
@@ -128,7 +131,6 @@ export default class NewTraining extends Component {
         seriesArray: []
       });
       this.exercisesAfterFill[`${exercise.name}`] = {};
-      console.log(exercises[i]);
       for (let j = 0; j < exercises[i].series; j++) {
         exercises[i].seriesArray.push({});
         this.exercisesAfterFill[`${exercise.name}`][
@@ -136,14 +138,14 @@ export default class NewTraining extends Component {
         ] = {};
       }
     });
-    // this.exercisesAfterFill = exercises;
-    console.log(this.exercisesAfterFill);
-    // console.log(exercises);
-    this.setState({ showTable: true, exercises: exercises, showSave: true });
+    this.setState({
+      showTable: true,
+      exercises: exercises,
+      showSave: true
+    });
   };
 
   renderExercises = el => {
-    // console.log(el);
     const series = [];
     for (let i = 0; i < el.series; i++) {
       series.push({
@@ -153,7 +155,6 @@ export default class NewTraining extends Component {
         tagName: `${el.name}-tag`
       });
     }
-    // console.log(series);
     return (
       <tr key={el.name}>
         <td>{el.name}</td>
@@ -186,12 +187,10 @@ export default class NewTraining extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
-      <div>
-        <h1>Wybierz Trening</h1>
-        <Dropdown>
-          <Dropdown.Toggle variant="info" id="choosePlan">
+      <div className="todayTraining">
+        <Dropdown className="todayTraining__chooseDropdown">
+          <Dropdown.Toggle size="lg" variant="info" id="choosePlan">
             Wybierz plan treningowy
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -201,19 +200,21 @@ export default class NewTraining extends Component {
           </Dropdown.Menu>
         </Dropdown>
         {this.state.showTable ? (
-          <Table striped bordered hover variant="dark">
-            <thead>
-              <tr>
-                <td>Nazwa ćwiczenia</td>
-                <td>Seria 1</td>
-                <td>Seria 2</td>
-                <td>Seria 3</td>
-                <td>Seria 4</td>
-                <td>Seria 5</td>
-              </tr>
-            </thead>
-            <tbody>{this.state.exercises.map(this.renderExercises)}</tbody>
-          </Table>
+          <div className="todayTraining__trainingTable">
+            <Table striped bordered hover variant="dark">
+              <thead>
+                <tr>
+                  <td>Nazwa ćwiczenia</td>
+                  <td>Seria 1</td>
+                  <td>Seria 2</td>
+                  <td>Seria 3</td>
+                  <td>Seria 4</td>
+                  <td>Seria 5</td>
+                </tr>
+              </thead>
+              <tbody>{this.state.exercises.map(this.renderExercises)}</tbody>
+            </Table>
+          </div>
         ) : null}
         {this.state.showSave ? (
           <Button onClick={this.sendToDataBase} variant="primary">
@@ -225,7 +226,8 @@ export default class NewTraining extends Component {
             header={this.alertText.success.header}
             desc={this.alertText.success.desc}
             close={this.closeSuccessPopUp}
-            goToStatistics="true"
+            goTo1Text={this.alertText.goTo1.text}
+            goTo1Link={this.alertText.goTo1.link}
           />
         ) : null}
         {this.state.showFalsePopUp ? (

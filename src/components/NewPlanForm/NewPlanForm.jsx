@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import CustomAlert from "../../components/Alert/Alert";
-import Input from "../../components/Input/Input";
+// import Input from "../../components/Input/Input";
 import "./newPlanForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
