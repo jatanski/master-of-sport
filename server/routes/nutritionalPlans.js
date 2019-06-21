@@ -32,7 +32,7 @@ router.post("/", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
   let user = await User.findById(req.user);
 
-  res.status(200).send(user.nutritionalPlan);
+  res.status(200).send(user.nutritionalPlans);
 });
 
 export default router;

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import express from "express";
 import { User } from "../models/userModel";
 import Menu from "../models/menuModel";
@@ -10,8 +11,7 @@ router.post("/", auth, async (req, res) => {
 
   const { name, meals, summary, date } = await req.body;
   // check if date already exist
-  // eslint-disable-next-line array-callback-return
-  const dateExist = user.statistics.plans.filter(el => {
+  const dateExist = user.statistics.menus.filter(el => {
     if (el.date === date) return el;
   });
   if (dateExist[0])

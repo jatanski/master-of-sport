@@ -11,6 +11,7 @@ import Statistics from "./views/Statistics/Statistics";
 import Circuits from "./views/Circuits/Cirtuits";
 import TrainingDiary from "./views/TrainingDiary/TrainingDiary";
 import WorkoutPlans from "./views/WorkoutPlans/WorkoutPlans";
+import Menus from "./views/Menus/Menus";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="/circuits" component={Circuits} />
           <Route path="/diary" component={TrainingDiary} />
           <Route path="/workoutplans" component={WorkoutPlans} />
+          <Route path="/menus" component={Menus} />
         </Router>
       </div>
     );

@@ -45,6 +45,11 @@ export default class MenuDesktop extends Component {
                 </Link>
               </Nav.Item>
               <Nav.Item>
+                <Link className="menuDesktop__link" to="/menus">
+                  Dodaj Jadłospis
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
                 <Nav.Item>
                   <Link className="menuDesktop__link" to="/bmi">
                     Sprawdź swoje BMI
