@@ -50,13 +50,13 @@ export default class MenuDesktop extends Component {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Item>
-                  <Link className="menuDesktop__link" to="/bmi">
-                    Sprawdź swoje BMI
-                  </Link>
-                </Nav.Item>
-                <Link className="menuDesktop__link" to="/diary">
-                  Dziennik treningowy
+                <Link className="menuDesktop__link" to="/bmi">
+                  Sprawdź swoje BMI
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link className="menuDesktop__link" to="/myplans">
+                  Moje Plany
                 </Link>
               </Nav.Item>
             </Nav>

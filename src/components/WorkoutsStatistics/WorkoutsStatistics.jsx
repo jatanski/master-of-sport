@@ -151,14 +151,13 @@ export default class WorkoutsStatistics extends Component {
   };
 
   render() {
-    // console.log(this.state);
     console.log(this.props);
     return (
       <div>
         <Tabs defaultActiveKey="home">
-          <Tab eventKey="home" title="Wybierz">
+          {/* <Tab eventKey="home" title="Wybierz">
             <p>Wybierz plan, aby zobaczyć statystyki</p>
-          </Tab>
+          </Tab> */}
           {this.props.workoutsArray
             ? this.props.workoutsArray.map(this.renderPlan)
             : null}

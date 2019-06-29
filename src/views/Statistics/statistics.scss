@@ -1,0 +1,12 @@
+.statistics {
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5vh;
+    & * {
+      margin-bottom: 2vh;
+      width: 50%;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./myPlans.scss";
-import EditPlan from "../../components/EditPlan/EditPlan";
+// import EditPlan from "../../components/EditPlan/EditPlan";
 import WorkoutsStatistics from "../../components/WorkoutsStatistics/WorkoutsStatistics";
 
 export default class myPlans extends Component {
@@ -47,7 +47,7 @@ export default class myPlans extends Component {
   render() {
     return (
       <div>
-        <EditPlan plans={this.state.plans} />
+        {/* <EditPlan plans={this.state.plans} /> */}
         <WorkoutsStatistics
           workouts={this.state.workouts}
           workoutsArray={this.state.workoutsArray}

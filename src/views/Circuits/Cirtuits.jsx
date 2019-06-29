@@ -168,7 +168,7 @@ export default class Circuits extends Component {
               variant="primary"
             >
               <span className="calculatorCalories__newMeal__text">
-                Zapisz plan
+                Zapisz pomiary
               </span>
               <FontAwesomeIcon icon={faSave} />
             </Button>
