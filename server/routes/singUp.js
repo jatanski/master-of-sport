@@ -2,6 +2,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import { User, validateUserSignUp } from "../models/userModel";
+import auth from "../middleware/auth";
 
 const router = express.Router();
 
@@ -32,6 +33,24 @@ router.post("/", async (req, res) => {
     console.log(err.message);
     res.status(400).send(err.message);
   }
+});
+
+router.put("/", auth, async (req, res) => {
+  let user = await User.findById(req.user);
+  console.log(user);
+  const { oldPassword, newPassword } = req.body;
+
+  const validPassword = await bcrypt.compare(oldPassword, user.password);
+  if (!validPassword) return res.status(400).send("Invalid email or passwors");
+
+  user.password = await bcrypt.hash(newPassword, await bcrypt.genSalt(10));
+
+  await user.save();
+
+  res
+    .header("x-auth-token", user.genToken())
+    .status(200)
+    .send(user._id);
 });
 
 export default router;

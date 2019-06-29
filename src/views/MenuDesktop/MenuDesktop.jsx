@@ -59,10 +59,13 @@ export default class MenuDesktop extends Component {
                   Moje Plany
                 </Link>
               </Nav.Item>
+              <Nav.Item>
+                <Link className="menuDesktop__link" to="/profil">
+                  Profil
+                </Link>
+              </Nav.Item>
             </Nav>
             <Nav>
-              <Nav.Item href="#features">Settings</Nav.Item>
-              <Nav.Item href="#pricing">Profil</Nav.Item>
               <Button variant="outline-light" onClick={this.logout}>
                 <Link to="/">Wyloguj się!</Link>
               </Button>
