@@ -1,0 +1,26 @@
+.mainView {
+  position: relative;
+  padding: 1vh 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-height: 94vh;
+  &::before {
+    content: "";
+    opacity: 0.5;
+    top: -20%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-image: url(../../img/backgrounds/sport-back.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+  &__card {
+    padding-top: 1.5vh;
+    margin: 0 5vw;
+    height: 45vh;
+  }
+}

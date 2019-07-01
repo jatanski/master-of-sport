@@ -130,7 +130,7 @@ export default class NewPlanForm extends Component {
 
   render() {
     return (
-      <Form>
+      <Form className="workoutPlan__newPlanForm">
         <Form.Group onChange={this.collectPlanName} controlId="name">
           <Form.Label className="circuits__form__dimensions">
             Wpisz nazwę treningu

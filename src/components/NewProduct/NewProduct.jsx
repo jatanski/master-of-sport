@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./newProduct.scss";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, ListGroup } from "react-bootstrap";
 import { allActions } from "../../redux/store";
 
 export default class NewProduct extends Component {
@@ -12,7 +12,9 @@ export default class NewProduct extends Component {
     numberOfFats: 0,
     numberOfCalories: 0,
     weight: 0,
-    numberProduct: 0
+    numberProduct: 0,
+    showProductsList: false,
+    completeName: ""
   };
 
   countElements = () => {
@@ -45,6 +47,14 @@ export default class NewProduct extends Component {
     allActions.sumProducts(allProducts[allProducts.length - 1]);
     allActions.addNewProduct(window.store.getState().newProduct.info);
     this.props.addNewProduct();
+    this.setState({
+      newProductName: "",
+      numberOfProteins: 0,
+      numberOfCarbohydrates: 0,
+      numberOfFats: 0,
+      numberOfCalories: 0,
+      weight: 0
+    });
   };
 
   handleNumberInputChange = e => {
@@ -59,6 +69,96 @@ export default class NewProduct extends Component {
     this.setState(state);
   };
 
+  handleProductName = e => {
+    this.handleTextInputChange(e);
+    this.searchProductName(e);
+  };
+
+  searchProductName = async e => {
+    const name = e.target.value;
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-app-id": "771915a1",
+      "x-app-key": "1b4374178aef5f8000676113d72ba037"
+    };
+    try {
+      let response = await fetch(
+        `https://trackapi.nutritionix.com/v2/search/instant?query=${name}`,
+        {
+          method: "get",
+          headers: requestHeaders
+        }
+      );
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      this.setState({ showProductsList: true });
+      const productList = [];
+      let numberProduct = 0;
+      response.common.forEach(el => {
+        if (numberProduct >= 12) return;
+        numberProduct += 1;
+        productList.push(el.food_name);
+      });
+      console.log(productList);
+      this.setState({ productsArray: productList });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  searchProductDetails = async e => {
+    e.preventDefault();
+
+    const productName = e.currentTarget.innerText;
+
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-app-id": "771915a1",
+      "x-app-key": "1b4374178aef5f8000676113d72ba037"
+    };
+    const requestBody = {
+      query: `100g ${productName}`
+    };
+    try {
+      let response = await fetch(
+        `https://trackapi.nutritionix.com/v2/natural/nutrients`,
+        {
+          method: "post",
+          headers: requestHeaders,
+          body: JSON.stringify(requestBody)
+        }
+      );
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      const foods = response.foods[0];
+
+      this.setState({
+        newProductName: productName,
+        showProductsList: false,
+        numberOfProteins: foods.nf_protein,
+        numberOfCarbohydrates: foods.nf_total_carbohydrate,
+        numberOfFats: foods.nf_total_fat,
+        numberOfCalories: foods.nf_calories
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  renderListElements = el => {
+    return (
+      <ListGroup.Item
+        action
+        className="newProduct__productElement"
+        onClick={this.searchProductDetails}
+      >
+        {el}
+      </ListGroup.Item>
+    );
+  };
+
   render() {
     return (
       <Modal show={this.props.show} onHide={this.props.close}>
@@ -70,11 +170,20 @@ export default class NewProduct extends Component {
             <Form.Group controlId="newProductName">
               <Form.Label>Nazwa produktu:</Form.Label>
               <Form.Control
-                onChange={this.handleTextInputChange}
+                onChange={this.handleProductName}
                 type="text"
                 placeholder="Wpisz nazwę"
+                value={this.state.newProductName}
               />
             </Form.Group>
+            {this.state.showProductsList ? (
+              <ListGroup className="newProduct__productList">
+                {this.state.productsArray
+                  ? this.state.productsArray.map(this.renderListElements)
+                  : null}
+              </ListGroup>
+            ) : null}
+
             <Form.Label className="makroelementsIn100g">
               Zawartość makroskładników w 100 g.
             </Form.Label>
@@ -83,6 +192,7 @@ export default class NewProduct extends Component {
               <Form.Control
                 onChange={this.handleNumberInputChange}
                 type="number"
+                value={this.state.numberOfProteins}
               />
             </Form.Group>
             <Form.Group controlId="numberOfCarbohydrates">
@@ -90,6 +200,7 @@ export default class NewProduct extends Component {
               <Form.Control
                 onChange={this.handleNumberInputChange}
                 type="number"
+                value={this.state.numberOfCarbohydrates}
               />
             </Form.Group>
             <Form.Group controlId="numberOfFats">
@@ -97,6 +208,7 @@ export default class NewProduct extends Component {
               <Form.Control
                 onChange={this.handleNumberInputChange}
                 type="number"
+                value={this.state.numberOfFats}
               />
             </Form.Group>
             <Form.Group controlId="numberOfCalories">
@@ -104,6 +216,7 @@ export default class NewProduct extends Component {
               <Form.Control
                 onChange={this.handleNumberInputChange}
                 type="number"
+                value={this.state.numberOfCalories}
               />
             </Form.Group>
             <Form.Group controlId="weight">

@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <Router>
           {this.props.loginStatus ? <DesktopMenu /> : null}
           <Route exact path="/" component={FirstView} />

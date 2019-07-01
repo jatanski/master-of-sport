@@ -1,3 +1,20 @@
-.workoutplans {
-  margin: 3vh 3vw;
+.workoutPlans {
+  &::before {
+    content: "";
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-image: url(../../img/cards/plan-treningowy.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+}
+
+.jumbotron {
+  margin: 5vh 25vw;
+  opacity: 0.8;
 }

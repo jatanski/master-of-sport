@@ -14,8 +14,8 @@ export default class WorkoutPlans extends Component {
 
   render() {
     return (
-      <section className="workoutplans">
-        <Jumbotron>
+      <section className="workoutPlans">
+        <Jumbotron className="workoutPlans__jumbotron jumbotron">
           <div className="calculatorCalories__instruction">
             <h2 className="calculatorCalories__header-main">
               Dodaj nowy plan treningowy

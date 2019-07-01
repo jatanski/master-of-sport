@@ -1,7 +1,4 @@
 .calculatorCalories {
-  max-width: 1440px;
-  margin: 3vh 3vw;
-  color: #000;
   &__header-main {
     text-align: center;
     margin-bottom: 5vh;
@@ -16,13 +13,13 @@
   }
   &__description {
     line-height: 180%;
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
   }
   &__formName {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;
+    width: 35%;
     &__label {
       font-weight: 600;
       color: #111;
@@ -32,6 +29,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    margin-bottom: 5vh;
     &__text {
       padding-right: 10px;
     }

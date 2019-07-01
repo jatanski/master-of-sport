@@ -203,6 +203,7 @@ export default class CalculatorCalories extends Component {
                 onClick={this.savePlan}
                 variant="primary"
                 size="lg"
+                className="calculatorCalories__newMeal"
               >
                 <span className="calculatorCalories__newMeal__text">
                   Zapisz plan
