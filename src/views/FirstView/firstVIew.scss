@@ -2,19 +2,100 @@
 
 .firstView {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  &__promotion {
+    overflow: hidden;
+    padding: 3vh 2vw;
+    position: relative;
+    color: #fff;
+    height: 100vh;
+    width: 50vw;
+    background-color: #1da1f2;
+    &__headerContainer {
+      position: relative;
+      top: 20vh;
+    }
+    &__header {
+      position: relative;
+      font-size: 2.8rem;
+    }
+    &__headerDesc {
+      font-size: 1.4rem;
+      font-weight: normal;
+    }
 
-  & .button {
-    margin: 10px;
+    &__decoration {
+      &__ico {
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        transform: translateY(-50%) rotateY(180deg);
+        opacity: 0.2;
+        font-size: 36em;
+      }
+    }
+    &__description {
+      @include centerElementPosition;
+      top: 60%;
+      width: 80%;
+      font-size: 1.5em;
+      &__textAndIco {
+        display: flex;
+        align-items: center;
+      }
+      &__text {
+        padding-top: 2vh;
+      }
+    }
   }
+  &__rejAndLog {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #111;
+    &::before {
+      content: "";
+      // opacity: 0.9;
+      top: -20%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      background-image: url(../../img/backgrounds/back-firstView2.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+    }
+    &__ico {
+      margin-left: 1vw;
+      margin-bottom: 2vh;
+      font-size: 4rem;
+    }
+    &__text {
+      font-weight: 500;
+    }
+    & .button {
+      margin: 10px;
+    }
 
-  &__registerButton a {
-    @include resetButton;
-  }
+    &__registerButton a {
+      @include resetButton;
+    }
 
-  &__loginButton a {
-    @include resetButton;
+    &__loginButton a {
+      @include resetButton;
+    }
   }
+}
+
+.firstView__ico {
+  font-size: 1.7em;
+  margin-right: 1vw;
+}
+
+.jumbotron-firstView {
+  margin: 0 !important;
+  opacity: 0.9 !important;
 }
