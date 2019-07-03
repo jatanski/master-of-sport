@@ -1,6 +1,25 @@
 .calculatorBMI {
-  position: relative;
-  margin: 3vh 3vw;
+  max-height: 100vh;
+  &__wrap {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 40vh 25vh 15vh;
+    margin: 3vh 3vw;
+  }
+  &::before {
+    content: "";
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-image: url(../../img/cards/plan-treningowy.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
   &__header {
     padding-bottom: 50px;
     font-size: 2.4em;
@@ -21,6 +40,9 @@
       font-size: 1.5em;
     }
   }
+  &__table {
+    margin-top: 2vh;
+  }
   &__popUp {
     width: 30vw;
     position: absolute;
@@ -33,4 +55,24 @@
 .bmiResult {
   font-size: 1.4em;
   font-weight: 600;
+}
+
+.jumbotron-bmi {
+  margin: 2vh 5vw !important;
+  width: 50vw !important;
+  grid-area: 1 / 1 / 4 / 2;
+}
+
+.bmi {
+  grid-area: 1 / 2 / 3 / 3;
+}
+.calculatorBMI__button {
+  grid-area: 3 / 2 / 4 / 3;
+}
+
+.resultDescription {
+  font-size: 1.6rem;
+  // text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
 }

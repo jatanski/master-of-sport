@@ -1,3 +1,19 @@
+.circuits {
+  &::before {
+    content: "";
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-image: url(../../img/cards/plan-treningowy.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+  }
+}
+
 .circuits__form__dimensions {
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -13,4 +29,10 @@
 
 .bold {
   font-weight: 600;
+}
+
+.jumbotron-circuits {
+  margin: 2vh 20vw 0vh !important;
+  padding: 2rem 2rem;
+  width: 60vw;
 }

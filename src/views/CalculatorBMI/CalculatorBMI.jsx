@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from "react";
 import "./calculatorBMI.scss";
 import {
@@ -124,95 +125,117 @@ export default class CalculatorBMI extends Component {
 
   renderDescription = () => {
     if (this.state.id >= 1 && this.state.id <= 3) {
-      return <p>Twoja waga jest za niska! Musisz przytyć.</p>;
-      // eslint-disable-next-line eqeqeq
+      return (
+        <p className="resultDescription">
+          Twoja waga jest za niska! Musisz przytyć.
+        </p>
+      );
     } else if (this.state.id == 4) {
-      return <p>Twoja waga jest prawidłowa. Gratuluję!</p>;
+      return (
+        <p className="resultDescription">
+          Twoja waga jest prawidłowa. Gratuluję!
+        </p>
+      );
     } else if (this.state.id >= 5) {
-      return <p>Jesteś grubasem! Musisz koniecznie schudnąć albo umrzesz.</p>;
+      return (
+        <p className="resultDescription">
+          Jesteś grubasem! Musisz koniecznie schudnąć albo umrzesz.
+        </p>
+      );
     }
   };
 
   render() {
     return (
       <section className="calculatorBMI">
-        <Jumbotron>
-          <div className="calculatorCalories__instruction">
-            <h2 className="calculatorCalories__header-main">
-              Oblicz swoje BMI
-            </h2>
-            <p>
-              BMI to ważny wyznacznik tego, czy Twoje waga jest prawidłowa. Nie
-              lekceważ odchyleń od stanu prawidłowego, ponieważ mogą być one
-              groźne dla Twojego zdrowia.
-            </p>
-            <h3 className="calculatorCalories__header-secondary">Instrukcja</h3>
-            <p className="calculatorCalories__description">
-              1. Wpisz swoją wagę oraz wzrost w centumetrach, a następnie
-              kliknij oblicz. <br /> 2. Kalkulator obliczy swoje BMI oraz
-              sprawdzi w jakiej kategorii się znajdujesz. <br /> 3. Możesz
-              zapisać swoje BMI, aby móc monitorować swoje zmiany.
-            </p>
+        <div className="calculatorBMI__wrap">
+          <Jumbotron className="jumbotron-bmi">
+            <div className="calculatorCalories__instruction">
+              <h2 className="calculatorCalories__header-main">
+                Oblicz swoje BMI
+              </h2>
+              <p>
+                BMI to ważny wyznacznik tego, czy Twoje waga jest prawidłowa.
+                Nie lekceważ odchyleń od stanu prawidłowego, ponieważ mogą być
+                one groźne dla Twojego zdrowia.
+              </p>
+              <h3 className="calculatorCalories__header-secondary">
+                Instrukcja
+              </h3>
+              <p className="calculatorCalories__description">
+                1. Wpisz swoją wagę oraz wzrost w centumetrach, a następnie
+                kliknij oblicz. <br /> 2. Kalkulator obliczy swoje BMI oraz
+                sprawdzi w jakiej kategorii się znajdujesz. <br /> 3. Możesz
+                zapisać swoje BMI, aby móc monitorować swoje zmiany.
+              </p>
+            </div>
+            <Form className="calculatorBMI__form">
+              <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Waga w kg</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  className="calculatorBMI__form__input"
+                  type="number"
+                  onChange={this.collectData}
+                  id="weight"
+                />
+              </InputGroup>
+              <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Wzrost w cm</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  className="calculatorBMI__form__input"
+                  type="number"
+                  onChange={this.collectData}
+                  id="height"
+                />
+              </InputGroup>
+              <Button
+                className="calculatorBMI__form__button"
+                variant="primary"
+                onClick={this.countBMI}
+              >
+                Oblicz
+              </Button>
+            </Form>
+            {this.renderResult()}
+          </Jumbotron>
+          <BmiTable className="bmi" id={this.state.id} />
+          <div className="calculatorBMI__button">
+            {this.state.bmi !== 0 ? (
+              <Button
+                className="calculatorCalories__newMeal"
+                size="lg"
+                onClick={this.saveBMI}
+                variant="success"
+              >
+                <span className="calculatorCalories__newMeal__text">
+                  Zapisz wynik
+                </span>
+                <FontAwesomeIcon icon={faSave} />
+              </Button>
+            ) : null}
+            {this.renderDescription()}
           </div>
-          <Form className="calculatorBMI__form">
-            <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
-              <InputGroup.Prepend>
-                <InputGroup.Text>Waga w kg</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                className="calculatorBMI__form__input"
-                type="number"
-                onChange={this.collectData}
-                id="weight"
-              />
-            </InputGroup>
-            <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
-              <InputGroup.Prepend>
-                <InputGroup.Text>Wzrost w cm</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                className="calculatorBMI__form__input"
-                type="number"
-                onChange={this.collectData}
-                id="height"
-              />
-            </InputGroup>
-            <Button
-              className="calculatorBMI__form__button"
-              variant="primary"
-              onClick={this.countBMI}
-            >
-              Oblicz
-            </Button>
-          </Form>
-          {this.renderResult()}
-        </Jumbotron>
-        <BmiTable id={this.state.id} />
-        {this.state.bmi !== 0 ? (
-          <Button size="lg" onClick={this.saveBMI} variant="success">
-            <span className="calculatorCalories__newMeal__text">
-              Zapisz wynik
-            </span>
-            <FontAwesomeIcon icon={faSave} />
-          </Button>
-        ) : null}
-        {this.renderDescription()}
-        {this.state.showSuccessPopUp ? (
-          <CustomAlert
-            header={this.alertText.success.header}
-            desc={this.alertText.success.desc}
-            close={this.closeSuccessPopUp}
-            goTo1Text={this.alertText.goTo1.text}
-            goTo1Link={this.alertText.goTo1.link}
-          />
-        ) : null}
-        {this.state.showFalsePopUp ? (
-          <CustomAlert
-            header={this.alertText.fail.header}
-            desc={this.alertText.fail.desc}
-            close={this.closeFalsePopUp}
-          />
-        ) : null}
+          {this.state.showSuccessPopUp ? (
+            <CustomAlert
+              header={this.alertText.success.header}
+              desc={this.alertText.success.desc}
+              close={this.closeSuccessPopUp}
+              goTo1Text={this.alertText.goTo1.text}
+              goTo1Link={this.alertText.goTo1.link}
+            />
+          ) : null}
+          {this.state.showFalsePopUp ? (
+            <CustomAlert
+              header={this.alertText.fail.header}
+              desc={this.alertText.fail.desc}
+              close={this.closeFalsePopUp}
+            />
+          ) : null}
+        </div>
       </section>
     );
   }

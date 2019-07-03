@@ -238,7 +238,12 @@ export default class NewMenu extends Component {
           ? this.state.meals.map(this.renderMeals)
           : null}
         {this.state.showButtonSave ? (
-          <Button variant="success" size="lg" onClick={this.saveMenu}>
+          <Button
+            className="newMenu__saveMenu"
+            variant="success"
+            size="lg"
+            onClick={this.saveMenu}
+          >
             {" "}
             Zapisz Jadłospis
           </Button>

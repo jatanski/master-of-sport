@@ -7,14 +7,13 @@ export default class NewProduct extends Component {
   state = {
     multipier: 0,
     newProductName: "",
+    numberProduct: 0,
     numberOfProteins: 0,
     numberOfCarbohydrates: 0,
     numberOfFats: 0,
     numberOfCalories: 0,
-    weight: 0,
-    numberProduct: 0,
     showProductsList: false,
-    completeName: ""
+    weight: 0
   };
 
   countElements = () => {
@@ -74,42 +73,8 @@ export default class NewProduct extends Component {
     this.searchProductName(e);
   };
 
-  searchProductName = async e => {
-    const name = e.target.value;
-    const requestHeaders = {
-      "Content-Type": "application/json; charset=UTF-8",
-      "x-app-id": "771915a1",
-      "x-app-key": "1b4374178aef5f8000676113d72ba037"
-    };
-    try {
-      let response = await fetch(
-        `https://trackapi.nutritionix.com/v2/search/instant?query=${name}`,
-        {
-          method: "get",
-          headers: requestHeaders
-        }
-      );
-      if (response.status !== 200) throw response;
-      response = await response.json();
-      this.setState({ showProductsList: true });
-      const productList = [];
-      let numberProduct = 0;
-      response.common.forEach(el => {
-        if (numberProduct >= 12) return;
-        numberProduct += 1;
-        productList.push(el.food_name);
-      });
-      console.log(productList);
-      this.setState({ productsArray: productList });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   searchProductDetails = async e => {
     e.preventDefault();
-
     const productName = e.currentTarget.innerText;
 
     const requestHeaders = {
@@ -136,12 +101,45 @@ export default class NewProduct extends Component {
       this.setState({
         newProductName: productName,
         showProductsList: false,
-        numberOfProteins: foods.nf_protein,
-        numberOfCarbohydrates: foods.nf_total_carbohydrate,
-        numberOfFats: foods.nf_total_fat,
-        numberOfCalories: foods.nf_calories
+        numberOfProteins: Math.round(foods.nf_protein * 10) / 10,
+        numberOfCarbohydrates:
+          Math.round(foods.nf_total_carbohydrate * 10) / 10,
+        numberOfFats: Math.round(foods.nf_total_fat * 10) / 10,
+        numberOfCalories: Math.round(foods.nf_calories * 10) / 10
       });
       console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  searchProductName = async e => {
+    const name = e.target.value;
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-app-id": "771915a1",
+      "x-app-key": "1b4374178aef5f8000676113d72ba037"
+    };
+    try {
+      let response = await fetch(
+        `https://trackapi.nutritionix.com/v2/search/instant?query=${name}`,
+        {
+          method: "get",
+          headers: requestHeaders
+        }
+      );
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      this.setState({ showProductsList: true });
+      const productList = [];
+      let numberProduct = 0;
+      response.common.forEach(el => {
+        if (numberProduct >= 12) return;
+        numberProduct += 1;
+        productList.push(el.food_name);
+      });
+      this.setState({ productsArray: productList });
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -183,7 +181,6 @@ export default class NewProduct extends Component {
                   : null}
               </ListGroup>
             ) : null}
-
             <Form.Label className="makroelementsIn100g">
               Zawartość makroskładników w 100 g.
             </Form.Label>

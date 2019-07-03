@@ -13,7 +13,7 @@ export default class Instruction extends Component {
             <p>{this.props.description}</p>
             <h3 className="calculatorCalories__header-secondary">Instrukcja</h3>
             <p className="calculatorCalories__description">
-              {this.props.instruction}
+              {this.props.instruction()}
             </p>
           </div>
         </Jumbotron>

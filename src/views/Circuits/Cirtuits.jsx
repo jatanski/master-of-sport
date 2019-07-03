@@ -119,7 +119,7 @@ export default class Circuits extends Component {
     console.log(this.state);
     return (
       <section className="circuits">
-        <Jumbotron>
+        <Jumbotron className="jumbotron-circuits">
           <div className="calculatorCalories__instruction">
             <h2 className="calculatorCalories__header-main">
               Wprowadź swoje pomiary
