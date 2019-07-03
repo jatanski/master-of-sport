@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Alert } from "react-bootstrap";
+import "./alert.scss";
 
 export default class CustomAlert extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class CustomAlert extends Component {
   render() {
     return (
       <Alert
-        className="calculatorBMI__popUp"
+        className="calculatorBMI__popUp customAlert"
         show={this.props.showFalsePopUp}
         variant={this.variant.general}
       >

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
+import "./circuitsStatistics.scss";
 
 export default class CircuitsStatistics extends Component {
   state = {
@@ -45,24 +46,32 @@ export default class CircuitsStatistics extends Component {
 
   render() {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <td>Data</td>
-          <td>Waga</td>
-          <td>Łydka</td>
-          <td>Udo</td>
-          <td>Pas</td>
-          <td>Talia</td>
-          <td>Klatka piersiowa</td>
-          <td>Biceps</td>
-          <td>Przedramię</td>
-        </thead>
-        <tbody>
-          {this.state.circuits
-            ? this.state.circuits.map(this.showResult)
-            : null}
-        </tbody>
-      </Table>
+      <div className="circuitsTableWrap">
+        <Table
+          className="circuitsTableWrap__table"
+          striped
+          variant="dark"
+          bordered
+          hover
+        >
+          <thead>
+            <td>Data</td>
+            <td>Waga</td>
+            <td>Łydka</td>
+            <td>Udo</td>
+            <td>Pas</td>
+            <td>Talia</td>
+            <td>Klatka piersiowa</td>
+            <td>Biceps</td>
+            <td>Przedramię</td>
+          </thead>
+          <tbody>
+            {this.state.circuits
+              ? this.state.circuits.map(this.showResult)
+              : null}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }

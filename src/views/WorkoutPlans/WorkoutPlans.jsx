@@ -5,16 +5,22 @@ import "./workoutPlans.scss";
 
 export default class WorkoutPlans extends Component {
   state = {
+    showDisabledLayer: false,
     showNewTrainingPlan: false,
     disableTrainingPlan: false
   };
 
+  showDisabledLayer = () => this.setState({ showDisabledLayer: true });
+  showOffDisabledLayer = () => this.setState({ showDisabledLayer: false });
   showNewTrainingPlan = () => this.setState({ showNewTrainingPlan: true });
   showOffNewPlan = () => this.setState({ showNewTrainingPlan: false });
 
   render() {
     return (
       <section className="workoutPlans">
+        {this.state.showDisabledLayer ? (
+          <div className="disabledLayer" />
+        ) : null}
         <Jumbotron className="workoutPlans__jumbotron jumbotron">
           <div className="calculatorCalories__instruction">
             <h2 className="calculatorCalories__header-main">
@@ -45,7 +51,11 @@ export default class WorkoutPlans extends Component {
           </Button>
         </Jumbotron>
         {this.state.showNewTrainingPlan ? (
-          <NewPlanForm showOff={this.showOffNewPlan} />
+          <NewPlanForm
+            showOff={this.showOffNewPlan}
+            showDisabledLayer={this.showDisabledLayer}
+            showOffDisabledLayer={this.showOffDisabledLayer}
+          />
         ) : null}
       </section>
     );

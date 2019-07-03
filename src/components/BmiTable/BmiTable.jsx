@@ -15,6 +15,7 @@ export default class BmiTable extends Component {
   };
 
   componentDidUpdate(prevProps) {
+    if (!this.props.id) return;
     if (prevProps.id !== this.props.id) {
       let id = "";
       for (const el in this.rows) {

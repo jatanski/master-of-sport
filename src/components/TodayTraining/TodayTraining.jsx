@@ -15,6 +15,7 @@ export default class NewTraining extends Component {
     choosenPlan: "",
     dateToSend: {},
     exercises: [],
+    showDisabledLayer: false,
     showTable: false,
     showSave: false,
     showSuccessPopUp: false,
@@ -101,12 +102,15 @@ export default class NewTraining extends Component {
       }
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ showSuccessPopUp: true });
+      this.setState({ showSuccessPopUp: true, showDisabledLayer: true });
       // console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+
+  showDisabledLayer = () => this.setState({ showDisabledLayer: true });
+  showOffDisabledLayer = () => this.setState({ showDisabledLayer: false });
 
   showPlanToChoose = el => {
     return (
@@ -121,7 +125,6 @@ export default class NewTraining extends Component {
   };
 
   renderTable = el => {
-    // console.log(this, el);
     this.setState({ choosenPlan: el.name });
     const exercises = [];
     el.exercises.map((exercise, i) => {
@@ -160,7 +163,11 @@ export default class NewTraining extends Component {
         <td>{el.name}</td>
         {series.map(series => (
           <td key={series.key}>
-            <InputGroup id={series.key} size="sm">
+            <InputGroup
+              className="inputWrapContainer"
+              id={series.key}
+              size="sm"
+            >
               <InputGroup.Prepend>
                 <InputGroup.Text>Powtórzenia</InputGroup.Text>
               </InputGroup.Prepend>
@@ -170,8 +177,11 @@ export default class NewTraining extends Component {
                 type="number"
                 bsPrefix={el.name}
               />
+
               <InputGroup.Prepend>
-                <InputGroup.Text>Obciążenie</InputGroup.Text>
+                <InputGroup.Text className="inputWrap__weightLabel">
+                  Obciążenie{" "}
+                </InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl
                 onChange={this.collectDate}
@@ -189,6 +199,9 @@ export default class NewTraining extends Component {
   render() {
     return (
       <div className="todayTraining">
+        {this.state.showDisabledLayer ? (
+          <div className="disabledLayer" />
+        ) : null}
         <Dropdown className="todayTraining__chooseDropdown">
           <Dropdown.Toggle size="lg" variant="info" id="choosePlan">
             Wybierz plan treningowy
@@ -202,7 +215,7 @@ export default class NewTraining extends Component {
         {this.state.showTable ? (
           <div className="todayTraining__trainingTable">
             <Table striped bordered hover variant="dark">
-              <thead>
+              <thead className="todayTraining__trainingTable__header">
                 <tr>
                   <td>Nazwa ćwiczenia</td>
                   <td>Seria 1</td>
@@ -217,7 +230,12 @@ export default class NewTraining extends Component {
           </div>
         ) : null}
         {this.state.showSave ? (
-          <Button onClick={this.sendToDataBase} variant="primary">
+          <Button
+            className="todayTraining__saveBtn"
+            onClick={this.sendToDataBase}
+            variant="primary"
+            size="lg"
+          >
             Zapisz trening
           </Button>
         ) : null}
@@ -228,6 +246,7 @@ export default class NewTraining extends Component {
             close={this.closeSuccessPopUp}
             goTo1Text={this.alertText.goTo1.text}
             goTo1Link={this.alertText.goTo1.link}
+            extraFunc={this.showOffDisabledLayer}
           />
         ) : null}
         {this.state.showFalsePopUp ? (

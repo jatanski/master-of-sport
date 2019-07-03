@@ -1,3 +1,5 @@
+@import "../../styles/mixins";
+
 .todayTraining {
   position: relative;
   &__chooseDropdown {
@@ -6,7 +8,38 @@
     transform: translateX(-50%);
   }
   &__trainingTable {
-    margin-top: 3vh;
+    @include centerElement;
+    width: 70vw;
     padding-top: 8vh;
+    text-align: center;
+    &__header {
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+  }
+  &__saveBtn {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.inputWrapContainer {
+  @include centerElement;
+  width: 10vw;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr;
+  grid-row-gap: 1vh;
+  input {
+    width: 70%;
+    background-color: #ccc;
+    border: none;
+  }
+}
+
+.inputWrap {
+  &__weightLabel {
+    width: 100%;
   }
 }

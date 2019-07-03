@@ -16,6 +16,7 @@ export default class CalculatorCalories extends Component {
     numberOfMeals: 0,
     meals: [],
     name: "",
+    showDisabledLayer: false,
     showSavePlan: false,
     showSuccessPopUp: false,
     showFalsePopUp: false,
@@ -60,6 +61,7 @@ export default class CalculatorCalories extends Component {
       numberOfMeals: 0,
       meals: [],
       name: "",
+      showDisabledLayer: false,
       showSavePlan: false,
       showSuccessPopUp: false,
       showFalsePopUp: false,
@@ -123,12 +125,15 @@ export default class CalculatorCalories extends Component {
       }
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ showSuccessPopUp: true });
+      this.setState({ showSuccessPopUp: true, showDisabledLayer: true });
       // console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+
+  showDisabledLayer = () => this.setState({ showDisabledLayer: true });
+  showOffDisabledLayer = () => this.setState({ showDisabledLayer: false });
 
   showSection = () =>
     this.setState({
@@ -140,6 +145,9 @@ export default class CalculatorCalories extends Component {
   render() {
     return (
       <section className="calculatorCalories">
+        {this.state.showDisabledLayer ? (
+          <div className="disabledLayer" />
+        ) : null}
         <Jumbotron>
           <div className="calculatorCalories__instruction">
             <h2 className="calculatorCalories__header-main">

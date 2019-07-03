@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tabs, Tab, Table, Row, Col, ListGroup } from "react-bootstrap";
+import { Tabs, Tab, Table, Accordion, Card, Button } from "react-bootstrap";
 import "./workoutsStatistics.scss";
 
 export default class WorkoutsStatistics extends Component {
@@ -105,15 +105,20 @@ export default class WorkoutsStatistics extends Component {
       }
     });
     return (
-      <Tab.Container key={el.date} defaultActiveKey="#link1">
-        <Row>
-          <Col>
-            <ListGroup>
-              <ListGroup.Item>{el.date}</ListGroup.Item>
-            </ListGroup>
-          </Col>
-          <Col>
-            <Tab.Content>
+      <Accordion>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle
+              as={Button}
+              key={el.date}
+              variant="link"
+              eventKey={el.date}
+            >
+              {el.date}
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey={el.date}>
+            <Card.Body>
               <Table
                 className="workoutsStatistics__table"
                 striped
@@ -133,16 +138,21 @@ export default class WorkoutsStatistics extends Component {
                 </thead>
                 <tbody>{exercisesArray.map(this.showData)}</tbody>
               </Table>
-            </Tab.Content>
-          </Col>
-        </Row>
-      </Tab.Container>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
     );
   };
 
   renderPlan = el => {
     return (
-      <Tab key={el} eventKey={el} title={el}>
+      <Tab
+        className="workoutsStatistics__Tabs"
+        key={el}
+        eventKey={el}
+        title={el}
+      >
         {this.state.workouts[el]
           ? this.state.workouts[el].map(this.showExercises)
           : null}
@@ -154,10 +164,7 @@ export default class WorkoutsStatistics extends Component {
     console.log(this.props);
     return (
       <div>
-        <Tabs defaultActiveKey="home">
-          {/* <Tab eventKey="home" title="Wybierz">
-            <p>Wybierz plan, aby zobaczyć statystyki</p>
-          </Tab> */}
+        <Tabs className="workoutsStatistics__Tabs" defaultActiveKey="home">
           {this.props.workoutsArray
             ? this.props.workoutsArray.map(this.renderPlan)
             : null}

@@ -9,12 +9,12 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default class NewPlanForm extends Component {
   state = {
+    disabledSave: true,
+    exercises: [],
     name: "",
     numberOfExercises: 0,
-    exercises: [],
     showFalsePopUp: false,
-    showSuccessPopUp: false,
-    disabledSave: true
+    showSuccessPopUp: false
   };
 
   exercises = [];
@@ -97,6 +97,7 @@ export default class NewPlanForm extends Component {
         this.setState({ showFalsePopUp: true });
       }
       if (response.status !== 200) throw response;
+      this.props.showDisabledLayer();
       response = await response.json();
       this.setState({ showSuccessPopUp: true });
     } catch (error) {
@@ -161,6 +162,7 @@ export default class NewPlanForm extends Component {
             goTo1Link={this.alertText.goTo1.link}
             showOff={this.props.showOff}
             disabledOff={this.props.disabledOff}
+            extraFunc={this.props.showOffDisabledLayer}
           />
         ) : null}
         {this.state.showFalsePopUp ? (

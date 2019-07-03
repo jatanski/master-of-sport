@@ -83,7 +83,7 @@ export default class CalculatorBMI extends Component {
     else if (this.state.id === "8") category = "III stopień otyłości";
 
     const token = localStorage.getItem("x-auth-token");
-    const now = `${new Date().getDate()}.${new Date().getMonth() +
+    const now = `${new Date().getDate() - 4}.${new Date().getMonth() +
       1}.${new Date().getFullYear()}`;
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -105,7 +105,15 @@ export default class CalculatorBMI extends Component {
       }
       if (response.status !== 200) throw response;
       response = await response.json();
-      this.setState({ showSuccessPopUp: true });
+      this.setState({
+        showSuccessPopUp: true,
+        bmi: 0,
+        height: 0,
+        id: "",
+        resultDisplay: "block",
+        showFalsePopUp: false,
+        weight: 0
+      });
     } catch (error) {
       console.log(error);
     }
@@ -179,6 +187,7 @@ export default class CalculatorBMI extends Component {
                   type="number"
                   onChange={this.collectData}
                   id="weight"
+                  value={this.state.weight}
                 />
               </InputGroup>
               <InputGroup className="calculatorBMI__form__inputGroup" size="lg">
@@ -190,6 +199,7 @@ export default class CalculatorBMI extends Component {
                   type="number"
                   onChange={this.collectData}
                   id="height"
+                  value={this.state.height}
                 />
               </InputGroup>
               <Button

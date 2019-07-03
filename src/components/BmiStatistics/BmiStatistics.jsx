@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
+import "./bmiStatistics.scss";
 
 export default class BmiStatistics extends Component {
   state = {
@@ -49,18 +50,26 @@ export default class BmiStatistics extends Component {
 
   render() {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <td>Data</td>
-            <td>BMI</td>
-            <td>Stan</td>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.bmi ? this.state.bmi.map(this.showResult) : null}
-        </tbody>
-      </Table>
+      <div className="bmiTableWrap">
+        <Table
+          variant="dark"
+          className="bmiTableWrap__table"
+          striped
+          bordered
+          hover
+        >
+          <thead>
+            <tr>
+              <td>Data</td>
+              <td>BMI</td>
+              <td>Stan</td>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.bmi ? this.state.bmi.map(this.showResult) : null}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }

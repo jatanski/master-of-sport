@@ -11,7 +11,7 @@ class Meal extends Component {
     products: [],
     showNewProduct: false,
     saveButton: {
-      text: "Dodaj posiłek",
+      text: "Zapisz posiłek",
       variant: "success"
     },
     activeNewProduct: true
