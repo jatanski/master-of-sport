@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./registerForm.scss";
 import { Form, Button } from "react-bootstrap";
+import "./registerForm.scss";
 
 export default class RegisterForm extends Component {
   state = {
@@ -35,31 +35,18 @@ export default class RegisterForm extends Component {
         "x-auth-token",
         response.headers.get("x-auth-token")
       );
-      //   this.props.loginStatus(true);
       response = await response.json();
-      console.log(response);
+      // console.log(response);
       this.props.changeView();
     } catch (err) {
       console.log(err);
-      //   if ([404, 400].includes(err.status)) {
-      //     let error = "Konto o podanym adresie email już istnieje";
-      //     this.setState({
-      //       name: "",
-      //       email: "",
-      //       password: "",
-      //       type: "student",
-      //       isDisable: true,
-      //       errors: {
-      //         email: error
-      //       }
-      //     });
     }
   };
 
   render() {
     return (
       <div>
-        <Form>
+        <Form className="registerView__form">
           <Form.Group controlId="formName">
             <Form.Label>Imię:</Form.Label>
             <Form.Control

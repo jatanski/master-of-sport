@@ -8,7 +8,6 @@ import {
   faWeight,
   faDumbbell,
   faRunning,
-  faHandPaper,
   faUserEdit
 } from "@fortawesome/free-solid-svg-icons";
 

@@ -10,3 +10,10 @@
     }
   }
 }
+
+.linkMyStyle {
+  color: white;
+  &-black {
+    color: black !important;
+  }
+}

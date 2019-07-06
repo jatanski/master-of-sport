@@ -1,77 +1,150 @@
 import React, { Component } from "react";
 import "./menuDesktop.scss";
-import { Navbar, Nav, Button, NavDropdown } from "react-bootstrap";
 import { allActions } from "../../redux/store";
 import { Link } from "react-router-dom";
 
+import {
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBIcon,
+  Button
+} from "mdbreact";
+
 export default class MenuDesktop extends Component {
+  state = { isOpen: false };
   logout() {
     localStorage.removeItem("x-auth-token");
     allActions.logout();
   }
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
   render() {
     return (
       <div className="menuDesktop">
-        <Navbar expand="lg" bg="dark" variant="dark">
-          <Navbar.Brand>
-            <Link className="menuDesktop__link" to="/me">
-              Master of Calories
-            </Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              <NavDropdown title="Dodaj plan">
-                <NavDropdown.Item>
-                  <Link to="/workoutplans">Treningowy</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="/calculator">Dietetyczny</Link>
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/statistics">
-                  Statystyki
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/circuits">
-                  Obwody
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/diary">
-                  Dodaj treninig
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/menus">
-                  Dodaj Jadłospis
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/bmi">
-                  Sprawdź swoje BMI
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/myplans">
-                  Moje Plany
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link className="menuDesktop__link" to="/profil">
-                  Profil
-                </Link>
-              </Nav.Item>
-            </Nav>
-            <Nav>
-              <Button variant="outline-light" onClick={this.logout}>
-                <Link to="/">Wyloguj się!</Link>
-              </Button>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        <MDBNavbar color="primary-color" dark expand="md">
+          <MDBNavbarBrand>
+            <strong className="white-text">
+              <Link className="linkMyStyle" to="/me">
+                Master of Sportsman
+              </Link>
+            </strong>
+          </MDBNavbarBrand>
+          <MDBNavbarToggler onClick={this.toggleCollapse} />
+          <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+            <MDBNavbarNav left>
+              <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <div className="d-none d-md-inline">Dieta</div>
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem>
+                      <MDBNavLink
+                        className="linkMyStyle-black"
+                        to="/calculator"
+                      >
+                        Nowy plan dietetyczny
+                      </MDBNavLink>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <MDBNavLink className="linkMyStyle-black" to="/menus">
+                        Dzisiejszy jadłospis
+                      </MDBNavLink>
+                    </MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <div className="d-none d-md-inline">Trening</div>
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem>
+                      <MDBNavLink
+                        className="linkMyStyle-black"
+                        to="/workoutplans"
+                      >
+                        Nowy plan treningowy
+                      </MDBNavLink>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
+                      <MDBNavLink className="linkMyStyle-black" to="/diary">
+                        Dodaj dzisiejszy trening
+                      </MDBNavLink>
+                    </MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/statistics">Statystyki</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/circuits">Obwody</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/bmi">Sprawdź BMI</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/myplans">Plany treningowe</MDBNavLink>
+              </MDBNavItem>
+            </MDBNavbarNav>
+            <MDBNavbarNav right>
+              <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle nav caret>
+                    <MDBIcon icon="user" />
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default">
+                    <MDBDropdownItem>
+                      <MDBNavLink className="linkMyStyle-black" to="/profil">
+                        Profil
+                      </MDBNavLink>
+                    </MDBDropdownItem>
+                    <Button size="sm" variant="outline-light">
+                      <Link to="/">Wyloguj się</Link>
+                    </Button>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink
+                  className="waves-effect waves-light"
+                  to="https://www.linkedin.com/in/jakub-tanski/"
+                >
+                  <MDBIcon fab icon="linkedin" />
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink
+                  className="waves-effect waves-light"
+                  to="https://www.facebook.com/ja.tanski"
+                >
+                  <MDBIcon fab icon="facebook" />
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink
+                  className="waves-effect waves-light"
+                  to="https://github.com/jatanski/master-of-calories"
+                >
+                  <MDBIcon fab icon="github" />
+                </MDBNavLink>
+              </MDBNavItem>
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBNavbar>
       </div>
     );
   }

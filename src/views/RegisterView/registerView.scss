@@ -1,0 +1,57 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.registerView {
+  min-height: 100vh;
+  background-color: $firstViewBgcColor;
+  &__decoration {
+    &__ico {
+      position: absolute;
+      transform: translateY(-50%);
+      opacity: 0.2;
+      font-size: 24em;
+      &-1 {
+        @include icoFirstView;
+        top: 25%;
+        left: 5%;
+      }
+      &-2 {
+        @include icoFirstView;
+        top: 75%;
+        left: 5%;
+      }
+      &-3 {
+        @include icoFirstView;
+        top: 25%;
+        right: 5%;
+      }
+      &-4 {
+        @include icoFirstView;
+        transform: rotateY(180deg);
+        top: 55%;
+        right: 5%;
+      }
+    }
+  }
+  &__jumbotron {
+    position: relative;
+    top: 25vh;
+    padding: 3rem 2rem;
+    margin: 0 50vh !important;
+    opacity: 0.9 !important;
+  }
+  &__form {
+    width: 80%;
+  }
+  &__backBtn {
+    margin-bottom: 3vh;
+    @include resetButton;
+    & a {
+      color: #111;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+}
