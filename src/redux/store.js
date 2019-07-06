@@ -18,6 +18,7 @@ const allActions = bindActionCreators(
     logout: loginActions.logout,
     sendInfo: newProductActions.sendInfo,
     addProduct: newProductActions.addProduct,
+    changeProduct: newProductActions.changeProduct,
     sumProducts: newProductActions.sumProducts,
     sumMeals: newProductActions.sumMeals,
     resetMeals: newProductActions.resetMeals,

@@ -1,20 +1,27 @@
 .calculatorCalories {
   position: relative;
+  font-weight: 500;
   &__header-main {
     text-align: center;
     margin-bottom: 5vh;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 500;
   }
   &__header-secondary {
     text-align: left;
     margin: 5vh 0 2vh;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 500;
   }
   &__description {
     line-height: 180%;
     margin-bottom: 3vh;
+    font-weight: 500;
+  }
+  &__prop {
+    font-weight: 500;
   }
   &__formName {
     position: absolute;
@@ -22,8 +29,12 @@
     transform: translateX(-50%);
     width: 35%;
     &__label {
+      height: 5vh;
       font-weight: 600;
       color: #111;
+    }
+    &__button {
+      margin: 0;
     }
   }
   &__newMeal {

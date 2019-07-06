@@ -7,7 +7,8 @@ const INITIAL_STATE = {
     numberOfCarbohydrates: 0,
     numberOfFats: 0,
     numberOfCalories: 0,
-    weight: 0
+    weight: 0,
+    showEditWeight: false
   }
 };
 
@@ -79,6 +80,11 @@ const allProductsReducer = (state = PRODUCTS_STATE, action) => {
         ...state,
         products: [...state.products, action.item]
       };
+    case types.CHANGE_PRODUCT:
+      return {
+        ...state,
+        products: [action.item]
+      };
     default:
       return state;
   }
@@ -99,7 +105,9 @@ const newProductReducer = (state = INITIAL_STATE, action) => {
           numberOfProteins: 0,
           numberOfCarbohydrates: 0,
           numberOfFats: 0,
-          numberOfCalories: 0
+          numberOfCalories: 0,
+          weight: 0,
+          showEditWeight: false
         }
       };
     default:

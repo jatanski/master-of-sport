@@ -177,7 +177,7 @@ export default class CalculatorCalories extends Component {
               value={this.state.name}
             />
             <Button
-              size="lg"
+              className="calculatorCalories__formName__button"
               disabled={this.state.disabledButtonStart}
               onClick={this.showSection}
             >

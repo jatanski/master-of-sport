@@ -4,17 +4,28 @@ import { Table, Button } from "react-bootstrap";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import { connect } from "react-redux";
 import { allActions } from "../../redux/store";
+import { MDBInput } from "mdbreact";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter
+} from "mdbreact";
 
 class Meal extends Component {
   state = {
+    activeNewProduct: true,
+    editWeight: 0,
+    nameOfChangeWeight: "",
     numberOfProducts: 1,
     products: [],
-    showNewProduct: false,
     saveButton: {
       text: "Zapisz posiłek",
       variant: "success"
     },
-    activeNewProduct: true
+    showNewProduct: false,
+    showEditWeightModal: false
   };
 
   products = [];
@@ -40,29 +51,59 @@ class Meal extends Component {
       products: [
         ...this.state.products,
         {
-          number: this.state.numberOfProducts
+          number: this.state.numberOfProducts + 1
         }
       ]
     });
+  };
+
+  changeWeight = () => {
+    const differences = {};
+    this.products.forEach(el => {
+      if (el.newProductName === this.state.nameOfChangeWeight) {
+        const newValues = {
+          calories: (this.state.editWeight * el.caloriesOfProduct) / 100,
+          carbo: (this.state.editWeight * el.carboOfProduct) / 100,
+          fats: (this.state.editWeight * el.fatsOfProduct) / 100,
+          proteins: (this.state.editWeight * el.proteinsOfProduct) / 100
+        };
+        differences.numberOfCalories = newValues.calories - el.numberOfCalories;
+        differences.numberOfCarbohydrates =
+          newValues.carbo - el.numberOfCarbohydrates;
+        differences.numberOfFats = newValues.fats - el.numberOfFats;
+        differences.numberOfProteins = newValues.proteins - el.numberOfProteins;
+
+        console.log(differences);
+        el.weight = this.state.editWeight;
+        el.numberOfCalories = newValues.calories;
+        el.numberOfCarbohydrates = newValues.carbo;
+        el.numberOfFats = newValues.fats;
+        el.numberOfProteins = newValues.proteins;
+      }
+    });
+    allActions.changeProduct(window.store.getState().allProducts.products);
+    allActions.sumProducts(differences);
+    this.summary = {
+      calories: this.summary.calories + differences.numberOfCalories,
+      proteins: this.summary.proteins + differences.numberOfProteins,
+      carbohydrates:
+        this.summary.carbohydrates + differences.numberOfCarbohydrates,
+      fats: this.summary.fats + differences.numberOfFats
+    };
+    this.closeEditWeight();
   };
 
   createNewProduct = el => {
     return (
       <tr key={el.numberProduct}>
         <td> {el.newProductName}</td>
-        <td>{el.weight} g</td>
+        <td onClick={this.showEditWeight.bind(this, el)}>{el.weight} g</td>
         <td>{el.numberOfCalories} kcal</td>
         <td>{el.numberOfProteins} g</td>
         <td>{el.numberOfCarbohydrates} g</td>
         <td>{el.numberOfFats} g</td>
       </tr>
     );
-  };
-
-  showNewProduct = () => {
-    if (this.state.activeNewProduct) {
-      this.setState({ showNewProduct: true });
-    }
   };
 
   closeNewProduct = () => {
@@ -89,6 +130,29 @@ class Meal extends Component {
     allActions.resetProduct();
   };
 
+  handleNumberInputChange = e => {
+    const state = {};
+    state[`${e.target.id}`] = Number(e.target.value);
+    this.setState(state);
+  };
+
+  showEditWeight = el => {
+    this.setState({
+      showEditWeightModal: !this.state.showEditWeightModal,
+      nameOfChangeWeight: el.newProductName
+    });
+  };
+
+  closeEditWeight = () => {
+    this.setState({ showEditWeightModal: !this.state.showEditWeightModal });
+  };
+
+  showNewProduct = () => {
+    if (this.state.activeNewProduct) {
+      this.setState({ showNewProduct: true });
+    }
+  };
+
   renderNewProduct() {
     return (
       <NewProduct
@@ -100,6 +164,8 @@ class Meal extends Component {
   }
 
   render() {
+    // console.log(this.state);
+    // console.log(this.props);
     return (
       <div className="meal">
         <Table striped bordered hover variant="dark">
@@ -148,6 +214,41 @@ class Meal extends Component {
           {this.state.saveButton.text}
         </Button>
         {this.renderNewProduct()}
+        {this.state.showEditWeightModal ? (
+          <MDBModalHeader>
+            <MDBModal
+              isOpen={this.state.showEditWeightModal}
+              toggle={this.showEditWeight}
+              centered
+              size="sm"
+            >
+              <MDBModalHeader toggle={this.showEditWeight}>
+                Zmień gramaturę
+              </MDBModalHeader>
+              <MDBModalBody>
+                Waga:{" "}
+                <MDBInput
+                  id="editWeight"
+                  onChange={this.handleNumberInputChange}
+                  size="sm"
+                  type="number"
+                />
+              </MDBModalBody>
+              <MDBModalFooter>
+                <MDBBtn
+                  color="secondary"
+                  size="sm"
+                  onClick={this.showEditWeight}
+                >
+                  Zamknij
+                </MDBBtn>
+                <MDBBtn size="sm" color="primary" onClick={this.changeWeight}>
+                  Zapisz
+                </MDBBtn>
+              </MDBModalFooter>
+            </MDBModal>
+          </MDBModalHeader>
+        ) : null}
       </div>
     );
   }

@@ -13,7 +13,11 @@ export default class NewProduct extends Component {
     numberOfFats: 0,
     numberOfCalories: 0,
     showProductsList: false,
-    weight: 0
+    weight: 0,
+    proteinsOfProduct: 0,
+    carboOfProduct: 0,
+    fatsOfProduct: 0,
+    caloriesOfProduct: 0
   };
 
   countElements = () => {
@@ -25,7 +29,12 @@ export default class NewProduct extends Component {
       numberOfFats: this.state.numberOfFats * multipier,
       numberOfCalories: this.state.numberOfCalories * multipier,
       weight: this.state.weight,
-      numberProduct: this.state.numberProduct + 1
+      numberProduct: this.state.numberProduct + 1,
+      showEditWeight: false,
+      proteinsOfProduct: this.state.proteinsOfProduct,
+      carboOfProduct: this.state.carboOfProduct,
+      fatsOfProduct: this.state.fatsOfProduct,
+      caloriesOfProduct: this.state.caloriesOfProduct
     };
     this.setState({
       multipier: multipier,
@@ -105,7 +114,11 @@ export default class NewProduct extends Component {
         numberOfCarbohydrates:
           Math.round(foods.nf_total_carbohydrate * 10) / 10,
         numberOfFats: Math.round(foods.nf_total_fat * 10) / 10,
-        numberOfCalories: Math.round(foods.nf_calories * 10) / 10
+        numberOfCalories: Math.round(foods.nf_calories * 10) / 10,
+        proteinsOfProduct: Math.round(foods.nf_protein * 10) / 10,
+        carboOfProduct: Math.round(foods.nf_total_carbohydrate * 10) / 10,
+        fatsOfProduct: Math.round(foods.nf_total_fat * 10) / 10,
+        caloriesOfProduct: Math.round(foods.nf_calories * 10) / 10
       });
       console.log(response);
     } catch (error) {
@@ -139,7 +152,6 @@ export default class NewProduct extends Component {
         productList.push(el.food_name);
       });
       this.setState({ productsArray: productList });
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -148,6 +160,7 @@ export default class NewProduct extends Component {
   renderListElements = el => {
     return (
       <ListGroup.Item
+        key={Math.random()}
         action
         className="newProduct__productElement"
         onClick={this.searchProductDetails}

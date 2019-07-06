@@ -10,7 +10,7 @@ export default class Instruction extends Component {
             <h2 className="calculatorCalories__header-main">
               {this.props.header}
             </h2>
-            <p>{this.props.description}</p>
+            <p className="calculatorCalories__prop">{this.props.description}</p>
             <h3 className="calculatorCalories__header-secondary">Instrukcja</h3>
             <p className="calculatorCalories__description">
               {this.props.instruction()}
