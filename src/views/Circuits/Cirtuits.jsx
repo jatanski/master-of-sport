@@ -17,9 +17,9 @@ export default class Circuits extends Component {
     chest: 0,
     biceps: 0,
     forearm: 0,
+    resetForm: false,
     showFalsePopUp: false,
-    showSuccessPopUp: false,
-    resetForm: false
+    showSuccessPopUp: false
   };
 
   inputs = [
@@ -116,7 +116,6 @@ export default class Circuits extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <section className="circuits">
         <Jumbotron className="jumbotron-circuits">
@@ -124,7 +123,7 @@ export default class Circuits extends Component {
             <h2 className="calculatorCalories__header-main">
               Wprowadź swoje pomiary
             </h2>
-            <p>
+            <p className="calculatorCalories__prop">
               Monitorowanie wagi oraz wymiarów poszczególnych części ciała, jest
               istotną częścią prowadzenia swojego planu
               treningowo-dietetycznego. <br /> Dzięki szczegółowym statystyką
@@ -153,6 +152,7 @@ export default class Circuits extends Component {
             {this.inputs.map(el => {
               return (
                 <Input
+                  key={el.id}
                   text={el.text}
                   collectData={this.collectData}
                   id={el.id}

@@ -3,8 +3,8 @@ import "./statistics.scss";
 import { Button, Jumbotron } from "react-bootstrap";
 import BmiStatistics from "../../components/BmiStatistics/BmiStatistics";
 import CircuitsStatistics from "../../components/CircuitsStatistics/CircuitsStatistics";
-import MyPlans from "../MyPlans/MyPlans";
 import MenusStatistics from "../../components/MenusStatistics/MenusStatistics";
+import WorkoutsStatistics from "../../components/WorkoutsStatistics/WorkoutsStatistics";
 
 export default class Statistics extends Component {
   state = {
@@ -83,7 +83,7 @@ export default class Statistics extends Component {
         {this.state.showBmi ? <BmiStatistics /> : null}
         {this.state.showCircuits ? <CircuitsStatistics /> : null}
         {this.state.showMenus ? <MenusStatistics /> : null}
-        {this.state.showWorkouts ? <MyPlans /> : null}
+        {this.state.showWorkouts ? <WorkoutsStatistics /> : null}
       </section>
     );
   }

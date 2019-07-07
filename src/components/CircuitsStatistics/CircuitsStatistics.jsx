@@ -22,7 +22,6 @@ export default class CircuitsStatistics extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ circuits: response });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -55,15 +54,17 @@ export default class CircuitsStatistics extends Component {
           hover
         >
           <thead>
-            <td>Data</td>
-            <td>Waga</td>
-            <td>Łydka</td>
-            <td>Udo</td>
-            <td>Pas</td>
-            <td>Talia</td>
-            <td>Klatka piersiowa</td>
-            <td>Biceps</td>
-            <td>Przedramię</td>
+            <tr>
+              <td>Data</td>
+              <td>Waga</td>
+              <td>Łydka</td>
+              <td>Udo</td>
+              <td>Pas</td>
+              <td>Talia</td>
+              <td>Klatka</td>
+              <td>Biceps</td>
+              <td>Przedramię</td>
+            </tr>
           </thead>
           <tbody>
             {this.state.circuits

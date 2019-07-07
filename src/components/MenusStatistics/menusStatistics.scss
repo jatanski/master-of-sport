@@ -1,3 +1,58 @@
 .statistics__menus {
   margin: 1vh 15vw 5vh;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .statistics__menus {
+    margin: 1vh 8vw 5vh;
+  }
+}
+
+@media (max-width: 414px) {
+  .statistics__menus {
+    &__meal {
+      margin: 3vh 0vw;
+      & td,
+      th {
+        font-size: 0.7em;
+        padding: 0.7rem 0.4rem !important;
+      }
+    }
+    &__summaryTable {
+      margin: 3vh 0vw;
+      & td {
+        font-size: 0.7em;
+        padding: 0.7rem 0.4rem !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .statistics__menus {
+    &__meal {
+      & td,
+      th {
+        font-size: 0.65em;
+        padding: 0.5rem 0.25rem !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .statistics__menus {
+    &__meal {
+      & td,
+      th {
+        font-size: 0.55em;
+      }
+    }
+    &__summaryTable {
+      & td {
+        font-size: 0.55em;
+      }
+    }
+  }
 }

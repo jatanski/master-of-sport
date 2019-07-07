@@ -4,3 +4,9 @@
     text-align: center;
   }
 }
+
+@media (max-width: 1024px) {
+  .bmiTableWrap {
+    margin: 3vh 10vw;
+  }
+}

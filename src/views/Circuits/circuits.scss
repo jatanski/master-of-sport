@@ -36,3 +36,35 @@
   padding: 2rem 2rem;
   width: 60vw;
 }
+
+@media (max-width: 1024px) {
+  .jumbotron-circuits {
+    margin: 5vh 7vw 0vh !important;
+    width: 86vw;
+  }
+}
+
+@media (max-width: 414px) {
+  .jumbotron-circuits {
+    margin: 2vh 7vw 0vh !important;
+    padding: 1rem 1rem;
+    width: 86vw;
+  }
+
+  .circuits__form__dimensions {
+    font-size: 1em;
+  }
+  .circuits__form {
+    left: 5%;
+    width: 90%;
+  }
+  .input-custom {
+    width: 25vw !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .input-custom {
+    width: 30vw !important;
+  }
+}

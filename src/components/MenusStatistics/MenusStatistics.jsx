@@ -24,7 +24,6 @@ export default class WorkoutsStatistics extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ menus: response });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +45,7 @@ export default class WorkoutsStatistics extends Component {
   renderMeal = el => {
     this.numberOfMeal += 1;
     return (
-      <div key={Math.random()} className="meal">
+      <div key={Math.random()} className="statistics__menus__meal">
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
@@ -61,7 +60,7 @@ export default class WorkoutsStatistics extends Component {
             <tr>
               <td>Produkt</td>
               <td>Ilość</td>
-              <td>Kcal</td>
+              <td>Kalorie</td>
               <td>Białko</td>
               <td>Węglowodany</td>
               <td>Tłuszcze</td>
@@ -82,13 +81,12 @@ export default class WorkoutsStatistics extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <section className="statistics__menus">
         <Accordion>
           {this.state.menus
             ? this.state.menus.map(el => (
-                <Card>
+                <Card key={el._id}>
                   <Card.Header>
                     <Accordion.Toggle
                       as={Button}
@@ -103,7 +101,7 @@ export default class WorkoutsStatistics extends Component {
                     <Card.Body>
                       {el.meals.map(this.renderMeal)}
                       <Table
-                        className="caloriesSummaryTable"
+                        className="statistics__menus__summaryTable"
                         striped
                         bordered
                         hover

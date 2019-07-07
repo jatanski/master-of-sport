@@ -4,3 +4,29 @@
     text-align: center;
   }
 }
+
+@media (max-width: 1024px) {
+  .circuitsTableWrap {
+    margin: 3vh 10vw;
+  }
+}
+
+@media (max-width: 414px) {
+  .circuitsTableWrap {
+    margin: 3vh 2vw;
+    & td {
+      font-size: 0.7em;
+      padding: 0.7rem 0.4rem !important;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .circuitsTableWrap {
+    margin: 3vh 2vw;
+    & td {
+      font-size: 0.65em;
+      padding: 0.5rem 0.25rem !important;
+    }
+  }
+}

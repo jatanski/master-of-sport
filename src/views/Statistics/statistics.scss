@@ -10,3 +10,13 @@
     }
   }
 }
+
+@media (max-width: 414px) {
+  .statistics {
+    &__buttons {
+      & * {
+        width: 75%;
+      }
+    }
+  }
+}
