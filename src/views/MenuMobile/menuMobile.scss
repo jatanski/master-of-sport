@@ -1,0 +1,13 @@
+.menuMobile {
+  &__logoutBtn {
+    & a {
+      color: aliceblue;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .menuMobile {
+    display: none;
+  }
+}

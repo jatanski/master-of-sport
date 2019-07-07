@@ -31,7 +31,7 @@ export default class MenuDesktop extends Component {
 
   render() {
     return (
-      <div className="menuDesktop">
+      <section className="menuDesktop">
         <MDBNavbar color="primary-color" dark expand="md">
           <MDBNavbarBrand>
             <strong className="white-text">
@@ -149,7 +149,7 @@ export default class MenuDesktop extends Component {
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
-      </div>
+      </section>
     );
   }
 }

@@ -17,3 +17,9 @@
     color: black !important;
   }
 }
+
+@media (max-width: 1024px) {
+  .menuDesktop {
+    display: none;
+  }
+}
