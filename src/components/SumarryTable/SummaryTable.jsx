@@ -41,7 +41,7 @@ class SummaryTable extends Component {
         </thead>
         <tbody>
           <tr>
-            <td className="summaryDay">Suma dobowa</td>
+            <td className="summaryDay">Suma</td>
             <td>{this.props.elementsFromAllMeals.calories} kcal</td>
             <td>{this.props.elementsFromAllMeals.proteins} g</td>
             <td>{this.props.elementsFromAllMeals.carbohydrates} g</td>

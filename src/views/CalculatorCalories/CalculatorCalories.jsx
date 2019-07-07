@@ -149,7 +149,7 @@ export default class CalculatorCalories extends Component {
             <h2 className="calculatorCalories__header-main">
               Dodaj nowy plan żywieniowy
             </h2>
-            <p>
+            <p className="calculatorCalories__prop">
               Możesz tutaj dodać nowy plan dietetyczny, którego potem można użyć
               przy tworzeniu jadłospisów na dany dzień.
             </p>
@@ -222,8 +222,6 @@ export default class CalculatorCalories extends Component {
                 close={this.closeSuccessPopUp}
                 goTo1Text={this.alertText.goTo1.text}
                 goTo1Link={this.alertText.goTo1.link}
-                goTo2Text={this.alertText.goTo2.text}
-                goTo2Link={this.alertText.goTo2.link}
                 extraFunc={this.cleanCalc}
               />
             ) : null}

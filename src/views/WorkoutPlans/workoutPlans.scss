@@ -28,3 +28,15 @@
   background-color: #fff;
   z-index: 1;
 }
+
+@media (max-width: 1024px) {
+  .jumbotron {
+    margin: 5vh 8vw;
+  }
+}
+
+@media (max-width: 414px) {
+  .jumbotron {
+    margin: 4vh 8vw;
+  }
+}

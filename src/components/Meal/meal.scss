@@ -21,3 +21,10 @@
 .editWeight {
   color: white !important;
 }
+
+@media (max-width: 1024px) {
+  .meal {
+    margin: 10vh 10vw 5vh;
+    width: 80vw;
+  }
+}

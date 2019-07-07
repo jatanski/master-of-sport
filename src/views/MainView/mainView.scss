@@ -24,3 +24,35 @@
     height: 45vh;
   }
 }
+
+@media (max-width: 1024px) {
+  .mainView {
+    &__card {
+      margin: 0 2.5vw;
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .mainView {
+    &__card {
+      margin: 0vh 1.5vw 15vh;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .mainView {
+    &__card {
+      margin: 0vh 1.5vw 22vh;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .mainView {
+    &__card {
+      margin: 0vh 1.5vw 30vh;
+    }
+  }
+}

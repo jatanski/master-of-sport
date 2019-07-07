@@ -1,4 +1,13 @@
 .menuMobile {
+  & .container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: 1024px;
+    & .navbar {
+      padding: 0.5rem 1.5rem 0.5rem 1rem;
+    }
+  }
   &__logoutBtn {
     & a {
       color: aliceblue;

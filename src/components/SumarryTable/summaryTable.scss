@@ -9,3 +9,36 @@
     font-weight: 600;
   }
 }
+
+@media (max-width: 1024px) {
+  .caloriesSummaryTable {
+    margin: 10vh 10vw 5vh;
+    width: 80vw;
+  }
+}
+
+@media (max-width: 414px) {
+  .caloriesSummaryTable {
+    margin: 10vh 3vw 5vh;
+    width: 80vw;
+  }
+}
+
+@media (max-width: 375px) {
+  .caloriesSummaryTable {
+    margin: 10vh 3vw 5vh;
+    width: 80vw;
+    & td {
+      padding: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .caloriesSummaryTable {
+    & td {
+      font-size: 0.8rem;
+      padding: 0.45rem;
+    }
+  }
+}

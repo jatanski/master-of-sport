@@ -50,3 +50,61 @@
     padding-top: 3vh;
   }
 }
+
+@media (max-width: 1024px) {
+  .calculatorCalories {
+    &__header-main {
+      font-size: 1.8em;
+      margin-bottom: 3vh;
+    }
+    &__formName {
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .calculatorCalories {
+    &__header-main {
+      font-size: 1.6em;
+    }
+    &__header-secondary {
+      font-size: 1.4em;
+    }
+    &__description {
+      font-size: 0.8em;
+    }
+    &__prop {
+      font-size: 0.8em;
+    }
+    &__formName {
+      width: 80%;
+      &__label {
+        font-size: 0.9em !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .calculatorCalories {
+    &__header-main {
+      font-size: 1.4em;
+    }
+    &__header-secondary {
+      font-size: 1.3em;
+    }
+    &__description {
+      font-size: 0.65em;
+    }
+    &__prop {
+      font-size: 0.7em;
+    }
+    &__formName {
+      width: 80%;
+      &__label {
+        font-size: 0.9em !important;
+      }
+    }
+  }
+}

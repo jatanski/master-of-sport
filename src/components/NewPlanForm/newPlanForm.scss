@@ -3,6 +3,14 @@
 }
 
 #name {
-  //   margin: 0 35vw;
   width: 30vw;
+}
+
+@media (max-width: 1024px) {
+  .workoutPlan__newPlanForm {
+    margin: 0vh 8vw;
+  }
+  #name {
+    width: 35vw;
+  }
 }
