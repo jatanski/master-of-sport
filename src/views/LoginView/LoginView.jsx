@@ -36,7 +36,7 @@ export default class RegisterView extends Component {
             className="registerView__decoration__ico-4"
           />
         </div>
-        <Jumbotron className="registerView__jumbotron">
+        <Jumbotron className="registerView__jumbotron login-jumbotron">
           <Button className="registerView__backBtn" variant="warning">
             <Link to="/">Powrót do strony głównej</Link>
           </Button>

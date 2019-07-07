@@ -6,10 +6,6 @@
   background-color: $firstViewBgcColor;
   &__decoration {
     &__ico {
-      position: absolute;
-      transform: translateY(-50%);
-      opacity: 0.2;
-      font-size: 24em;
       &-1 {
         @include icoFirstView;
         top: 25%;
@@ -52,6 +48,154 @@
       font-weight: 500;
       text-decoration: none;
       text-transform: uppercase;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .registerView {
+    &__decoration {
+      &__ico {
+        &-1,
+        &-2,
+        &-3,
+        &-4 {
+          font-size: 16em;
+        }
+        &-1,
+        &-3 {
+          top: 13%;
+        }
+        &-2 {
+          top: 86%;
+        }
+        &-4 {
+          top: 73%;
+        }
+      }
+    }
+    &__jumbotron {
+      padding: 2rem 2rem;
+      top: 23vh;
+      margin: 0 15vw !important;
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .registerView {
+    &__decoration {
+      &__ico {
+        &-1,
+        &-2,
+        &-3,
+        &-4 {
+          font-size: 9em;
+        }
+        &-1,
+        &-3 {
+          top: 11%;
+        }
+        &-2 {
+          top: 89%;
+        }
+        &-4 {
+          top: 80%;
+        }
+      }
+    }
+    &__jumbotron {
+      top: 18vh;
+      margin: 0 12vw !important;
+      padding: 1rem 1rem;
+    }
+    &__form {
+      width: 100%;
+    }
+    &__backBtn {
+      & a {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .registerView {
+    &__decoration {
+      &__ico {
+        &-1,
+        &-2,
+        &-3,
+        &-4 {
+          font-size: 8em;
+        }
+        &-1,
+        &-3 {
+          top: 10%;
+        }
+        &-2 {
+          top: 90%;
+        }
+        &-4 {
+          top: 80%;
+        }
+      }
+    }
+    &__jumbotron {
+      top: 17vh;
+      margin: 0 9vw !important;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .registerView {
+    &__form {
+      font-size: 0.8em;
+      & input {
+        font-size: 1em;
+      }
+      & button {
+        font-size: 0.8em;
+      }
+    }
+    &__backBtn {
+      & a {
+        font-size: 0.8em;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .registerView {
+    &__decoration {
+      &__ico {
+        &-1,
+        &-2,
+        &-3,
+        &-4 {
+          font-size: 7em;
+        }
+      }
+    }
+    &__form {
+      font-size: 0.7em;
+      & input {
+        font-size: 0.9em;
+      }
+      & button {
+        font-size: 0.8em;
+      }
+    }
+    &__jumbotron {
+      padding: 1em 1em;
+    }
+    &__backBtn {
+      & a {
+        font-size: 0.7em;
+      }
     }
   }
 }

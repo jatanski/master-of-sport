@@ -4,8 +4,8 @@ import "./registerForm.scss";
 
 export default class RegisterForm extends Component {
   state = {
-    formNameValue: "",
     formEmailValue: "",
+    formNameValue: "",
     formPasswordValue: ""
   };
 
@@ -17,10 +17,11 @@ export default class RegisterForm extends Component {
 
   submitRegister = async e => {
     e.preventDefault();
-    const requestBody = {};
-    requestBody.name = this.state.formNameValue;
-    requestBody.email = this.state.formEmailValue;
-    requestBody.password = this.state.formPasswordValue;
+    const requestBody = {
+      name: this.state.formNameValue,
+      email: this.state.formEmailValue,
+      password: this.state.formPasswordValue
+    };
 
     try {
       let response = await fetch("/register", {
@@ -36,7 +37,6 @@ export default class RegisterForm extends Component {
         response.headers.get("x-auth-token")
       );
       response = await response.json();
-      // console.log(response);
       this.props.changeView();
     } catch (err) {
       console.log(err);
