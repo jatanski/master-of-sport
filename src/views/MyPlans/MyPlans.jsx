@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./myPlans.scss";
-// import EditPlan from "../../components/EditPlan/EditPlan";
-import WorkoutsStatistics from "../../components/WorkoutsStatistics/WorkoutsStatistics";
+import EditPlan from "../../components/EditPlan/EditPlan";
 
 export default class myPlans extends Component {
   state = {
@@ -46,14 +45,9 @@ export default class myPlans extends Component {
 
   render() {
     return (
-      <div>
-        {/* <EditPlan plans={this.state.plans} /> */}
-        <WorkoutsStatistics
-          workouts={this.state.workouts}
-          workoutsArray={this.state.workoutsArray}
-          plans={this.state.plans}
-        />
-      </div>
+      <section className="myPlans">
+        <EditPlan plans={this.state.plans} />
+      </section>
     );
   }
 }

@@ -24,6 +24,7 @@ const allActions = bindActionCreators(
     resetMeals: newProductActions.resetMeals,
     addMeal: mealsActions.addMeal,
     addNewProduct: mealsActions.addNewProduct,
+    changeNewProduct: mealsActions.changeNewProduct,
     resetProduct: mealsActions.resetProduct,
     addNewMeal: mealNewActions.addNewMeal,
     resetNewMeal: mealNewActions.resetNewMeal

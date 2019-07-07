@@ -21,6 +21,11 @@ const mealReducer = (state = MEAL_STATE, action) => {
           })
         ]
       };
+    case types.CHANGE_NEW_PRODUCT:
+      return {
+        ...state,
+        meals: action.item
+      };
     default:
       return state;
   }

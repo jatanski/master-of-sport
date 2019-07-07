@@ -4,7 +4,7 @@ import { Table, Button } from "react-bootstrap";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import { connect } from "react-redux";
 import { allActions } from "../../redux/store";
-import { MDBInput } from "mdbreact";
+import { MDBInput, MDBIcon } from "mdbreact";
 import {
   MDBBtn,
   MDBModal,
@@ -20,12 +20,10 @@ class Meal extends Component {
     nameOfChangeWeight: "",
     numberOfProducts: 1,
     products: [],
-    saveButton: {
-      text: "Zapisz posiłek",
-      variant: "success"
-    },
     showNewProduct: false,
-    showEditWeightModal: false
+    showEditWeightModal: false,
+    showDeleteProductIco: true,
+    showSaveButton: true
   };
 
   products = [];
@@ -73,7 +71,6 @@ class Meal extends Component {
         differences.numberOfFats = newValues.fats - el.numberOfFats;
         differences.numberOfProteins = newValues.proteins - el.numberOfProteins;
 
-        console.log(differences);
         el.weight = this.state.editWeight;
         el.numberOfCalories = newValues.calories;
         el.numberOfCarbohydrates = newValues.carbo;
@@ -96,7 +93,13 @@ class Meal extends Component {
   createNewProduct = el => {
     return (
       <tr key={el.numberProduct}>
-        <td> {el.newProductName}</td>
+        <td className="tdName">
+          {" "}
+          {el.newProductName}{" "}
+          {this.state.showDeleteProductIco ? (
+            <MDBIcon icon="trash" onClick={this.deleteProduct.bind(this, el)} />
+          ) : null}
+        </td>
         <td onClick={this.showEditWeight.bind(this, el)}>{el.weight} g</td>
         <td>{el.numberOfCalories} kcal</td>
         <td>{el.numberOfProteins} g</td>
@@ -111,23 +114,66 @@ class Meal extends Component {
   };
 
   changeAddNewProduct = () => {
-    this.setState({ activeNewProduct: false });
+    this.setState({ activeNewProduct: !this.state.activeNewProduct });
   };
 
   changeSaveButton = () => {
     this.setState({
-      saveButton: {
-        text: "Edytuj posiłek",
-        variant: "info"
-      }
+      showSaveButton: !this.state.showSaveButton,
+      showDeleteProductIco: !this.state.showDeleteProductIco
     });
     this.changeAddNewProduct();
     this.props.disabledOff();
     this.props.disabledOffSavePlan();
-    allActions.sumMeals(window.store.getState().sumProducts.sumOfElements);
-    const toSave = { products: this.products, summary: this.summary };
-    allActions.addNewMeal(toSave);
-    allActions.resetProduct();
+    let noCreateNewMeal = false;
+    window.store.getState().mealNew.meals.forEach(el => {
+      if (el.number === this.props.number) noCreateNewMeal = true;
+    });
+    if (!noCreateNewMeal) {
+      allActions.sumMeals(window.store.getState().sumProducts.sumOfElements);
+      const toSave = {
+        products: this.products,
+        summary: this.summary,
+        number: this.props.number
+      };
+      allActions.addNewMeal(toSave);
+      allActions.resetProduct();
+    }
+  };
+
+  changeEditButton = () => {
+    this.setState({
+      showSaveButton: !this.state.showSaveButton,
+      showDeleteProductIco: !this.state.showDeleteProductIco
+    });
+    this.changeAddNewProduct();
+    this.props.disabledOff();
+    this.props.disabledOffSavePlan();
+  };
+
+  deleteProduct = el => {
+    const deleteProduct = {};
+    deleteProduct.numberOfCalories = -el.numberOfCalories;
+    deleteProduct.numberOfCarbohydrates = -el.numberOfCarbohydrates;
+    deleteProduct.numberOfFats = -el.numberOfFats;
+    deleteProduct.numberOfProteins = -el.numberOfProteins;
+
+    allActions.sumProducts(deleteProduct);
+    this.summary = {
+      calories: this.summary.calories + deleteProduct.numberOfCalories,
+      proteins: this.summary.proteins + deleteProduct.numberOfProteins,
+      carbohydrates:
+        this.summary.carbohydrates + deleteProduct.numberOfCarbohydrates,
+      fats: this.summary.fats + deleteProduct.numberOfFats
+    };
+    const numberOfChangeProduct = el.numberOfProducts;
+    this.products.splice(el.numberOfProducts - 1, 1);
+
+    this.products.forEach(product => {
+      if (product.numberOfProducts > numberOfChangeProduct)
+        product.numberOfProducts -= 1;
+    });
+    allActions.changeProduct(this.products);
   };
 
   handleNumberInputChange = e => {
@@ -206,13 +252,26 @@ class Meal extends Component {
             </tr>
           </tbody>
         </Table>
-        <Button
-          size="lg"
-          onClick={this.changeSaveButton}
-          variant={this.state.saveButton.variant}
-        >
-          {this.state.saveButton.text}
-        </Button>
+        {this.state.showSaveButton ? (
+          <Button
+            size="lg"
+            disabled={this.state.disabledSaveButton}
+            onClick={this.changeSaveButton}
+            variant="success"
+          >
+            Zapisz posiłek
+          </Button>
+        ) : (
+          <Button
+            size="lg"
+            disabled={this.state.disabledEditButton}
+            onClick={this.changeEditButton}
+            variant="info"
+          >
+            Edytuj posiłek
+          </Button>
+        )}
+
         {this.renderNewProduct()}
         {this.state.showEditWeightModal ? (
           <MDBModalHeader>

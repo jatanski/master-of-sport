@@ -46,26 +46,28 @@ export default class myPlans extends Component {
   };
 
   showEditPlanName = el => {
-    console.log(el);
+    // console.log(el);
     let plans = this.state.plans;
     plans.forEach(plan => {
       if (plan.id === el.id) plan.showInput = true;
     });
-    this.setState({ plans: plans });
+    this.setState({ plans: plans, collectNewName: el.name });
   };
 
-  showEditPlanForm = el => this.setState({ showEditPlanForm: true });
+  showEditPlanForm = () => this.setState({ showEditPlanForm: true });
 
   changePlanName = async el => {
     console.log(el);
     let plans = this.state.plans;
     plans.forEach(plan => {
-      if (plan.id === el.id) plan.showInput = false;
-      plan.name = this.state.newName;
+      if (plan.id === el.id) {
+        plan.showInput = false;
+        plan.name = this.state.newName;
+      }
     });
 
     const id = el._id;
-    console.log(id);
+    // console.log(id);
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -91,7 +93,6 @@ export default class myPlans extends Component {
   };
 
   collectNewName = e => {
-    console.log(e);
     let state = "";
     state = e.target.value;
     this.setState({ newName: state });
@@ -119,7 +120,7 @@ export default class myPlans extends Component {
                   Zmień
                 </Button>
               </InputGroup.Prepend>
-              <FormControl value={el.name} onChange={this.collectNewName} />
+              <FormControl onChange={this.collectNewName} />
               <Button
                 onClick={this.closeInput.bind(this, el)}
                 variant="danger"
@@ -129,32 +130,38 @@ export default class myPlans extends Component {
               </Button>
             </InputGroup>
           ) : (
-            <div>
-              <span>{el.name}</span>
-              <Button
-                size="sm"
-                onClick={this.deletePlan}
-                id={el._id}
-                variant="danger"
-              >
-                <span class="material-icons">delete</span>
-              </Button>
-              <Button
-                size="sm"
-                onClick={this.showEditPlanName.bind(this, el)}
-                id={el._id}
-                variant="info"
-              >
-                <span class="material-icons">edit</span>
-              </Button>
-              <Button
-                size="sm"
-                onClick={this.showEditPlanForm.bind(this, el)}
-                id={el._id}
-                variant="secondary"
-              >
-                <span class="material-icons">event_note</span>
-              </Button>
+            <div className="myPlans__editPlan__main__plan">
+              <div>
+                <span className="myPlans__editPlan__main__plan__name">
+                  {el.name}
+                </span>
+              </div>
+              <div>
+                <Button
+                  size="sm"
+                  onClick={this.deletePlan}
+                  id={el._id}
+                  variant="danger"
+                >
+                  <span class="material-icons">delete</span>
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={this.showEditPlanName.bind(this, el)}
+                  id={el._id}
+                  variant="info"
+                >
+                  <span class="material-icons">edit</span>
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={this.showEditPlanForm.bind(this, el)}
+                  id={el._id}
+                  variant="secondary"
+                >
+                  <span class="material-icons">event_note</span>
+                </Button>
+              </div>
             </div>
           )}
         </ListGroup.Item>
@@ -164,7 +171,7 @@ export default class myPlans extends Component {
 
   renderPlans = el => {
     return (
-      <div key={el.id}>
+      <div className="myPlans__editPlan__main__details__onePlan" key={el.id}>
         <Tab.Pane eventKey={el.id}>
           <Table striped bordered hover variant="dark">
             <thead>
@@ -193,27 +200,35 @@ export default class myPlans extends Component {
     console.log(this.state);
     console.log(this.props);
     return (
-      <div>
-        <h1>Twoje plany treningowe</h1>
-        <Tab.Container>
-          <Row>
-            <Col>
-              <ListGroup>
-                <ListGroup.Item disabled href="#link">
-                  Wybierz trening
-                </ListGroup.Item>
-              </ListGroup>
-              {this.state.plans ? this.state.plans.map(this.renderTitle) : null}
-            </Col>
-            <Col>
-              <Tab.Content>
+      <div className="myPlans__editPlan">
+        <h3 className="myPlans__editPlan__header">Twoje plany treningowe</h3>
+        <div className="myPlans__editPlan__main">
+          <Tab.Container>
+            <Row>
+              <Col>
+                <ListGroup>
+                  <ListGroup.Item
+                    className="myPlans__editPlan__main__header"
+                    disabled
+                    href="#link"
+                  >
+                    Wybierz trening
+                  </ListGroup.Item>
+                </ListGroup>
                 {this.state.plans
-                  ? this.state.plans.map(this.renderPlans)
+                  ? this.state.plans.map(this.renderTitle)
                   : null}
-              </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
+              </Col>
+              <Col>
+                <Tab.Content className="myPlans__editPlan__main__details">
+                  {this.state.plans
+                    ? this.state.plans.map(this.renderPlans)
+                    : null}
+                </Tab.Content>
+              </Col>
+            </Row>
+          </Tab.Container>
+        </div>
         {this.state.showEditPlanForm ? <NewPlanForm /> : null}
       </div>
     );

@@ -80,6 +80,11 @@ export default class MenuDesktop extends Component {
                       </MDBNavLink>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
+                      <MDBNavLink className="linkMyStyle-black" to="/myplans">
+                        Istniejące plany
+                      </MDBNavLink>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem>
                       <MDBNavLink className="linkMyStyle-black" to="/diary">
                         Dodaj dzisiejszy trening
                       </MDBNavLink>
@@ -96,9 +101,6 @@ export default class MenuDesktop extends Component {
               <MDBNavItem>
                 <MDBNavLink to="/bmi">Sprawdź BMI</MDBNavLink>
               </MDBNavItem>
-              <MDBNavItem>
-                <MDBNavLink to="/myplans">Plany treningowe</MDBNavLink>
-              </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
               <MDBNavItem>
@@ -113,7 +115,9 @@ export default class MenuDesktop extends Component {
                       </MDBNavLink>
                     </MDBDropdownItem>
                     <Button size="sm" variant="outline-light">
-                      <Link to="/">Wyloguj się</Link>
+                      <Link onClick={this.logout} to="/">
+                        Wyloguj się
+                      </Link>
                     </Button>
                   </MDBDropdownMenu>
                 </MDBDropdown>

@@ -2,3 +2,37 @@ td:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.myPlans__editPlan {
+  margin: 3vh 3vw;
+  width: 94vw;
+  &__header {
+    font-size: 1.7em;
+    font-weight: 500;
+    padding-bottom: 3vh;
+  }
+  &__main {
+    width: 60vw;
+    &__details {
+      position: relative;
+      &__onePlan {
+        position: absolute;
+        width: 100%;
+      }
+    }
+    &__header {
+      font-size: 1.4em;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    &__plan {
+      display: flex;
+      justify-content: space-between;
+      &__name {
+        font-weight: 500;
+        font-size: 1.2em;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}

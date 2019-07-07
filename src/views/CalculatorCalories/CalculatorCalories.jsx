@@ -27,19 +27,15 @@ export default class CalculatorCalories extends Component {
     success: {
       header: "Plan został zapisany.",
       desc:
-        "Jeżeli chesz przejrzeć wszystkie swoje plany, znajdziesz je w zakładce MOJE PLANY. Natomiast w zakładce DZIENNIK DZIETETYCZNY możesz dodać swoje dzisiejsze posiłki."
+        "W zakładce DZISIEJSZY JADŁOSPIS możesz teraz dodać swoje dzisiejsze posiłki."
     },
     fail: {
       header: "Plan o tej nazwie już istnieje.",
       desc: "Wpisz inną nazwę."
     },
     goTo1: {
-      text: "Moje plany",
-      link: "/myPlans"
-    },
-    goTo2: {
-      text: "Dziennik dietetyczny",
-      link: "/dupa"
+      text: "Dzisiejszy jadłospis",
+      link: "/menus"
     }
   };
 
@@ -95,12 +91,12 @@ export default class CalculatorCalories extends Component {
 
   disabledOffSavePlan = () =>
     this.setState({
-      disabledButtonSavePlan: false
+      disabledButtonSavePlan: !this.state.disabledButtonSavePlan
     });
 
   disabledOff = () =>
     this.setState({
-      disabledButtonNewMeal: false
+      disabledButtonNewMeal: !this.state.disabledButtonNewMeal
     });
 
   savePlan = async () => {

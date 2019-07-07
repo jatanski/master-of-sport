@@ -37,14 +37,14 @@ export default class CustomAlert extends Component {
         <div className="d-flex justify-content-between">
           {this.props.goTo1Text ? (
             <Link to={this.props.goTo1Link}>
-              <Button variant="outline-secondary">
+              <Button onClick={this.onClick} variant="outline-secondary">
                 {this.props.goTo1Text}
               </Button>
             </Link>
           ) : null}
           {this.props.goTo2Text ? (
             <Link to={this.props.goTo2Link}>
-              <Button variant="outline-secondary">
+              <Button onClick={this.onClick} variant="outline-secondary">
                 {this.props.goTo2Text}
               </Button>
             </Link>

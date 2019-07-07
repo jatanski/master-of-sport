@@ -47,7 +47,7 @@ export default class FirstView extends Component {
               <FontAwesomeIcon icon={faWeight} className="firstView__ico" />
               <p className="firstView__promotion__description__text">
                 Zapisuj pomiary swojego ciała oraz wage i obserwuj jak Twoje
-                cialo się zmienia!
+                ciało się zmienia!
               </p>
             </div>
           </div>

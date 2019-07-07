@@ -24,10 +24,13 @@ export default class NewProduct extends Component {
     const multipier = this.state.weight / 100;
     const elementsAfterCount = {
       newProductName: this.state.newProductName,
-      numberOfProteins: this.state.numberOfProteins * multipier,
-      numberOfCarbohydrates: this.state.numberOfCarbohydrates * multipier,
-      numberOfFats: this.state.numberOfFats * multipier,
-      numberOfCalories: this.state.numberOfCalories * multipier,
+      numberOfProteins:
+        Math.round(this.state.numberOfProteins * multipier * 10) / 10,
+      numberOfCarbohydrates:
+        Math.round(this.state.numberOfCarbohydrates * multipier * 10) / 10,
+      numberOfFats: Math.round(this.state.numberOfFats * multipier * 10) / 10,
+      numberOfCalories:
+        Math.round(this.state.numberOfCalories * multipier * 10) / 10,
       weight: this.state.weight,
       numberProduct: this.state.numberProduct + 1,
       showEditWeight: false,

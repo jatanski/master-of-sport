@@ -18,6 +18,7 @@ import { connect } from "react-redux";
 
 class App extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="app">
         <Router>
