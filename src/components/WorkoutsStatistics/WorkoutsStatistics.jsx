@@ -5,7 +5,39 @@ import "./workoutsStatistics.scss";
 export default class WorkoutsStatistics extends Component {
   state = {
     statistics: {},
-    workouts: {}
+    workouts: {},
+    workoutsArray: []
+  };
+
+  componentDidMount = async () => {
+    let workouts = {};
+    let workoutsArray = [];
+    const token = localStorage.getItem("x-auth-token");
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-auth-token": token
+    };
+
+    try {
+      let response = await fetch("/plans", {
+        method: "get",
+        headers: requestHeaders
+      });
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      response.plans.forEach(el => {
+        el.id = `#${el._id}`;
+        el.showInput = false;
+      });
+      response.workouts.forEach(el => {
+        workouts[`${el}`] = [];
+        workoutsArray.push(el);
+      });
+      this.setState({ workouts: workouts, workoutsArray: workoutsArray });
+      this.downloadData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   downloadData = async () => {
@@ -35,13 +67,6 @@ export default class WorkoutsStatistics extends Component {
       this.setState({ workouts: workouts });
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  componentDidUpdate = prevProps => {
-    if (prevProps.workouts !== this.props.workouts) {
-      this.setState({ workouts: this.props.workouts });
-      this.downloadData();
     }
   };
 
@@ -161,12 +186,11 @@ export default class WorkoutsStatistics extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Tabs className="workoutsStatistics__Tabs" defaultActiveKey="home">
-          {this.props.workoutsArray
-            ? this.props.workoutsArray.map(this.renderPlan)
+          {this.state.workoutsArray
+            ? this.state.workoutsArray.map(this.renderPlan)
             : null}
         </Tabs>
       </div>
