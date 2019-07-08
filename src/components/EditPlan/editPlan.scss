@@ -36,3 +36,28 @@ td:hover {
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .myPlans__editPlan {
+    &__main {
+      width: 94vw;
+      &__plan {
+        & button {
+          padding: 0.5rem 0.6rem !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .myPlans__editPlan {
+    &__main__plan {
+      flex-direction: column;
+      & button {
+        font-size: 0.55rem !important;
+        padding: 0.45rem 0.5rem !important;
+      }
+    }
+  }
+}

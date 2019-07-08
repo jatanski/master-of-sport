@@ -72,7 +72,57 @@
 
 .resultDescription {
   font-size: 1.6rem;
-  // text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .calculatorBMI {
+    &__wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    &__form {
+      width: 55%;
+    }
+  }
+  .jumbotron-bmi {
+    width: 85vw !important;
+  }
+
+  .resultDescription {
+    position: relative;
+    top: 10vh;
+  }
+}
+
+@media (max-width: 414px) {
+  .calculatorBMI {
+    &__form {
+      width: 75%;
+    }
+  }
+
+  .resultDescription {
+    top: 15vh;
+  }
+}
+
+@media (max-width: 375px) {
+  .calculatorBMI {
+    &__form {
+      width: 90%;
+    }
+    &__button {
+      & button {
+        padding: 1rem 1.2rem !important;
+        font-size: 0.9rem !important;
+      }
+    }
+  }
+
+  .resultDescription {
+    top: 16vh;
+    font-size: 1.3rem;
+  }
 }

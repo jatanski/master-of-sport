@@ -39,14 +39,12 @@ export default class myPlans extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ plans: response });
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   showEditPlanName = el => {
-    // console.log(el);
     let plans = this.state.plans;
     plans.forEach(plan => {
       if (plan.id === el.id) plan.showInput = true;
@@ -57,7 +55,6 @@ export default class myPlans extends Component {
   showEditPlanForm = () => this.setState({ showEditPlanForm: true });
 
   changePlanName = async el => {
-    console.log(el);
     let plans = this.state.plans;
     plans.forEach(plan => {
       if (plan.id === el.id) {
@@ -67,7 +64,6 @@ export default class myPlans extends Component {
     });
 
     const id = el._id;
-    // console.log(id);
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -86,7 +82,6 @@ export default class myPlans extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ plans: plans });
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -143,7 +138,7 @@ export default class myPlans extends Component {
                   id={el._id}
                   variant="danger"
                 >
-                  <span class="material-icons">delete</span>
+                  <span className="material-icons">delete</span>
                 </Button>
                 <Button
                   size="sm"
@@ -151,7 +146,7 @@ export default class myPlans extends Component {
                   id={el._id}
                   variant="info"
                 >
-                  <span class="material-icons">edit</span>
+                  <span className="material-icons">edit</span>
                 </Button>
                 <Button
                   size="sm"
@@ -159,7 +154,7 @@ export default class myPlans extends Component {
                   id={el._id}
                   variant="secondary"
                 >
-                  <span class="material-icons">event_note</span>
+                  <span className="material-icons">event_note</span>
                 </Button>
               </div>
             </div>
@@ -197,8 +192,8 @@ export default class myPlans extends Component {
   };
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
+    // console.log(this.state);
+    // console.log(this.props);
     return (
       <div className="myPlans__editPlan">
         <h3 className="myPlans__editPlan__header">Twoje plany treningowe</h3>

@@ -1,3 +1,19 @@
 .newWorkout {
   margin: 3vh 3vw;
 }
+
+@media (max-width: 1024px) {
+  .newWorkout {
+    &__startBtn {
+      font-size: 0.9rem !important;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .newWorkout {
+    &__startBtn {
+      font-size: 0.8rem !important;
+    }
+  }
+}

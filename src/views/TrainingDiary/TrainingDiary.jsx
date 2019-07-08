@@ -46,6 +46,7 @@ export default class TrainingDiary extends Component {
             size="lg"
             variant="success"
             disabled={this.state.disableTodayPlan}
+            className="newWorkout__startBtn"
           >
             Wprowadź dzisiejszy trening
           </Button>

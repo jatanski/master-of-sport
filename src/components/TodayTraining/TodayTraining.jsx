@@ -190,6 +190,26 @@ export default class NewTraining extends Component {
                 bsPrefix={el.name}
               />
             </InputGroup>
+            <InputGroup
+              className="inputWrapContainerMobile"
+              id={series.key}
+              size="sm"
+            >
+              <FormControl
+                placeholder="Powtórzenia"
+                onChange={this.collectDate}
+                id={series.idRepeat}
+                type="number"
+                bsPrefix={el.name}
+              />
+              <FormControl
+                placeholder="Obciążenie"
+                onChange={this.collectDate}
+                id={series.idLoad}
+                type="number"
+                bsPrefix={el.name}
+              />
+            </InputGroup>
           </td>
         ))}
       </tr>

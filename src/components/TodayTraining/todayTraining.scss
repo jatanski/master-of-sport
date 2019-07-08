@@ -38,8 +38,75 @@
   }
 }
 
+.inputWrapContainerMobile {
+  @include centerElement;
+  width: 10vw;
+  display: grid;
+  display: none;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 1vh;
+  input {
+    width: 100%;
+    background-color: #eee;
+    padding: 0.5rem;
+    border: none;
+  }
+}
+
 .inputWrap {
   &__weightLabel {
     width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .todayTraining {
+    &__trainingTable {
+      width: 90vw;
+      & td {
+      }
+    }
+  }
+  .inputWrapContainer {
+    display: none;
+  }
+  .inputWrapContainerMobile {
+    display: grid;
+  }
+}
+
+@media (max-width: 414px) {
+  .todayTraining {
+    &__chooseDropdown {
+      & button {
+        font-size: 0.9rem !important;
+      }
+    }
+    &__trainingTable {
+      left: 48%;
+      padding-top: 15vh;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .todayTraining {
+    &__chooseDropdown {
+      & button {
+        font-size: 0.75rem !important;
+        padding: 1rem !important;
+      }
+    }
+    &__trainingTable {
+      & td {
+        padding: 0.75rem !important;
+        font-size: 0.75rem;
+      }
+    }
+    &__trainingTable {
+      left: 48%;
+      padding-top: 15vh;
+    }
   }
 }

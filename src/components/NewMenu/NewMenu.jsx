@@ -91,7 +91,6 @@ export default class NewMenu extends Component {
         showMealTables: false,
         showSummaryTable: false
       });
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -150,13 +149,6 @@ export default class NewMenu extends Component {
             </tr>
           </tbody>
         </Table>
-        {/* <Button
-          size="lg"
-          onClick={this.changeSaveButton}
-          variant={this.state.saveButton.variant}
-        >
-          {this.state.saveButton.text}
-        </Button> */}
         {this.renderNewProduct()}
       </div>
     );
@@ -175,10 +167,7 @@ export default class NewMenu extends Component {
     );
   };
 
-  renderNewProduct = el => {};
-
   renderTable = el => {
-    console.log(this, el);
     this.setState({
       choosenPlan: el.name,
       summary: el.summary,
@@ -190,7 +179,6 @@ export default class NewMenu extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="newMenu">
         {" "}

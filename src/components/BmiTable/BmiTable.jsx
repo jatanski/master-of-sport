@@ -21,17 +21,15 @@ export default class BmiTable extends Component {
       for (const el in this.rows) {
         if (this.props.id === el) id = el;
       }
-      console.log(id);
-      console.log(this.rows[id]);
       this.rows[id].current.style.backgroundColor = "lightskyblue";
     }
   }
 
-  changeColor = e => {
-    if ((this.props.id = e.target.value)) {
-      console.log(e.target.id);
-    }
-  };
+  // changeColor = e => {
+  //   if ((this.props.id = e.target.value)) {
+  //     console.log(e.target.id);
+  //   }
+  // };
   render() {
     return (
       <Table className="calculatorBMI__table" striped bordered hover>
@@ -55,7 +53,7 @@ export default class BmiTable extends Component {
             <td>Niedowaga</td>
           </tr>
           <tr className="greenRow" id="4" ref={this.rows[4]}>
-            <td>18,5 - 30</td>
+            <td>18,5 - 25</td>
             <td>Wartość prawidłowa</td>
           </tr>
           <tr className="orangeRow" id="5" ref={this.rows[5]}>

@@ -25,7 +25,6 @@ export default class myPlans extends Component {
       });
       if (response.status !== 200) throw response;
       response = await response.json();
-      console.log(response);
       response.plans.forEach(el => {
         el.id = `#${el._id}`;
         el.showInput = false;
@@ -36,8 +35,6 @@ export default class myPlans extends Component {
         workoutsArray.push(el);
       });
       this.setState({ workouts: workouts, workoutsArray: workoutsArray });
-
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

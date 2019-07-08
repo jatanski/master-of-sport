@@ -22,7 +22,6 @@ export default class BmiStatistics extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ bmi: response });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
