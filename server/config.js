@@ -1,5 +1,5 @@
 export default {
-  username: "Admin",
-  password: "Admin",
-  jwtKey: "Admin"
+  username: process.env.mosDBUser,
+  password: process.env.mosDBPass,
+  jwtKey: process.env.mosJwtKey
 };
