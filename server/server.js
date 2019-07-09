@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 //import other files in our project
 import config from "./config";
+import { prod } from "./prod";
 
 //import routes
 import signUp from "./routes/singUp";
@@ -48,3 +49,5 @@ app.use("/workouts", workouts);
 app.use("/nutritionalPlans", nutritionalPlans);
 app.use("/menus", menus);
 app.use("/myFoodProduct", myfoodProduct);
+
+prod(app);
