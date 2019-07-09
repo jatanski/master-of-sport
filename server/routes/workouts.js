@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import express from "express";
 import { User } from "../models/userModel";
 import Workout from "../models/workoutsModel";
