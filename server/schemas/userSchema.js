@@ -53,6 +53,14 @@ const userSchema = new mongoose.Schema({
   nutritionalPlans: {
     type: Array,
     default: []
+  },
+  myFoodProducts: {
+    type: Array,
+    default: []
+  },
+  foodNames: {
+    type: Array,
+    default: []
   }
 });
 

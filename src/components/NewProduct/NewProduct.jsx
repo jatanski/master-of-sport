@@ -17,7 +17,14 @@ export default class NewProduct extends Component {
     proteinsOfProduct: 0,
     carboOfProduct: 0,
     fatsOfProduct: 0,
-    caloriesOfProduct: 0
+    caloriesOfProduct: 0,
+    saveProduct: false,
+    productsArray: []
+  };
+
+  checkSaveProduct = e => {
+    if (e.target.checked) this.setState({ saveProduct: true });
+    else if (!e.target.checked) this.setState({ saveProduct: false });
   };
 
   countElements = () => {
@@ -51,20 +58,29 @@ export default class NewProduct extends Component {
   };
 
   createNewProduct = () => {
+    if (this.state.saveProduct) this.saveProduct();
     this.countElements();
     allActions.addProduct(window.store.getState().newProduct.info);
-
     const allProducts = window.store.getState().allProducts.products;
     allActions.sumProducts(allProducts[allProducts.length - 1]);
     allActions.addNewProduct(window.store.getState().newProduct.info);
     this.props.addNewProduct();
     this.setState({
+      multipier: 0,
       newProductName: "",
+      numberProduct: 0,
       numberOfProteins: 0,
       numberOfCarbohydrates: 0,
       numberOfFats: 0,
       numberOfCalories: 0,
-      weight: 0
+      showProductsList: false,
+      weight: 0,
+      proteinsOfProduct: 0,
+      carboOfProduct: 0,
+      fatsOfProduct: 0,
+      caloriesOfProduct: 0,
+      saveProduct: false,
+      nameToSave: ""
     });
   };
 
@@ -82,7 +98,41 @@ export default class NewProduct extends Component {
 
   handleProductName = e => {
     this.handleTextInputChange(e);
-    this.searchProductName(e);
+    this.searchProductDouble(e);
+  };
+
+  productListDisplayOff = () => {
+    const showOff = () => {
+      this.setState({ showProductsList: false });
+    };
+
+    setTimeout(showOff, 1000);
+  };
+
+  saveProduct = async () => {
+    const token = localStorage.getItem("x-auth-token");
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-auth-token": token
+    };
+    const requestBody = {
+      name: this.state.newProductName,
+      calories: this.state.numberOfCalories,
+      proteins: this.state.numberOfProteins,
+      fats: this.state.numberOfFats,
+      carbo: this.state.numberOfCarbohydrates
+    };
+    try {
+      let response = await fetch("/myFoodProduct", {
+        method: "post",
+        headers: requestHeaders,
+        body: JSON.stringify(requestBody)
+      });
+      if (response.status !== 200) throw response;
+      response = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   searchProductDetails = async e => {
@@ -123,13 +173,14 @@ export default class NewProduct extends Component {
         fatsOfProduct: Math.round(foods.nf_total_fat * 10) / 10,
         caloriesOfProduct: Math.round(foods.nf_calories * 10) / 10
       });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
-  searchProductName = async e => {
+  searchProductDouble = async e => {
+    let nutriProductList = [];
+    let myProductList = [];
     const name = e.target.value;
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -150,25 +201,98 @@ export default class NewProduct extends Component {
       const productList = [];
       let numberProduct = 0;
       response.common.forEach(el => {
-        if (numberProduct >= 12) return;
+        if (numberProduct >= 6) return;
         numberProduct += 1;
-        productList.push(el.food_name);
+        productList.push([el.food_name, "nutri"]);
       });
-      this.setState({ productsArray: productList });
+      nutriProductList = productList;
+    } catch (error) {
+      console.log(error);
+    }
+
+    const token = localStorage.getItem("x-auth-token");
+    const requestHeadersMyDB = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-auth-token": token
+    };
+    try {
+      let response = await fetch(`/myFoodProduct/names`, {
+        method: "get",
+        headers: requestHeadersMyDB
+      });
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      this.setState({ showProductsList: true });
+      const responseList = response.filter(el => {
+        return el.includes(name);
+      });
+      const productList = [];
+      let numberProduct = 0;
+      responseList.forEach(el => {
+        if (numberProduct >= 6) return;
+        numberProduct += 1;
+        productList.push([el, "my"]);
+      });
+      myProductList = productList;
+    } catch (error) {
+      console.log(error);
+    }
+    const dualProductList = [...nutriProductList, ...myProductList];
+    this.setState({ productsArray: dualProductList });
+  };
+
+  searchProductDetailsInMyDB = async e => {
+    e.preventDefault();
+    const productName = e.currentTarget.innerText;
+    const token = localStorage.getItem("x-auth-token");
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-auth-token": token,
+      name: productName
+    };
+    try {
+      let response = await fetch(`/myFoodProduct`, {
+        method: "get",
+        headers: requestHeaders
+      });
+      if (response.status !== 200) throw response;
+      response = await response.json();
+
+      this.setState({
+        newProductName: productName,
+        showProductsList: false,
+        numberOfProteins: response.proteins,
+        numberOfCarbohydrates: response.carbohydrates,
+        numberOfFats: response.fats,
+        numberOfCalories: response.calories,
+        proteinsOfProduct: response.proteins,
+        carboOfProduct: response.carbohydrates,
+        fatsOfProduct: response.fats,
+        caloriesOfProduct: response.calories
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
+  searchDetails = e => {
+    this.searchProductDetails(e);
+    this.searchProductDetailsInMyDB(e);
+  };
+
   renderListElements = el => {
+    let weight = 0;
+    if (el[1] === "nutri") weight = 400;
+    else if (el[1] === "my") weight = 500;
     return (
       <ListGroup.Item
+        style={{ fontWeight: weight }}
         key={Math.random()}
         action
         className="newProduct__productElement"
-        onClick={this.searchProductDetails}
+        onClick={this.searchDetails}
       >
-        {el}
+        {el[0]}
       </ListGroup.Item>
     );
   };
@@ -184,10 +308,12 @@ export default class NewProduct extends Component {
             <Form.Group controlId="newProductName">
               <Form.Label>Nazwa produktu:</Form.Label>
               <Form.Control
+                onBlur={this.productListDisplayOff}
                 onChange={this.handleProductName}
                 type="text"
                 placeholder="Wpisz nazwę"
                 value={this.state.newProductName}
+                autoComplete="off"
               />
             </Form.Group>
             {this.state.showProductsList ? (
@@ -242,6 +368,15 @@ export default class NewProduct extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
+          <Form>
+            <Form.Group controlId="saveProduct">
+              <Form.Check
+                onChange={this.checkSaveProduct}
+                type="checkbox"
+                label="Zapisz produkt"
+              />
+            </Form.Group>
+          </Form>
           <Button onClick={this.props.close} variant="secondary">
             Close
           </Button>

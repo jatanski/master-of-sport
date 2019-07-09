@@ -14,6 +14,7 @@ import plans from "./routes/plans";
 import workouts from "./routes/workouts";
 import nutritionalPlans from "./routes/nutritionalPlans";
 import menus from "./routes/menus";
+import myfoodProduct from "./routes/myFoodProduct";
 
 //create app
 const app = express();
@@ -46,3 +47,4 @@ app.use("/plans", plans);
 app.use("/workouts", workouts);
 app.use("/nutritionalPlans", nutritionalPlans);
 app.use("/menus", menus);
+app.use("/myFoodProduct", myfoodProduct);
