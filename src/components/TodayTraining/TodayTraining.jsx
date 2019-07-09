@@ -58,7 +58,6 @@ export default class NewTraining extends Component {
       this.setState({
         trainings: response.plans
       });
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +70,6 @@ export default class NewTraining extends Component {
     this.exercisesAfterFill[`${e.target.className}`][
       `${e.target.parentElement.id}`
     ][`${e.target.id}`] = e.target.value;
-    console.log(this.exercisesAfterFill);
     this.setState({
       dateToSend: this.exercisesAfterFill
     });
@@ -80,7 +78,6 @@ export default class NewTraining extends Component {
   sendToDataBase = async () => {
     const now = `${new Date().getDate()}.${new Date().getMonth() +
       1}.${new Date().getFullYear()}`;
-    // const now = "11.05.2019";
     const token = localStorage.getItem("x-auth-token");
     const requestHeaders = {
       "Content-Type": "application/json; charset=UTF-8",
@@ -103,14 +100,24 @@ export default class NewTraining extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ showSuccessPopUp: true, showDisabledLayer: true });
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   showDisabledLayer = () => this.setState({ showDisabledLayer: true });
-  showOffDisabledLayer = () => this.setState({ showDisabledLayer: false });
+  showOffDisabledLayer = () =>
+    this.setState({
+      choosenPlan: "",
+      dateToSend: {},
+      exercises: [],
+      showDisabledLayer: false,
+      showTable: false,
+      showSave: false,
+      showSuccessPopUp: false,
+      showFalsePopUp: false,
+      trainings: []
+    });
 
   showPlanToChoose = el => {
     return (
@@ -169,7 +176,7 @@ export default class NewTraining extends Component {
               size="sm"
             >
               <InputGroup.Prepend>
-                <InputGroup.Text>Powtórzenia</InputGroup.Text>
+                <InputGroup.Text>Powtór.</InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl
                 onChange={this.collectDate}
@@ -180,7 +187,7 @@ export default class NewTraining extends Component {
 
               <InputGroup.Prepend>
                 <InputGroup.Text className="inputWrap__weightLabel">
-                  Obciążenie{" "}
+                  Ciężar{" "}
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl

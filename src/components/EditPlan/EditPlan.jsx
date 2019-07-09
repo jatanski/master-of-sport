@@ -24,36 +24,6 @@ export default class myPlans extends Component {
       this.setState({ plans: this.props.plans });
   }
 
-  deletePlan = async e => {
-    const id = e.target.id;
-    const token = localStorage.getItem("x-auth-token");
-    const requestHeaders = {
-      "Content-Type": "application/json; charset=UTF-8",
-      "x-auth-token": token
-    };
-    try {
-      let response = await fetch(`/plans/${id}`, {
-        method: "delete",
-        headers: requestHeaders
-      });
-      if (response.status !== 200) throw response;
-      response = await response.json();
-      this.setState({ plans: response });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  showEditPlanName = el => {
-    let plans = this.state.plans;
-    plans.forEach(plan => {
-      if (plan.id === el.id) plan.showInput = true;
-    });
-    this.setState({ plans: plans, collectNewName: el.name });
-  };
-
-  showEditPlanForm = () => this.setState({ showEditPlanForm: true });
-
   changePlanName = async el => {
     let plans = this.state.plans;
     plans.forEach(plan => {
@@ -100,6 +70,36 @@ export default class myPlans extends Component {
     });
   };
 
+  deletePlan = async e => {
+    const id = e.target.id;
+    const token = localStorage.getItem("x-auth-token");
+    const requestHeaders = {
+      "Content-Type": "application/json; charset=UTF-8",
+      "x-auth-token": token
+    };
+    try {
+      let response = await fetch(`/plans/${id}`, {
+        method: "delete",
+        headers: requestHeaders
+      });
+      if (response.status !== 200) throw response;
+      response = await response.json();
+      this.setState({ plans: response });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  showEditPlanName = el => {
+    let plans = this.state.plans;
+    plans.forEach(plan => {
+      if (plan.id === el.id) plan.showInput = true;
+    });
+    this.setState({ plans: plans, collectNewName: el.name });
+  };
+
+  // showEditPlanForm = () => this.setState({ showEditPlanForm: true });
+
   renderTitle = el => {
     return (
       <ListGroup key={el.id}>
@@ -138,7 +138,9 @@ export default class myPlans extends Component {
                   id={el._id}
                   variant="danger"
                 >
-                  <span className="material-icons">delete</span>
+                  <span id={el._id} className="material-icons">
+                    delete
+                  </span>
                 </Button>
                 <Button
                   size="sm"
@@ -150,7 +152,7 @@ export default class myPlans extends Component {
                 </Button>
                 <Button
                   size="sm"
-                  onClick={this.showEditPlanForm.bind(this, el)}
+                  // onClick={this.showEditPlanForm.bind(this, el)}
                   id={el._id}
                   variant="secondary"
                 >
@@ -192,8 +194,6 @@ export default class myPlans extends Component {
   };
 
   render() {
-    // console.log(this.state);
-    // console.log(this.props);
     return (
       <div className="myPlans__editPlan">
         <h3 className="myPlans__editPlan__header">Twoje plany treningowe</h3>

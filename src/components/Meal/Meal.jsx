@@ -210,10 +210,8 @@ class Meal extends Component {
   }
 
   render() {
-    // console.log(this.state);
-    // console.log(this.props);
     return (
-      <div className="meal">
+      <div key={this.props.number} className="meal">
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>

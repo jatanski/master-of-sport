@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import CustomAlert from "../../components/Alert/Alert";
-// import Input from "../../components/Input/Input";
 import "./newPlanForm.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -23,15 +22,15 @@ export default class NewPlanForm extends Component {
     success: {
       header: "Plan został zapisany pomyślnie.",
       desc:
-        "Możesz teraz przejść do sekcji MOJE TRENINGI i wsprowadzić swój pierwszy trening. Albo zrobić coś innego. Wybór należy do Ciebie."
+        "Możesz teraz przejść do sekcji DZISIEJSZY TRENING i wsprowadzić swój pierwszy trening. Albo zrobić coś innego. Wybór należy do Ciebie."
     },
     fail: {
       header: "Coś poszło nie tak ;/",
       desc: "Plan o tej nazwie już istnieje. Spróbuj wpisać inną nazwę."
     },
     goTo1: {
-      text: "Moje treningi",
-      link: "/myplans"
+      text: "Dzisiejszy trening",
+      link: "/diary"
     }
   };
 
@@ -86,7 +85,6 @@ export default class NewPlanForm extends Component {
       exercises: exercisesToSend
     };
 
-    console.log(requestBody);
     try {
       let response = await fetch("/plans", {
         method: "post",
@@ -112,7 +110,7 @@ export default class NewPlanForm extends Component {
           <Col>
             <Form.Group onChange={this.collectExercises} controlId={el.number}>
               <Form.Label>Ćwiczenie {el.number} </Form.Label>
-              <Form.Control />
+              <Form.Control autoComplete="off" />
             </Form.Group>
           </Col>
           <Col>
@@ -136,7 +134,7 @@ export default class NewPlanForm extends Component {
           <Form.Label className="circuits__form__dimensions">
             Wpisz nazwę treningu
           </Form.Label>
-          <Form.Control />
+          <Form.Control autoComplete="off" />
         </Form.Group>
         {this.state.exercises
           ? this.state.exercises.map(this.showExercises)

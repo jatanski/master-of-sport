@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./loginForm.scss";
 import { Form, Button } from "react-bootstrap";
 import { allActions } from "../../redux/store";
 
@@ -35,30 +34,14 @@ export default class RegisterForm extends Component {
         response.headers.get("x-auth-token")
       );
       allActions.login();
-
-      //   this.props.loginStatus(true);
       response = await response.json();
-      console.log(response);
       this.props.changeView();
     } catch (err) {
       console.log(err);
-      //   if ([404, 400].includes(err.status)) {
-      //     let error = "Konto o podanym adresie email już istnieje";
-      //     this.setState({
-      //       name: "",
-      //       email: "",
-      //       password: "",
-      //       type: "student",
-      //       isDisable: true,
-      //       errors: {
-      //         email: error
-      //       }
-      //     });
     }
   };
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <Form>

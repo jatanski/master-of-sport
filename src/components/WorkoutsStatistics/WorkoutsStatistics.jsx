@@ -80,20 +80,16 @@ export default class WorkoutsStatistics extends Component {
         <td>{el.name}</td>
         {series.map(el => {
           return (
-            <td key={Math.random()}>
-              <thead>
-                <tr>
-                  <td>Powt</td>
-                  <td>Ciężar</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{el[0]}</td>
-                  <td>{el[1]}</td>
-                </tr>
-              </tbody>
-            </td>
+            <div key={Math.random()}>
+              <tr>
+                <td>Powt</td>
+                <td>Ciężar</td>
+              </tr>
+              <tr>
+                <td>{el[0]}</td>
+                <td>{el[1]}</td>
+              </tr>
+            </div>
           );
         })}
       </tr>
@@ -130,43 +126,45 @@ export default class WorkoutsStatistics extends Component {
       }
     });
     return (
-      <Accordion>
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle
-              as={Button}
-              key={el.date}
-              variant="link"
-              eventKey={el.date}
-            >
-              {el.date}
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey={el.date}>
-            <Card.Body>
-              <Table
-                className="workoutsStatistics__table"
-                striped
-                bordered
-                hover
-                variant="dark"
+      <div key={el.date}>
+        <Accordion>
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle
+                as={Button}
+                key={el.date}
+                variant="link"
+                eventKey={el.date}
               >
-                <thead>
-                  <tr>
-                    <td>Ćwiczenie</td>
-                    <td>Seria 1</td>
-                    <td>Seria 2</td>
-                    <td>Seria 3</td>
-                    <td>Seria 4</td>
-                    <td>Seria 5</td>
-                  </tr>
-                </thead>
-                <tbody>{exercisesArray.map(this.showData)}</tbody>
-              </Table>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-      </Accordion>
+                {el.date}
+              </Accordion.Toggle>
+            </Card.Header>
+            <Accordion.Collapse eventKey={el.date}>
+              <Card.Body>
+                <Table
+                  className="workoutsStatistics__table"
+                  striped
+                  bordered
+                  hover
+                  variant="dark"
+                >
+                  <thead>
+                    <tr>
+                      <td>Ćwiczenie</td>
+                      <td>Seria 1</td>
+                      <td>Seria 2</td>
+                      <td>Seria 3</td>
+                      <td>Seria 4</td>
+                      <td>Seria 5</td>
+                    </tr>
+                  </thead>
+                  <tbody>{exercisesArray.map(this.showData)}</tbody>
+                </Table>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
+      </div>
     );
   };
 

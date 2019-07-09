@@ -8,10 +8,10 @@ export default class NewProduct extends Component {
     multipier: 0,
     newProductName: "",
     numberProduct: 0,
-    numberOfProteins: 0,
-    numberOfCarbohydrates: 0,
-    numberOfFats: 0,
-    numberOfCalories: 0,
+    // numberOfProteins: 0,
+    // numberOfCarbohydrates: 0,
+    // numberOfFats: 0,
+    // numberOfCalories: 0,
     showProductsList: false,
     weight: 0,
     proteinsOfProduct: 0,
@@ -363,6 +363,7 @@ export default class NewProduct extends Component {
               <Form.Control
                 type="number"
                 onChange={this.handleNumberInputChange}
+                autoComplete="off"
               />
             </Form.Group>
           </Form>

@@ -51,7 +51,6 @@ export default class NewMenu extends Component {
       if (response.status !== 200) throw response;
       response = await response.json();
       this.setState({ plans: response });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -115,9 +114,7 @@ export default class NewMenu extends Component {
           <thead>
             <tr>
               <th colSpan="6">
-                <span className="numberOfMeal">
-                  Posiłek {this.state.numberOfMeal}
-                </span>
+                <span className="numberOfMeal">Posiłek {el.number}</span>
               </th>
             </tr>
           </thead>
@@ -149,7 +146,7 @@ export default class NewMenu extends Component {
             </tr>
           </tbody>
         </Table>
-        {this.renderNewProduct()}
+        {/* {this.renderNewProduct()} */}
       </div>
     );
   };

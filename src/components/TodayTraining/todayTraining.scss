@@ -33,7 +33,7 @@
   grid-row-gap: 1vh;
   input {
     width: 70%;
-    background-color: #ccc;
+    background-color: #fff;
     border: none;
   }
 }
@@ -64,8 +64,6 @@
   .todayTraining {
     &__trainingTable {
       width: 90vw;
-      & td {
-      }
     }
   }
   .inputWrapContainer {

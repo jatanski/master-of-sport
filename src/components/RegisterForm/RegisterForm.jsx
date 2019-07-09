@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
-import "./registerForm.scss";
 
 export default class RegisterForm extends Component {
   state = {

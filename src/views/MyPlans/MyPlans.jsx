@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./myPlans.scss";
 import EditPlan from "../../components/EditPlan/EditPlan";
 
 export default class myPlans extends Component {

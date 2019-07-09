@@ -1,6 +1,5 @@
 @import "./mixins";
 @import "./variables";
-// @import "./reset";
 
 * > {
   padding: 0;
@@ -33,4 +32,8 @@ ul {
 
 .app {
   min-height: 90vh;
+}
+
+td:hover {
+  cursor: default;
 }

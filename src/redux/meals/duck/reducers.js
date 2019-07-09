@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import types from "./types";
 
 const MEAL_STATE = {
@@ -14,10 +15,9 @@ const mealReducer = (state = MEAL_STATE, action) => {
       return {
         meals: [
           state.meals.map((el, i) => {
-            console.log(i);
             if (state.meals.length === i + 1) {
               return [...el, action.item];
-            } else return console.log("koc");
+            }
           })
         ]
       };

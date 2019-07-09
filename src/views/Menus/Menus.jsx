@@ -9,11 +9,11 @@ export default class Menus extends Component {
       "Dzięki monitorowaniu swoich dziennych jadłospisów możesz w łatwy sposób analizować wpływ zmian w jedzieniu na Twoją formę. Staraj się prowadzić dziennik zywieniowy regularnie, maksymalizuje to jakość Twoich statyk, które możesz później podesłać swojemu trenerowi lub dietetykowi.",
     instruction: () => {
       return (
-        <div>
+        <span>
           1. Wybierz z listy interesujący Cie plan dietetyczny. <br /> 2. Jeżeli
           potrzebujesz edytuj wybrane produkty. <br /> 3. Zapisz jadłospis.{" "}
           <br /> 4. Zapisane jadłospisy znajdziesz w statystykach.
-        </div>
+        </span>
       );
     }
   };

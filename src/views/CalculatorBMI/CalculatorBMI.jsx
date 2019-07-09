@@ -16,12 +16,12 @@ import CustomAlert from "../../components/Alert/Alert";
 export default class CalculatorBMI extends Component {
   state = {
     bmi: 0,
-    height: 0,
+    // height: 0,
     id: "",
     resultDisplay: "block",
     showSuccessPopUp: false,
-    showFalsePopUp: false,
-    weight: 0
+    showFalsePopUp: false
+    // weight: 0
   };
 
   resultStyle = {

@@ -1,9 +1,12 @@
 .workoutPlan__newPlanForm {
-  margin: 0vh 35vw;
+  margin: 0vh 25vw;
+  & label {
+    font-weight: 500;
+  }
 }
 
 #name {
-  width: 30vw;
+  width: 49vw;
 }
 
 @media (max-width: 1024px) {
