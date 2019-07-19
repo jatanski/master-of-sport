@@ -1,4 +1,4 @@
-![Master of Sport](https://github.com/jatanski/master-of-sport/blob/master/public/main-page.jpg)
+![Master of Sport](https://github.com/jatanski/master-of-sport/blob/master/public/main-page.JPG)
 # Master of Sport
 Professional workout and diet diary in React and Express / MongoDB backend with Material Design Boostrap and Bootstrap 4. Style wrote in SASS.
 
