@@ -8,7 +8,7 @@ Professional workout and diet diary in React and Express / MongoDB backend with 
 * **components** - all no-view React .js components in folders with styles in SASS,
 * **img** - all images used in projects,
 * **redux** - all redux files used in projects,
-* **styles** - only one global.css file with global styles in SASS,
+* **styles** - global.scss file with global styles, mixins & variables in SaSS,
 * **views** - all view React .js components in folders with styles
 
 **SERVER**
