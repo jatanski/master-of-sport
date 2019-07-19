@@ -1,5 +1,5 @@
-![Master of Sportman](https://github.com/jatanski/master-of-calories/blob/master/public/main-page.jpg)
-# Master of Sportman
+![Master of Sport](https://github.com/jatanski/master-of-sport/blob/master/public/main-page.jpg)
+# Master of Sport
 Professional workout and diet diary in React and Express / MongoDB backend with Material Design Boostrap and Bootstrap 4. Style wrote in SASS.
 
 ## What's in the package?
