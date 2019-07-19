@@ -1,5 +1,5 @@
 {
-  "name": "master-of-calories",
+  "name": "master-of-sport",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -89,7 +89,10 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "nodemon -r esm server/server.js"
+    "server": "node -r esm server/server.js"
+  },
+  "engines": {
+    "node": "12.2.0"
   },
   "eslintConfig": {
     "extends": "react-app"
