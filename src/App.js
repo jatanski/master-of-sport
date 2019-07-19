@@ -16,10 +16,14 @@ import TrainingDiary from "./views/TrainingDiary/TrainingDiary";
 import WorkoutPlans from "./views/WorkoutPlans/WorkoutPlans";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { allActions } from "./redux/store";
 
 class App extends Component {
+  componentDidMount() {
+    const token = localStorage.getItem("x-auth-token");
+    if (token) allActions.login();
+  }
   render() {
-    // console.log(this.props);
     return (
       <div className="app">
         <Router>

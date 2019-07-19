@@ -1,4 +1,4 @@
-![Master of Sportman](https://github.com/TuneLord/OWL_LearningPortal/blob/master/packages/public/icons/5.PNG)
+![Master of Sportman](https://github.com/jatanski/master-of-calories/blob/master/public/main-page.jpg)
 # Master of Sportman
 Professional workout and diet diary in React and Express / MongoDB backend with Material Design Boostrap and Bootstrap 4. Style wrote in SASS.
 
@@ -26,7 +26,21 @@ Professional workout and diet diary in React and Express / MongoDB backend with 
 * react,
 * redux,
 
-##
+## What's in the next version?
+
+**STYLES**
+* add loader spinners in all loading components
+* add animations
+* correct RWD
+* work on other style in components
+
+**FEATURES**
+* edit meal in **NewMenu** component
+* share workout & diet plan to others users
+* create general database of nutrient products
+* register & login with google *facebook
+* recall password
+* verify email before active account
 
 ## Available Scripts
 
