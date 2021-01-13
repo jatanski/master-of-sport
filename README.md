@@ -1,6 +1,12 @@
 ![Master of Sport](https://github.com/jatanski/master-of-sport/blob/master/public/main-page.JPG)
+
 # Master of Sport
 Professional workout and diet diary in React and Express / MongoDB backend with Material Design Boostrap and Bootstrap 4. Style wrote in SASS.
+
+## Deployment
+
+### Client: ![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)
+### Server: ![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)
 
 ## What's in the package?
 
@@ -18,13 +24,20 @@ Professional workout and diet diary in React and Express / MongoDB backend with 
 * **schemas** - all schemas for express object 
 
 ## NPM Packages
-* boostrap,
-* expressJS,
-* mdboostrap,
-* mongodb,
-* mongoose,
-* react,
-* redux,
+* boostrap
+* expressJS
+* mdboostrap
+* mongodb
+* mongoose
+* react
+* redux
+
+## Demo Instruction
+
+In [demo version](https://master-sportman.herokuapp.com/) you can create your account or log in example account:
+
+- Login: admin@admin.pl
+- Password: Admin123
 
 ## What's in the next version?
 
